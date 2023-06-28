@@ -1,0 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_mini_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/24 01:35:17 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/04/25 01:34:48 by mcourtoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+inline static void	__draw_mini_map_line(t_data *img, t_map_data *map, t_v2i i)
+{
+	t_v2i const	offset = {20, 20};
+
+	if (get_block(map, i) != '1' && get_block(map, i) != ' ')
+	{
+		if (get_block(map, i + (t_v2i){-1, 0}) == '1')
+			draw_line(img, offset + i * MINI_MAP_SIZE,
+				offset + (i + (t_v2i){0, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
+		if (get_block(map, i + (t_v2i){1, 0}) == '1')
+			draw_line(img, offset + (i + (t_v2i){1, 0}) * MINI_MAP_SIZE,
+				offset + (i + (t_v2i){1, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
+		if (get_block(map, i + (t_v2i){0, -1}) == '1')
+			draw_line(img, offset + i * MINI_MAP_SIZE,
+				offset + (i + (t_v2i){1, 0}) * MINI_MAP_SIZE, 0xFFFFFF);
+		if (get_block(map, i + (t_v2i){0, 1}) == '1')
+			draw_line(img, offset + (i + (t_v2i){0, 1}) * MINI_MAP_SIZE,
+				offset + (i + (t_v2i){1, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
+	}
+}
+
+void	draw_mini_map(t_data *img, t_map_data *map)
+{
+	t_v2i	i;
+
+	i[Y] = 0;
+	while (i[Y] < map->map_size[Y])
+	{
+		i[X] = 0;
+		while (i[X] < map->map_size[X])
+		{
+			__draw_mini_map_line(img, map, i);
+			i[X]++;
+		}
+		i[Y]++;
+	}
+}

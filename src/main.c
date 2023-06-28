@@ -1,0 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/06/28 18:50:04 by mcourtoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+/**
+ * @brief Destroy the window, image and display of the mlx and free the mlx ptr.
+ * 
+ * @param data to terminate.
+ */
+void	mlx_terminate(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+}
+
+/**
+ * @brief Set the params of t_data struct data
+ * 
+ * @param t_data to set
+ * @return EXIT_FAILURE if mlx fail and EXIT_SUCCESS otherwise. 
+ */
+int	set_params(t_data *data)
+{
+	data->mlx_ptr = mlx_init();
+	if (data->mlx_ptr == NULL)
+		exit(0);
+	data->lg = 1200;
+	data->wd = 700;
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->lg, data->wd, "cub3d");
+	if (!data->win_ptr)
+		return (free(data->mlx_ptr), perror("Mlx error"), EXIT_FAILURE);
+	data->img = mlx_new_image(data->mlx_ptr, data->lg, data->wd);
+	if (!data->img)
+		return (free(data->win_ptr), perror("Mlx error"), EXIT_FAILURE);
+	data->addr = mlx_get_data_addr(data->img, &data->bpp,
+			&data->line_len, &data->endian);
+	return (EXIT_SUCCESS);
+}
+void	create_map(t_map_data *map)
+{
+	ft_bzero(map, sizeof(t_map_data));
+	map->map_size = (t_v2i){20, 20};
+	map->map = malloc(20 * 20);
+	for (int i = 0; i < 20 * 20; i++)
+		map->map[i] = "01"[rand() & 1];
+}
+
+// TODO : Open and check args
+int	main(int ac, char **av)
+{
+	(void)ac;
+	(void)av;
+	t_data		data;
+	t_map_data	map;
+
+	srand(time(NULL));
+	if (set_params(&data) == EXIT_FAILURE)
+		return (1);
+	create_map(&map);
+	render(&data, &map);
+	draw_mini_map(&data, &map);
+	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
+	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
+	mlx_key_hook(data.win_ptr, &handle_input, &data);
+	mlx_hook(data.win_ptr, 17, 0L, &handle_cross, &data);
+	mlx_loop(data.mlx_ptr);
+	mlx_terminate(&data);
+	return (0);
+}
