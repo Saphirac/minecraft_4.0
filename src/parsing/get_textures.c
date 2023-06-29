@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/25 20:48:14 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 12:44:30 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @param n enum of the actual identifiant being entered
  * @return EXIT_SUCCESS if everything went correctly
  */
-int	get_textures_colours(
+static int	get_textures_colours(
 	t_map_data *const map,
 	char const *const line,
 	t_texture const n)
@@ -43,12 +43,23 @@ int	get_textures_colours(
 	return (EXIT_SUCCESS);
 }
 
-t_texture	check_line(char const *const line)
+inline static bool	__is_line_empty(char const *const line)
 {
 	size_t	i;
 
 	i = 0;
-	if (line[0] == '\n')
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+inline static t_texture	check_line(char const *const line)
+{
+	if (__is_line_empty(line) == true)
 		return (-3);
 	if (!line[0] || !line[1] || !line[2])
 		return (-2);

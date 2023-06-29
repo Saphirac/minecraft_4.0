@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 16:23:10 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/04/20 02:03:06 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/06/29 14:50:06 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ BONUS = ft_lstnew.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
 	ft_lstmap.c \
+	ft_lst_push_front.c \
+	ft_lst_push_back.c \
 
 OBJS = ${SRCS:.c=.o}
 

@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 02:23:25 by mcourtoi          #+#    #+#             */
-/*   Updated: 2021/12/11 02:46:08 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 14:50:54 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+t_list	*ft_lstnew(char *str)
 {
-	t_list	*newlist;
+	t_list *const	output = malloc(sizeof(t_list));
 
-	newlist = malloc(sizeof(t_list));
-	if (!(newlist))
+	if (!output)
 		return (NULL);
-	newlist->content = content;
-	newlist->next = NULL;
-	return (newlist);
+	output->str = ft_strdup(str);
+	if (!output->str)
+		return (free(output), NULL);
+	output->next = NULL;
+	output->prev = NULL;
+	return (output);
 }
