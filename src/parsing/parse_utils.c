@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/29 12:43:53 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:53:21 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,20 @@ int	find_max_x(char **map)
 
 bool	is_correct_char(char c)
 {
-	if (c == ' ' || c == '1' || c == '0'
-		|| c == 'N' || c == 'W' || c == 'E' || c == 'S')
+	if (c == '1' || c == '0' || c == 'N' || c == 'W' || c == 'E' || c == 'S')
 		return (true);
 	return (false);
 }
 
+void	ft_free(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}

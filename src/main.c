@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/28 18:50:04 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:52:08 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,35 @@ int	set_params(t_data *data)
 			&data->line_len, &data->endian);
 	return (EXIT_SUCCESS);
 }
-void	create_map(t_map_data *map)
+
+int	create_map(t_map_data *map, char *file)
 {
+	int	fd;
+
 	ft_bzero(map, sizeof(t_map_data));
-	map->map_size = (t_v2i){20, 20};
-	map->map = malloc(20 * 20);
-	for (int i = 0; i < 20 * 20; i++)
-		map->map[i] = "01"[rand() & 1];
+
+	fd = open_file(file);
+	if (fd < 0)
+		return (EXIT_FAILURE);
+	if (get_all_data(map, fd))
+		return (EXIT_FAILURE);
+	if (close(fd) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 // TODO : Open and check args
 int	main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
+	if (ac != 2)
+		return (1);
 	t_data		data;
 	t_map_data	map;
 
 	srand(time(NULL));
 	if (set_params(&data) == EXIT_FAILURE)
 		return (1);
-	create_map(&map);
+	create_map(&map, av[1]);
 	render(&data, &map);
 	draw_mini_map(&data, &map);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
