@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/04/25 03:42:02 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:59:53 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	img_pix_put(t_data *img, int x, int y, int color)
 		__attribute__((always_inline));
 void	draw_line(t_data *data, t_v2i p1, t_v2i p2, int color);
 void	draw_mini_map(t_data *img, t_map_data *map);
+
+// Parsing //
+int	ft_arrstrlen(char **array);
+int	check_border(char **map);
 
 // Raycasting //
 void	render(t_data *data, t_map_data *map);
