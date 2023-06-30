@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/29 21:52:08 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:30:36 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	main(int ac, char **av)
 	if (set_params(&data) == EXIT_FAILURE)
 		return (1);
 	create_map(&map, av[1]);
-	render(&data, &map);
 	draw_mini_map(&data, &map);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
 	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);

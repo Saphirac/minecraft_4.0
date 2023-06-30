@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/25 20:26:06 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:01:36 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ char	get_block(t_map_data *map, t_v2i pos)
 	if (pos[X] < 0 || pos[Y] < 0
 		|| pos[X] >= map->map_size[X] || pos[Y] >= map->map_size[Y])
 		return ('1');
-	return (map->map[pos[X] + pos[Y] * map->map_size[X]]);
+	return (map->map[pos[X]][pos[Y]]);
 }

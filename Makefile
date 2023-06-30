@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/04/25 03:41:14 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/06/30 15:03:42 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,13 +59,15 @@ SRC					=					\
 				}						\
 				${addprefix parsing/,	\
 						get_block.c		\
+						get_map.c		\
+						get_textures.c	\
+						open_file.c		\
+						parse_utils.c	\
 				}						\
-				${addprefix raycasting/,\
-						dda.c			\
-				}						\
-						main.c			\
 						keys.c			\
-						vectors.c
+						vectors.c		\
+						get_next_line.c	\
+						main.c
 
 ######################################
 #            OBJECT FILES            #

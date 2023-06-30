@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/29 12:44:56 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:30:19 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	img_pix_put(t_data *img, int x, int y, int color)
 		__attribute__((always_inline));
 void	draw_line(t_data *data, t_v2i p1, t_v2i p2, int color);
 void	draw_mini_map(t_data *img, t_map_data *map);
+char	get_block(t_map_data *map, t_v2i pos);
 
 // Parsing //
 
@@ -60,5 +61,10 @@ int		min(int a, int b);
 int		find_max_x(char **map);
 bool	is_correct_char(char c);
 int		get_all_data(t_map_data *const map, int const fd);
+int		ft_arrstrlen(char **array);
+void	ft_free(char **tab);
+void	print_map(char **map);
+int		get_map(t_map_data *map, int fd, char *line);
+int		open_file(char const *const file);
 
 #endif

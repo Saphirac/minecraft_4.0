@@ -6,12 +6,11 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/29 19:39:20 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:32:04 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 /**
  * @brief Get the textures, skip the identifiants at the beginning and then get
@@ -29,7 +28,7 @@ static int	get_textures_colours(
 {
 	char const	*ptr;
 
-	if (map->textures[n])
+	if (map->textures_colours[n])
 		return (perror("Data already exists.\n"), EXIT_FAILURE);
 	ptr = line;
 	while (*ptr != ' ')
@@ -37,8 +36,8 @@ static int	get_textures_colours(
 	while (*ptr == ' ')
 		ptr++;
 	if (*ptr)
-		map->textures[n] = ft_strndup(ptr, ft_strlen(ptr));
-	if (!*ptr || !map->textures[n])
+		map->textures_colours[n] = ft_strndup(ptr, ft_strlen(ptr));
+	if (!*ptr || !map->textures_colours[n])
 		return (perror("Ft_strndup error.\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -57,7 +56,7 @@ inline static bool	__is_line_empty(char const *const line)
 	return (true);
 }
 
-inline static t_texture	check_line(char const *const line)
+inline static int	check_line(char const *const line)
 {
 	if (__is_line_empty(line) == true)
 		return (-3);
@@ -97,14 +96,16 @@ int	get_all_data(
 	while (line)
 	{
 		if (check_line(line) > 0)
+		{
 			if (get_textures_colours(map, line, check_line(line)))
 				return (EXIT_FAILURE);
+		}
 		else if (check_line(line) == -1)
-			return (get_map(map, line, fd));
+			return (get_map(map, fd, line));
 		else if (check_line(line) == -2)
 			return (perror("Incorrect given data.\n"), EXIT_FAILURE);
 		free(line);
-		line = get_next_line;
+		line = get_next_line(fd);
 	}
 	free(line);
 	return (perror("No map.\n"), EXIT_FAILURE);

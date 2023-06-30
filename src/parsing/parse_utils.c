@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/29 21:53:21 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:19:32 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,19 @@ void	ft_free(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void print_map(char **map)
+{
+	int y;
+
+	y = 0;
+	if (map == NULL)
+		return ;
+	while (map[y])
+	{
+		ft_putstr_fd(map[y], 1);
+		ft_putstr_fd("\n", 1);
+		y++;
+	}
 }

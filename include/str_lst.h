@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   str_lst.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 02:27:26 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:41:56 by mcourtoi         ###   ########.fr       */
+/*   Created: 2023/06/30 15:45:54 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/06/30 15:46:29 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef STR_LST_H
+# define STR_LST_H
 
-void	ft_lstdelone(t_list *list)
-{
-	free(list->str);
-	free(list);
-}
+
+
+#endif
