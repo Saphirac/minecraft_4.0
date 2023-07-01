@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:32:04 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/01 22:00:45 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,9 @@ static int	get_textures_colours(
 	return (EXIT_SUCCESS);
 }
 
-inline static bool	__is_line_empty(char const *const line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\n')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 inline static int	check_line(char const *const line)
 {
-	if (__is_line_empty(line) == true)
+	if (is_line_empty(line) == true)
 		return (-3);
 	if (!line[0] || !line[1] || !line[2])
 		return (-2);
@@ -76,6 +62,19 @@ inline static int	check_line(char const *const line)
 		return (EA);
 	return (-1);
 }
+
+bool	is_textures_full(t_map_data *map)
+{
+	size_t	i;
+
+	i = 0;
+	while (map->textures_colours[i])
+		i++;
+	if (i < 6)
+		return (false);
+	return (true);
+}
+
 /**
  * @brief Get the textures of the wall and the colours of the floor and ceiling
  * 
@@ -95,7 +94,7 @@ int	get_all_data(
 		return (EXIT_FAILURE);
 	while (line)
 	{
-		if (check_line(line) > 0)
+		if (check_line(line) >= 0)
 		{
 			if (get_textures_colours(map, line, check_line(line)))
 				return (EXIT_FAILURE);

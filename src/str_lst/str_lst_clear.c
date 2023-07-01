@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   str_lst_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 02:27:26 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:41:56 by mcourtoi         ###   ########.fr       */
+/*   Created: 2023/03/08 19:32:11 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/07/01 20:09:55 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	ft_lstdelone(t_list *list)
+/**
+ * @brief Clear the given str_lst
+ * 
+ * @param list the str_lst to clear.
+ */
+void	str_lst_clear(t_str_lst *const list)
 {
-	free(list->str);
-	free(list);
+	while (list->size)
+		str_lst_del_one(list, list->head);
 }

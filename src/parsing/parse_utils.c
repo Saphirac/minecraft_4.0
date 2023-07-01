@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:19:32 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/01 21:23:47 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	find_max_x(char **map)
 
 bool	is_correct_char(char c)
 {
+	if (!c)
+		return (false);
 	if (c == '1' || c == '0' || c == 'N' || c == 'W' || c == 'E' || c == 'S')
 		return (true);
 	return (false);
@@ -71,17 +73,34 @@ void	ft_free(char **tab)
 	free(tab);
 }
 
-void print_map(char **map)
+void print_map(t_map_data *map)
 {
 	int y;
 
 	y = 0;
-	if (map == NULL)
-		return ;
-	while (map[y])
+	while (map->textures_colours[y])
 	{
-		ft_putstr_fd(map[y], 1);
-		ft_putstr_fd("\n", 1);
+		printf("%s\n", map->textures_colours[y]);
 		y++;
 	}
+	y = 0;
+	while (map->map[y])
+	{
+		printf("%s\n", map->map[y]);
+		y++;
+	}
+}
+
+bool	is_line_empty(char const *const line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
 }

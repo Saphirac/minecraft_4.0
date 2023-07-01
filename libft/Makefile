@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 16:23:10 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/06/30 15:43:38 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/07/01 20:42:20 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,18 +24,8 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c \
 		ft_striteri.c ft_strjoin.c ft_strlcat.c \
 		ft_strlcpy.c ft_strlen.c ft_strmapi.c \
 		ft_strncmp.c ft_strnstr.c ft_strrchr.c \
-		ft_strtrim.c ft_substr.c \
-		ft_tolower.c ft_toupper.c \
-		ft_lstnew.c \
-		ft_lstadd_front.c \
-		ft_lstsize.c \
-		ft_lstlast.c \
-		ft_lstadd_back.c \
-		ft_lstdelone.c \
-		ft_lstclear.c \
-		ft_lstiter.c \
-		ft_lst_push_front.c \
-		ft_lst_push_back.c
+		ft_strtrim.c ft_substr.c ft_strndup.c\
+		ft_tolower.c ft_toupper.c
 
 OBJS = ${SRCS:.c=.o}
 

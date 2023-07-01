@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:30:19 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/01 22:00:32 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "vectors.h"
 # include "get_next_line.h"
 # include "map.h"
+# include "str_lst.h"
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -63,8 +64,10 @@ bool	is_correct_char(char c);
 int		get_all_data(t_map_data *const map, int const fd);
 int		ft_arrstrlen(char **array);
 void	ft_free(char **tab);
-void	print_map(char **map);
+void	print_map(t_map_data *map);
 int		get_map(t_map_data *map, int fd, char *line);
 int		open_file(char const *const file);
+bool	is_line_empty(char const *const line);
+bool	is_textures_full(t_map_data *map);
 
 #endif

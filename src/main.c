@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:30:36 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/01 22:09:34 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	main(int ac, char **av)
 	t_data		data;
 	t_map_data	map;
 
-	srand(time(NULL));
 	if (set_params(&data) == EXIT_FAILURE)
 		return (1);
 	create_map(&map, av[1]);

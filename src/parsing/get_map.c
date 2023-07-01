@@ -6,17 +6,34 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:20:12 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/01 22:09:04 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	read_map(t_list *map_list, char *line, int fd)
+inline static bool	__is_map_line_correct(char const *const line)
 {
-	while (line)
+	size_t	i;
+
+	if (is_line_empty(line) == true)
+		return (false);
+	i = 0;
+	while (line[i])
 	{
-		if (ft_lstadd_back(map_list, line))
+		if (line[i] != ' ' && line[i] != '\n'
+			&& is_correct_char(line[i]) == false)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+int	read_map(t_str_lst *map_list, char *line, int fd)
+{
+	while (line && __is_map_line_correct(line) == true)
+	{
+		if (!str_lst_add_back(map_list, line))
 			return (EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
@@ -25,97 +42,61 @@ int	read_map(t_list *map_list, char *line, int fd)
 	return (EXIT_SUCCESS);
 }
 
-static int	ft_list_to_array_str(char ***array, int fd, char *line)
+inline static void	copy_or_fill_with_x(t_str_lst *list,
+										char *src,
+										char *map_line)
 {
-	t_list	list;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	ft_bzero(&list, sizeof(t_list));
-	if (read_map(&list, line, fd))
-		return (EXIT_FAILURE);
-	*array = malloc(sizeof(char *) * (ft_lstsize(&list) + 1));
-	if (!*array)
-		return (EXIT_FAILURE);
-	while (i < ft_lstsize(&list))
+	while (i < list->max_line_size - 1)
 	{
-		*array[i] = ft_strdup(list.str);
-		if (!*array[i])
-			return (EXIT_FAILURE);
-		list = *list.next;
+		if (is_correct_char(src[i]) == true)
+			map_line[i] = src[i];
+		else
+			map_line[i] = 'X';
 		i++;
 	}
-	*array[i] = NULL;
-	ft_lstclear(&list);
-	return (EXIT_SUCCESS);
+	map_line[i] = '\0';
 }
 
-inline static int	alloc_copy_map(t_map_data *map, char **old_map)
+static int	ft_list_to_array_str(t_map_data *map, t_str_lst *list)
 {
-	int	i;
-
-	map->map_size[X] = find_max_x(old_map);
-	map->map_size[Y] = ft_arrstrlen(old_map);
-	map->map = malloc(sizeof(char *) * (map->map_size[Y] + 1));
-	if (!map->map)
-		return (EXIT_FAILURE);
-	i =  0;
-	while (i < map->map_size[Y])
+	t_str		*iter;
+	size_t		i;
+	
+	iter = list->head;
+	i = 0;
+	while (iter)
 	{
-		map->map[i] = malloc(sizeof(char) * (map->map_size[X]));
+		map->map[i] = malloc(sizeof(char) * (list->max_line_size));
 		if (!map->map[i])
 			return (EXIT_FAILURE);
+		copy_or_fill_with_x(list, iter->str, map->map[i]);
 		i++;
+		iter = iter->next;
 	}
 	map->map[i] = NULL;
 	return (EXIT_SUCCESS);
 }
 
-inline static void	fill_with_x(t_map_data *map)
-{
-	int	x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (y < map->map_size[Y])
-	{
-		while (x < map->map_size[X])
-		{
-			if (is_correct_char(map->map[y][x]) == false)
-				map->map[y][x] = 'X';
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-}
-
 int	get_map(t_map_data *map, int fd, char *line)
 {
-	char	**map_tmp;
-	int		x;
-	int		y;
+	t_str_lst	list;
 
-	if (ft_list_to_array_str(&map_tmp, fd, line)
-		|| alloc_copy_map(map, map_tmp))
+	if (is_textures_full(map) == false)
 		return (EXIT_FAILURE);
-	y = 0;
-	while (map_tmp[y])
-	{
-		x = 0;
-		while (map_tmp[y][x])
-		{
-			if (map_tmp[y][x] == '\n')
-				map->map[y][x] = '\0';
-			else
-				map->map[y][x] = map_tmp[y][x];
-			x++;
-		}
-		y++;
-	}
-	ft_free(map_tmp);
-	print_map(map->map);
-	fill_with_x(map);
+	ft_bzero(&list, sizeof(t_str_lst));
+	if (read_map(&list, line, fd))
+		return (EXIT_FAILURE);
+	map->map_size[X] = list.max_line_size - 1;
+	map->map_size[Y] = list.size;
+	map->map = malloc(sizeof(char *) * (list.size + 1));
+	if (!map->map)
+		return (EXIT_FAILURE);
+	if (ft_list_to_array_str(map, &list))
+		return (EXIT_FAILURE);
+	str_lst_clear(&list);
+	print_map(map);
 	return (EXIT_SUCCESS);
 }

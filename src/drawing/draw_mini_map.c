@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 01:35:17 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/04/25 01:34:48 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/01 22:12:47 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ inline static void	__draw_mini_map_line(t_data *img, t_map_data *map, t_v2i i)
 
 	if (get_block(map, i) != '1' && get_block(map, i) != ' ')
 	{
-		if (get_block(map, i + (t_v2i){-1, 0}) == '1')
+		if (get_block(map, i) == '1')
 			draw_line(img, offset + i * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){0, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
-		if (get_block(map, i + (t_v2i){1, 0}) == '1')
+		if (get_block(map, i) == '1')
 			draw_line(img, offset + (i + (t_v2i){1, 0}) * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){1, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
-		if (get_block(map, i + (t_v2i){0, -1}) == '1')
+		if (get_block(map, i) == '1')
 			draw_line(img, offset + i * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){1, 0}) * MINI_MAP_SIZE, 0xFFFFFF);
-		if (get_block(map, i + (t_v2i){0, 1}) == '1')
+		if (get_block(map, i) == '1')
 			draw_line(img, offset + (i + (t_v2i){0, 1}) * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){1, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
 	}

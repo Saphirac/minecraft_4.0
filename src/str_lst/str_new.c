@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   str_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 02:23:25 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/29 14:50:54 by mcourtoi         ###   ########.fr       */
+/*   Created: 2023/03/08 19:37:40 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/07/01 20:27:45 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-t_list	*ft_lstnew(char *str)
+/**
+ * @brief Creates a new node with the given parameters.
+ * 
+ * @details Uses ft_strdup() for str parameter.
+ * 
+ * @param str of the new node.
+ * @param is_quoted bool of the new node.
+ * @return t_str* pointer to the new node.
+ */
+t_str	*str_new(char *const str)
 {
-	t_list *const	output = malloc(sizeof(t_list));
+	t_str *const	output = malloc(sizeof(t_str));
 
 	if (!output)
 		return (NULL);
