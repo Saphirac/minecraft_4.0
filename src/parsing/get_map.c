@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/01 22:09:04 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:27:17 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	ft_list_to_array_str(t_map_data *map, t_str_lst *list)
 	return (EXIT_SUCCESS);
 }
 
+// TODO : remplace player starting position with a 0
 int	get_map(t_map_data *map, int fd, char *line)
 {
 	t_str_lst	list;

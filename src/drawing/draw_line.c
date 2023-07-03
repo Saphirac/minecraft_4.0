@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 22:38:28 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/04/24 02:05:17 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/02 19:28:33 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ inline static bool	__in_border(int x, int y, t_data *data)
 	return (true);
 }
 
-void	draw_line(t_data *data, t_v2i p1, t_v2i p2, int color)
+void	draw_line(t_data *img, t_v2i p1, t_v2i p2, int colour)
 {
 	t_v2i	delta;
-	int		len;
+	size_t	len;
 	t_v2f	inc;
 	t_v2f	xy;
 
@@ -41,8 +41,10 @@ void	draw_line(t_data *data, t_v2i p1, t_v2i p2, int color)
 	xy[Y] = p1[Y];
 	while (len--)
 	{
-		if (__in_border(xy[X], xy[Y], data) == true)
-			img_pix_put(data, (int)xy[X], (int)xy[Y], color);
+		if (__in_border(xy[X], xy[Y], img) == true)
+			img_pix_put(img, (int)xy[X], (int)xy[Y], colour);
 		xy += inc;
 	}
+	if (__in_border(xy[X], xy[Y], img) == true)
+			img_pix_put(img, (int)xy[X], (int)xy[Y], colour);
 }

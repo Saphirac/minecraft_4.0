@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/01 22:00:32 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/02 19:41:08 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <stdbool.h>
 # include <time.h>
 
-# define MINI_MAP_SIZE 10
+# define MINI_MAP_SIZE 2
 
 typedef struct s_data {
 	void	*mlx_ptr;

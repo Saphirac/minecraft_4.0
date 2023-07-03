@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 01:35:17 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/01 22:12:47 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/02 19:19:53 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ inline static void	__draw_mini_map_line(t_data *img, t_map_data *map, t_v2i i)
 {
 	t_v2i const	offset = {20, 20};
 
-	if (get_block(map, i) != '1' && get_block(map, i) != ' ')
+	if (get_block(map, i) != '1' && get_block(map, i) != 'X')
 	{
-		if (get_block(map, i) == '1')
+		if (get_block(map, i + (t_v2i){-1, 0}) == '1')
 			draw_line(img, offset + i * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){0, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
-		if (get_block(map, i) == '1')
+		if (get_block(map, i + (t_v2i){1, 0}) == '1')
 			draw_line(img, offset + (i + (t_v2i){1, 0}) * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){1, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
-		if (get_block(map, i) == '1')
+		if (get_block(map, i + (t_v2i){0, -1}) == '1')
 			draw_line(img, offset + i * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){1, 0}) * MINI_MAP_SIZE, 0xFFFFFF);
-		if (get_block(map, i) == '1')
+		if (get_block(map, i + (t_v2i){0, 1}) == '1')
 			draw_line(img, offset + (i + (t_v2i){0, 1}) * MINI_MAP_SIZE,
 				offset + (i + (t_v2i){1, 1}) * MINI_MAP_SIZE, 0xFFFFFF);
 	}
@@ -37,15 +37,15 @@ void	draw_mini_map(t_data *img, t_map_data *map)
 {
 	t_v2i	i;
 
-	i[Y] = 0;
-	while (i[Y] < map->map_size[Y])
+	i[X] = 0;
+	while (i[X] < map->map_size[X])
 	{
-		i[X] = 0;
-		while (i[X] < map->map_size[X])
+		i[Y] = 0;
+		while (i[Y] < map->map_size[Y])
 		{
 			__draw_mini_map_line(img, map, i);
-			i[X]++;
+			i[Y]++;
 		}
-		i[Y]++;
+		i[X]++;
 	}
 }
