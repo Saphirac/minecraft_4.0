@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/02 17:27:17 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:25:52 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	get_map(t_map_data *map, int fd, char *line)
 	if (ft_list_to_array_str(map, &list))
 		return (EXIT_FAILURE);
 	str_lst_clear(&list);
-	print_map(map);
+	if (find_player(map))
+		return (EXIT_SUCCESS);
+	print_only_map(map);
 	return (EXIT_SUCCESS);
 }

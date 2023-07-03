@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/01 22:00:45 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:13:10 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_textures_colours(
 	char const	*ptr;
 
 	if (map->textures_colours[n])
-		return (perror("Data already exists.\n"), EXIT_FAILURE);
+		return (printf("Data already exists.\n"), EXIT_FAILURE);
 	ptr = line;
 	while (*ptr != ' ')
 		ptr++;
@@ -38,7 +38,7 @@ static int	get_textures_colours(
 	if (*ptr)
 		map->textures_colours[n] = ft_strndup(ptr, ft_strlen(ptr));
 	if (!*ptr || !map->textures_colours[n])
-		return (perror("Ft_strndup error.\n"), EXIT_FAILURE);
+		return (perror("get_textures :"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -102,10 +102,10 @@ int	get_all_data(
 		else if (check_line(line) == -1)
 			return (get_map(map, fd, line));
 		else if (check_line(line) == -2)
-			return (perror("Incorrect given data.\n"), EXIT_FAILURE);
+			return (printf("Incorrect given data.\n"), EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
-	return (perror("No map.\n"), EXIT_FAILURE);
+	return (printf("No map.\n"), EXIT_FAILURE);
 }

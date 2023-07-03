@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/06/30 19:07:34 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:35:34 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
  * @return boolean 1 if is border, 0 if isn't
  * @throws
 */
-static int	is_border(char **map, int x, int y)
+inline static int	__is_border(t_map_data *map, int x, int y)
 {
-	if (x == 0 || y == 0 || x == (int)ft_strlen(map[y]) \
-			|| y == ft_arrstrlen(map))
+	if (x == 0 || y == 0 || x == map->map_size[X] \
+			|| y == map->map_size[Y])
 		return (1);
 	return (0);
 }
@@ -38,9 +38,9 @@ static int	is_border(char **map, int x, int y)
  * @return boolean 1 if the case is traversable, 0 if isn't
  * @throws
 */
-static int	is_valid(char **map, int x, int y)
+inline static int	__is_valid(char **map, int x, int y)
 {
-	if (map[y][x] == '0' || map[y][x] == 'P')
+	if (map[y][x] == '0')
 		return (1);
 	return (0);
 }
@@ -54,17 +54,13 @@ static int	is_valid(char **map, int x, int y)
  * @return void
  * @throws
 */
-static void	fill_map(char *original, char *tmp_char)
+inline static void	__fill_map(char *original, char *tmp_char)
 {
 	*tmp_char = *original;
 	if (*original == '0')
 		*original = '2';
-	else if (*original == 'C')
-		*original = '3';
-	else if (*original == 'P')
-		*original = '4';
 	else
-		*original = '5';
+		*original = '3';
 }
 
 /**
@@ -78,18 +74,18 @@ static void	fill_map(char *original, char *tmp_char)
  * @return boolean 1 if isn't closed, 0 if it is
  * @throws
 */
-static int	ft_find_border(char **map, int x, int y)
+static int	ft_find_border(t_map_data *map, int x, int y)
 {
 	char	tmp_char;
 
-	if ((is_border(map, x, y) == 1 && map[y][x] != '1' ))
+	if ((__is_border(map, x, y) == 1))
 		return (1);
-	if (x < 0 || x == (int)ft_strlen(map[y])
-		|| y < 0 || y == (int)ft_arrstrlen(map))
+	if (x < 0 || x == map->map_size[X]
+		|| y < 0 || y == map->map_size[Y])
 		return (0);
-	if (is_valid(map, x, y))
+	if (__is_valid(map->map, x, y))
 	{
-		fill_map(&(map[y][x]), &tmp_char);
+		__fill_map(&(map->map[y][x]), &tmp_char);
 		if (ft_find_border(map, x + 1, y)
 			|| ft_find_border(map, x - 1, y)
 			|| ft_find_border(map, x, y + 1)
@@ -109,17 +105,12 @@ static int	ft_find_border(char **map, int x, int y)
  * @throws Print on the STDOUT "Map is not closed by wall" if it is
  * @throws Return MALLOC_ERR is there is malloc error
 */
-int	check_border(char **map)
+bool	check_border(t_map_data *map)
 {
-	char	**new_map;
-
-	new_map = copy_map(map);
-	if (new_map == NULL)
-		return (MALLOC_ERR);
-	if (ft_find_border(new_map, 2, 2) == 1)
+	if (ft_find_border(map, (int)map->player[X], (int)map->player[Y]) == 1)
 	{
 		printf("Map is not closed by wall\n");
-		return (0);
+		return (false);
 	}
-	return (1);
+	return (true);
 }

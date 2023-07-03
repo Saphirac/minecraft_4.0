@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/01 21:23:47 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:18:50 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,18 @@ void print_map(t_map_data *map)
 		printf("%s\n", map->textures_colours[y]);
 		y++;
 	}
+	y = 0;
+	while (map->map[y])
+	{
+		printf("%s\n", map->map[y]);
+		y++;
+	}
+}
+
+void print_only_map(t_map_data *map)
+{
+	int y;
+
 	y = 0;
 	while (map->map[y])
 	{

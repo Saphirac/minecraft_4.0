@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/01 21:43:28 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/07/03 20:15:02 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,8 @@ SRC					=							\
 						get_textures.c			\
 						open_file.c				\
 						parse_utils.c			\
+						check_border.c			\
+						find_player.c			\
 				}								\
 				${addprefix str_lst/,			\
 						str_lst_add_back.c		\

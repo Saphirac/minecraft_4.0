@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/02 19:27:22 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:38:24 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	create_map(t_map_data *map, char *file)
 	fd = open_file(file);
 	if (fd < 0)
 		return (EXIT_FAILURE);
-	if (get_all_data(map, fd))
+	if (get_all_data(map, fd) || check_border(map) == false)
 		return (EXIT_FAILURE);
 	if (close(fd) == -1)
 		return (EXIT_FAILURE);
@@ -68,15 +68,15 @@ int	create_map(t_map_data *map, char *file)
 // TODO : Open and check args
 int	main(int ac, char **av)
 {
-	if (ac != 2)
-		return (1);
 	t_data		data;
 	t_map_data	map;
 
+	if (ac != 2)
+		return (1);
+	if (create_map(&map, av[1]))
+		return (1);
 	if (set_params(&data) == EXIT_FAILURE)
 		return (1);
-	create_map(&map, av[1]);
-	printf("random char : %c\n", map.map[1][1]);
 	draw_mini_map(&data, &map);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
 	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
