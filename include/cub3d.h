@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/02 19:41:08 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 19:48:23 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,10 @@ int		get_map(t_map_data *map, int fd, char *line);
 int		open_file(char const *const file);
 bool	is_line_empty(char const *const line);
 bool	is_textures_full(t_map_data *map);
+int		ft_arrstrlen(char **array);
+int		check_border(char **map);
+
+// Raycasting //
+void	render(t_data *data, t_map_data *map);
 
 #endif
