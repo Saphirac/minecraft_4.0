@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_block.c                                        :+:      :+:    :+:   */
+/*   str_lst_add_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/02 19:01:37 by mcourtoi         ###   ########.fr       */
+/*   Created: 2023/03/08 19:43:54 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/07/01 21:10:25 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * @brief Get the block corresponding to the given pos in the map. If pos is out
- * of the map, gives automatically a wall (1).
+ * @brief Add a new node to the end of str_lst list.
  * 
- * @param map contains the char map with all blocks
- * @param pos given position
- * @return which block 
+ * @param list the list we add a node to.
+ * @param str string of the new node.
+ * @param is_quoted bool determining if node is quoted or not.
+ * @return t_str* pointer to the new node.
  */
-char	get_block(t_map_data *map, t_v2i pos)
+t_str	*str_lst_add_back(
+	t_str_lst *const list,
+	char *const str)
 {
-	if (pos[X] < 0 || pos[Y] < 0
-		|| pos[X] >= map->map_size[X] || pos[Y] >= map->map_size[Y])
-		return ('1');
-	return (map->map[pos[Y]][pos[X]]);
+	t_str *const	node = str_new(str);
+
+	if (!node)
+		return (NULL);
+	return (str_lst_push_back(list, node));
 }

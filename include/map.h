@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:07:30 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/28 19:18:01 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:03:58 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ struct s_map_data {
 	t_v2i	map_size;
 	char	*textures_colours[6];
 	t_v2f	player;
+	char	player_orientation;
 };
 
 char	*get_texture(

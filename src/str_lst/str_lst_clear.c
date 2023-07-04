@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   str_lst_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 02:28:42 by mcourtoi          #+#    #+#             */
-/*   Updated: 2021/12/11 02:28:55 by mcourtoi         ###   ########.fr       */
+/*   Created: 2023/03/08 19:32:11 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/07/01 20:09:55 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+/**
+ * @brief Clear the given str_lst
+ * 
+ * @param list the str_lst to clear.
+ */
+void	str_lst_clear(t_str_lst *const list)
 {
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	while (list->size)
+		str_lst_del_one(list, list->head);
 }

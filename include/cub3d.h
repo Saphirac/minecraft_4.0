@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 18:59:53 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:19:00 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "vectors.h"
 # include "get_next_line.h"
 # include "map.h"
+# include "str_lst.h"
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -25,7 +26,7 @@
 # include <stdbool.h>
 # include <time.h>
 
-# define MINI_MAP_SIZE 10
+# define MINI_MAP_SIZE 2
 
 typedef struct s_data {
 	void	*mlx_ptr;
@@ -39,10 +40,6 @@ typedef struct s_data {
 	int		wd;
 }				t_data;
 
-// Map //
-
-char	get_block(t_map_data *map, t_v2i pos);
-
 // Keys events //
 
 int		handle_no_event(void *data);
@@ -55,10 +52,26 @@ void	img_pix_put(t_data *img, int x, int y, int color)
 		__attribute__((always_inline));
 void	draw_line(t_data *data, t_v2i p1, t_v2i p2, int color);
 void	draw_mini_map(t_data *img, t_map_data *map);
+char	get_block(t_map_data *map, t_v2i pos);
 
 // Parsing //
-int	ft_arrstrlen(char **array);
-int	check_border(char **map);
+
+char	**copy_map(char **map);
+int		max(int a, int b);
+int		min(int a, int b);
+int		find_max_x(char **map);
+bool	is_correct_char(char c);
+int		get_all_data(t_map_data *const map, int const fd);
+int		ft_arrstrlen(char **array);
+void	ft_free(char **tab);
+void	print_map(t_map_data *map);
+int		get_map(t_map_data *map, int fd, char *line);
+int		open_file(char const *const file);
+bool	is_line_empty(char const *const line);
+bool	is_textures_full(t_map_data *map);
+bool	check_border(t_map_data *map);
+int		find_player(t_map_data *map);
+void 	print_only_map(t_map_data *map);
 
 // Raycasting //
 void	render(t_data *data, t_map_data *map);

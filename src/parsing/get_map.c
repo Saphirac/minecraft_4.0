@@ -6,56 +6,100 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/27 19:38:58 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:25:52 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_map_line(char const *const line)
+inline static bool	__is_map_line_correct(char const *const line)
 {
-	int	i;
+	size_t	i;
 
+	if (is_line_empty(line) == true)
+		return (false);
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] && (line[i] != ' ' || line[i] != '1' || line[i] != '0'
-			|| line[i] != 'N' || line[i] != 'S'
-			|| line[i] != 'E' || line[i] != 'W'))
-			return (EXIT_FAILURE);
+		if (line[i] != ' ' && line[i] != '\n'
+			&& is_correct_char(line[i]) == false)
+			return (false);
+		i++;
 	}
-	return (EXIT_SUCCESS)
+	return (true);
 }
 
-int	check_map(char	*map)
+int	read_map(t_str_lst *map_list, char *line, int fd)
 {
-	
-}
-
-int	get_map(t_map_data *map, char *line, int const fd)
-{
-	char	*tmp;
-
-	while (line)
+	while (line && __is_map_line_correct(line) == true)
 	{
-		if (check_map_line(line))
-			return (free(line), perror("Incorrect map.\n"), EXIT_FAILURE);
-		if (!map->map[0])
-			map->map = ft_strdup(line);
-		else
-		{
-			tmp = map->map;
-			map->map = ft_strjoin(map->map, line);
-			free (tmp);
-		}
-		if (!map->map)
-			return (free(line), EXIT_FAILURE);
-		map->map_size[Y] += 1;
+		if (!str_lst_add_back(map_list, line))
+			return (EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
-	if (check_map(map->map))
+	return (EXIT_SUCCESS);
+}
+
+inline static void	copy_or_fill_with_x(t_str_lst *list,
+										char *src,
+										char *map_line)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < list->max_line_size - 1)
+	{
+		if (is_correct_char(src[i]) == true)
+			map_line[i] = src[i];
+		else
+			map_line[i] = 'X';
+		i++;
+	}
+	map_line[i] = '\0';
+}
+
+static int	ft_list_to_array_str(t_map_data *map, t_str_lst *list)
+{
+	t_str		*iter;
+	size_t		i;
+	
+	iter = list->head;
+	i = 0;
+	while (iter)
+	{
+		map->map[i] = malloc(sizeof(char) * (list->max_line_size));
+		if (!map->map[i])
+			return (EXIT_FAILURE);
+		copy_or_fill_with_x(list, iter->str, map->map[i]);
+		i++;
+		iter = iter->next;
+	}
+	map->map[i] = NULL;
+	return (EXIT_SUCCESS);
+}
+
+// TODO : remplace player starting position with a 0
+int	get_map(t_map_data *map, int fd, char *line)
+{
+	t_str_lst	list;
+
+	if (is_textures_full(map) == false)
 		return (EXIT_FAILURE);
+	ft_bzero(&list, sizeof(t_str_lst));
+	if (read_map(&list, line, fd))
+		return (EXIT_FAILURE);
+	map->map_size[X] = list.max_line_size - 1;
+	map->map_size[Y] = list.size;
+	map->map = malloc(sizeof(char *) * (list.size + 1));
+	if (!map->map)
+		return (EXIT_FAILURE);
+	if (ft_list_to_array_str(map, &list))
+		return (EXIT_FAILURE);
+	str_lst_clear(&list);
+	if (find_player(map))
+		return (EXIT_SUCCESS);
+	print_only_map(map);
 	return (EXIT_SUCCESS);
 }
