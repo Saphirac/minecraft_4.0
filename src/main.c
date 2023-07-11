@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/03 20:38:24 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:29:03 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,14 @@ int	main(int ac, char **av)
 	if (set_params(&data) == EXIT_FAILURE)
 		return (1);
 	draw_mini_map(&data, &map);
+	raycaster(&map);
+	/*
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
 	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
 	mlx_key_hook(data.win_ptr, &handle_input, &data);
 	mlx_hook(data.win_ptr, 17, 0L, &handle_cross, &data);
 	mlx_loop(data.mlx_ptr);
 	mlx_terminate(&data);
+	*/
 	return (0);
 }

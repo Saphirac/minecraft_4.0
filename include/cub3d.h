@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/03 20:19:00 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:33:28 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "get_next_line.h"
 # include "map.h"
 # include "str_lst.h"
+# include "raycasting.h"
+# include "key_linux.h"
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -75,5 +77,6 @@ void 	print_only_map(t_map_data *map);
 
 // Raycasting //
 void	render(t_data *data, t_map_data *map);
+int		raycaster(t_map_data *map_data);
 
 #endif

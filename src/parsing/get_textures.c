@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/03 20:13:10 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:19:19 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,7 @@ bool	is_textures_full(t_map_data *map)
  * @param fd to the given map file
  * @return EXIT_SUCCESS OR FAILURE
  */
-int	get_all_data(
-	t_map_data *const map,
-	int const fd
-)
+int	get_all_data(t_map_data *const map, int const fd)
 {
 	char	*line;
 
@@ -102,7 +99,7 @@ int	get_all_data(
 		else if (check_line(line) == -1)
 			return (get_map(map, fd, line));
 		else if (check_line(line) == -2)
-			return (printf("Incorrect given data.\n"), EXIT_FAILURE);
+			return (printf("Incorrect given data.\n"), EXIT_FAILURE);	
 		free(line);
 		line = get_next_line(fd);
 	}

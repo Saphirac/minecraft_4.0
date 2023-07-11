@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/03 20:15:02 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/07/08 20:03:22 by gle-mini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,11 @@ SRC					=							\
 						str_lst_push_back.c		\
 						str_lst_push_front.c	\
 						str_new.c				\
+				}								\
+				${addprefix raycaster/,			\
+						raycasting.c			\
+						floor_casting.c			\
+						wall_casting.c			\
 				}								\
 						keys.c					\
 						vectors.c				\

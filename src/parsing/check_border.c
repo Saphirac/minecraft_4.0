@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/03 20:35:34 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:32:13 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	ft_find_border(t_map_data *map, int x, int y)
 {
 	char	tmp_char;
 
-	if ((__is_border(map, x, y) == 1))
+	if ((__is_border(map, x, y) == 1) && map->map[y][x] == '0')
 		return (1);
 	if (x < 0 || x == map->map_size[X]
 		|| y < 0 || y == map->map_size[Y])
@@ -91,6 +91,7 @@ static int	ft_find_border(t_map_data *map, int x, int y)
 			|| ft_find_border(map, x, y + 1)
 			|| ft_find_border(map, x, y - 1))
 			return (1);
+
 	}
 	return (0);
 }
