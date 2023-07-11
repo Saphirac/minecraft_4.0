@@ -19,7 +19,7 @@
 typedef struct	s_img
 {
 	void	*img;
-	int		*data;
+	char	*addr;
 
 	int		size_l;
 	int		bpp;
@@ -38,11 +38,11 @@ typedef struct	s_info
 	double planeY;
 	void	*mlx;
 	void	*win;
-	t_img	*img;
 	int		**buf;
 	int		**texture;
 	double	moveSpeed;
 	double	rotSpeed;
+	t_img	*img;
 	t_map_data	*map_data;
 }				t_info;
 

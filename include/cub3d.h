@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/10 17:33:28 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/11 23:33:15 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_data {
 int		handle_no_event(void *data);
 int		handle_input(int keysym, t_data *data);
 int		handle_cross(t_data *data);
+int		key_press(int key, t_info *info);
 
 // Drawing //
 
