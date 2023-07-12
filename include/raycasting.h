@@ -16,7 +16,7 @@
 #define MALLOC_ERR 2
 #define MLX_ERR 3
 
-typedef struct	s_img
+typedef struct	s_img_data
 {
 	void	*img;
 	char	*addr;
@@ -26,23 +26,23 @@ typedef struct	s_img
 	int		endian;
 	int		img_width;
 	int		img_height;
-}				t_img;
+}				t_img_data;
 
 typedef struct	s_info
 {
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	void	*mlx;
-	void	*win;
-	int		**buf;
-	int		**texture;
-	double	moveSpeed;
-	double	rotSpeed;
-	t_img	*img;
+	void		*mlx;
+	void		*win;
+	int			**buf;
+	int			**texture;
+	double		moveSpeed;
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
+	double		rotSpeed;
+	t_img_data	*img_data;
 	t_map_data	*map_data;
 }				t_info;
 

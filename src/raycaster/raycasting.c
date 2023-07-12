@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/11 23:43:25 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/12 19:14:21 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	draw(t_info *info)
 		x = 0;
 		while (x < width)
 		{
-			info->img->addr[y * width + x] = info->buf[y][x];
+			info->img_data->addr[y * width + x] = info->buf[y][x];
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(info->mlx, info->win, info->img->img, 0, 0);
+	mlx_put_image_to_window(info->mlx, info->win, info->img_data->img, 0, 0);
 }
 
 /**
@@ -46,28 +46,29 @@ void	draw(t_info *info)
  * @return
  * @throws
  */
-void	load_image(t_info *info, int *texture, char *path, t_img *img)
+void	load_image(t_info *info, int *texture, char *path, t_img_data *img_data)
 {
 	int y;
 	int	x;
 
-	printf("path : %s\n", path);
-	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
-	if (!img->img)
-		printf("HELLO\n");
-	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	img_data->img = mlx_xpm_file_to_image(info->mlx, path, &img_data->img_width, &img_data->img_height);
+	if (!img_data->img)
+		//RETURNOUER MLX_ERR
+	img_data->addr = mlx_get_data_addr(img_data->img, &img_data->bpp, &img_data->size_l, &img_data->endian);
 	y = 0;
-	while (y < img->img_height)
+	while (y < img_data->img_height)
 	{
 		x = 0;
-		while (x < img->img_width)
+		while (x < img_data->img_width)
 		{
-			texture[img->img_width * y + x] = img->addr[img->img_width * y + x];
+			printf("x: %d | y: %d\n", x, y);
+			texture[img_data->img_width * y + x] = 25;
+			//texture[img_data->img_width * y + x] = img_data->addr[img_data->img_width * y + x];
 			x++;
 		}
 		y++;
 	}
-	mlx_destroy_image(info->mlx, img->img);
+	mlx_destroy_image(info->mlx, img_data->img);
 }
 
 /**
@@ -79,12 +80,21 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
  */
 void	load_texture(t_info *info, t_map_data *map)
 {
-	t_img	img;
+	t_img_data	img_data;
+	(void)map;
 
+	//Changer le parser
+	load_image(info, info->texture[0], "textures/diamond.xpm", &img_data);
+	load_image(info, info->texture[1], "textures/mchassig.xpm", &img_data);
+	load_image(info, info->texture[2], "textures/wood.xpm", &img_data);
+	load_image(info, info->texture[3], "textures/stone.xpm", &img_data);
+
+	/*
 	load_image(info, info->texture[0], map->textures_colours[NO], &img);
 	load_image(info, info->texture[1], map->textures_colours[SO], &img);
 	load_image(info, info->texture[2], map->textures_colours[EA], &img);
 	load_image(info, info->texture[3], map->textures_colours[WE], &img);
+	*/
 }
 
 /**
@@ -97,7 +107,7 @@ void	load_texture(t_info *info, t_map_data *map)
 int	initialize_textures(t_info *info, t_map_data *map)
 {
 	int	i;
-	int	j;
+//	int	j;
 
 	if (!(info->texture = (int **)malloc(sizeof(int *) * 4)))
 		return (-1);
@@ -108,6 +118,7 @@ int	initialize_textures(t_info *info, t_map_data *map)
 			return (-1);
 		i++;
 	}
+/*
 	i = 0;
 	while (i < 4)
 	{
@@ -118,6 +129,24 @@ int	initialize_textures(t_info *info, t_map_data *map)
 			j++;
 		}
 		i++;
+	}
+	*/
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < )
+	{
+		x = 0;
+		while (x < img_data->img_width)
+		{
+			printf("x: %d | y: %d\n", x, y);
+			texture[img_data->img_width * y + x] = 25;
+			//texture[img_data->img_width * y + x] = img_data->addr[img_data->img_width * y + x];
+			x++;
+		}
+		y++;
 	}
 	load_texture(info, map);
 	return (1);
@@ -231,8 +260,10 @@ int	raycaster(t_map_data *map_data)
 
 	info.win = mlx_new_window(info.mlx, width, height, "mlx");
 
-	info.img->img = mlx_new_image(info.mlx, width, height);
-	info.img->addr = mlx_get_data_addr(info.img->img, &info.img->bpp, &info.img->size_l, &info.img->endian);
+	if (info.win == NULL || info.mlx == NULL)
+		printf("MEYRYRYRM");
+	info.img_data->img = mlx_new_image(info.mlx, width, height);
+	info.img_data->addr = mlx_get_data_addr(info.img_data->img, &info.img_data->bpp, &info.img_data->size_l, &info.img_data->endian);
 
 	mlx_loop_hook(info.mlx, &raycaster_loop, &info);
 	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
