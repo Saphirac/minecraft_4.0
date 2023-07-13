@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/11 13:29:03 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:56:16 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
  * 
  * @param data to terminate.
  */
-void	mlx_terminate(t_data *data)
+void	mlx_terminate(t_info *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img_data.img);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 }
 
 /**
@@ -68,24 +68,23 @@ int	create_map(t_map_data *map, char *file)
 // TODO : Open and check args
 int	main(int ac, char **av)
 {
-	t_data		data;
+	t_info		data;
 	t_map_data	map;
 
 	if (ac != 2)
 		return (1);
 	if (create_map(&map, av[1]))
 		return (1);
-	if (set_params(&data) == EXIT_FAILURE)
-		return (1);
-	draw_mini_map(&data, &map);
-	raycaster(&map);
-	/*
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
-	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
-	mlx_key_hook(data.win_ptr, &handle_input, &data);
-	mlx_hook(data.win_ptr, 17, 0L, &handle_cross, &data);
-	mlx_loop(data.mlx_ptr);
+	//if (set_params(&data) == EXIT_FAILURE)
+	//	return (1);
+	raycaster(&data, &map);
+	
+	//draw_mini_map(&data.img_data, &map);
+	//mlx_put_image_to_window(data.mlx, data.win, &data.img_data.img, 0, 0);
+	// mlx_loop_hook(data.mlx, &handle_no_event, &data);
+	// mlx_key_hook(data.win, &handle_input, &data);
+	// mlx_hook(data.win, 17, 0L, &handle_cross, &data);
+	// mlx_loop(data.mlx);
 	mlx_terminate(&data);
-	*/
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/11 23:33:15 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/12 21:32:29 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ typedef struct s_data {
 // Keys events //
 
 int		handle_no_event(void *data);
-int		handle_input(int keysym, t_data *data);
-int		handle_cross(t_data *data);
+int		handle_input(int keysym, t_info *data);
+int		handle_cross(t_info *data);
 int		key_press(int key, t_info *info);
 
 // Drawing //
 
-void	img_pix_put(t_data *img, int x, int y, int color)
+void	img_pix_put(t_img_data **img, int x, int y, int color)
 		__attribute__((always_inline));
-void	draw_line(t_data *data, t_v2i p1, t_v2i p2, int color);
-void	draw_mini_map(t_data *img, t_map_data *map);
+void	draw_line(t_img_data **img, t_v2i p1, t_v2i p2, int color);
+void	draw_mini_map(t_img_data **img, t_map_data *map);
 char	get_block(t_map_data *map, t_v2i pos);
 
 // Parsing //
@@ -77,7 +77,8 @@ int		find_player(t_map_data *map);
 void 	print_only_map(t_map_data *map);
 
 // Raycasting //
-void	render(t_data *data, t_map_data *map);
-int		raycaster(t_map_data *map_data);
+int		raycaster(t_info *info, t_map_data *map_data);
+int		initialize_info_structure(t_info *info, t_map_data *map_data);
+int		initialize_textures(t_info *info, t_img_data *img, t_map_data *map);
 
 #endif

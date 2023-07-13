@@ -6,13 +6,13 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 01:35:17 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/02 19:19:53 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/12 21:32:02 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-inline static void	__draw_mini_map_line(t_data *img, t_map_data *map, t_v2i i)
+inline static void	__draw_mini_map_line(t_img_data **img, t_map_data *map, t_v2i i)
 {
 	t_v2i const	offset = {20, 20};
 
@@ -33,7 +33,7 @@ inline static void	__draw_mini_map_line(t_data *img, t_map_data *map, t_v2i i)
 	}
 }
 
-void	draw_mini_map(t_data *img, t_map_data *map)
+void	draw_mini_map(t_img_data **img, t_map_data *map)
 {
 	t_v2i	i;
 

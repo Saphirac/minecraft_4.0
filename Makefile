@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/11 23:34:01 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/07/12 21:10:06 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,9 +79,10 @@ SRC					=							\
 						raycasting.c			\
 						floor_casting.c			\
 						wall_casting.c			\
-						keys_2.c				\
+						ray_data.c				\
 				}								\
 						keys.c					\
+						keys_2.c				\
 						vectors.c				\
 						get_next_line.c			\
 						main.c

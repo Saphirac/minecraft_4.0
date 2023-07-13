@@ -42,7 +42,7 @@ typedef struct	s_info
 	double		planeX;
 	double		planeY;
 	double		rotSpeed;
-	t_img_data	*img_data;
+	t_img_data	img_data;
 	t_map_data	*map_data;
 }				t_info;
 

@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 22:38:28 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/02 19:28:33 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/12 21:32:08 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ inline static int	__biggest(int a, int b)
 	return (b);
 }
 
-inline static bool	__in_border(int x, int y, t_data *data)
+inline static bool	__in_border(int x, int y)
 {
-	if (x < 0 || x >= data->lg || y < 0 || y >= data->wd)
+	if (x < 0 || x >= width || y < 0 || y >= height)
 		return (false);
 	return (true);
 }
 
-void	draw_line(t_data *img, t_v2i p1, t_v2i p2, int colour)
+void	draw_line(t_img_data **img, t_v2i p1, t_v2i p2, int colour)
 {
 	t_v2i	delta;
 	size_t	len;
@@ -41,10 +41,10 @@ void	draw_line(t_data *img, t_v2i p1, t_v2i p2, int colour)
 	xy[Y] = p1[Y];
 	while (len--)
 	{
-		if (__in_border(xy[X], xy[Y], img) == true)
+		if (__in_border(xy[X], xy[Y]) == true)
 			img_pix_put(img, (int)xy[X], (int)xy[Y], colour);
 		xy += inc;
 	}
-	if (__in_border(xy[X], xy[Y], img) == true)
+	if (__in_border(xy[X], xy[Y]) == true)
 			img_pix_put(img, (int)xy[X], (int)xy[Y], colour);
 }
