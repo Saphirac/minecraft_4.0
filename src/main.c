@@ -20,7 +20,7 @@
 void	mlx_terminate(t_info *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_image(data->mlx, data->img_data.img);
+	mlx_destroy_image(data->mlx, data->img_data->img);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 }
@@ -68,7 +68,7 @@ int	create_map(t_map_data *map, char *file)
 // TODO : Open and check args
 int	main(int ac, char **av)
 {
-	t_info		data;
+	t_info		*info;
 	t_map_data	map;
 
 	if (ac != 2)
@@ -77,7 +77,10 @@ int	main(int ac, char **av)
 		return (1);
 	//if (set_params(&data) == EXIT_FAILURE)
 	//	return (1);
-	raycaster(&data, &map);
+
+	info = malloc(sizeof(t_info) * 1);
+	info = ft_calloc(1, sizeof(t_info));
+	raycaster(info, &map);
 	
 	//draw_mini_map(&data.img_data, &map);
 	//mlx_put_image_to_window(data.mlx, data.win, &data.img_data.img, 0, 0);
@@ -85,6 +88,6 @@ int	main(int ac, char **av)
 	// mlx_key_hook(data.win, &handle_input, &data);
 	// mlx_hook(data.win, 17, 0L, &handle_cross, &data);
 	// mlx_loop(data.mlx);
-	mlx_terminate(&data);
+	// mlx_terminate(&data);
 	return (0);
 }

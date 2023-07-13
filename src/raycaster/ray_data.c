@@ -20,7 +20,7 @@
  * @return
  * @throws
  */
-int	load_image(t_info *info, int *texture, char *path, t_img_data *img_data)
+int	load_image(t_info (*info), int *texture, char *path, t_img_data *img_data)
 {
 	int y;
 	int	x;
@@ -53,15 +53,15 @@ int	load_image(t_info *info, int *texture, char *path, t_img_data *img_data)
  * @return
  * @throws
  */
-void	load_texture(t_info *info, t_img_data *img_data, t_map_data *map)
+void	load_texture(t_info **info, t_img_data *img_data, t_map_data *map)
 {
 	(void)map;
 
 	//TODO Changer le parser
-	load_image(info, info->texture[0], "textures/diamond.xpm", img_data);
-	load_image(info, info->texture[1], "textures/mchassig.xpm", img_data);
-	load_image(info, info->texture[2], "textures/wood.xpm", img_data);
-	load_image(info, info->texture[3], "textures/stone.xpm", img_data);
+	load_image(*info, (*info)->texture[0], "textures/diamond.xpm", img_data);
+	load_image(*info, (*info)->texture[1], "textures/mchassig.xpm", img_data);
+	load_image(*info, (*info)->texture[2], "textures/wood.xpm", img_data);
+	load_image(*info, (*info)->texture[3], "textures/stone.xpm", img_data);
 
 	/*
 	load_image(info, info->texture[0], map->textures_colours[NO], &img);
@@ -78,16 +78,16 @@ void	load_texture(t_info *info, t_img_data *img_data, t_map_data *map)
  * @return
  * @throws
  */
-int	initialize_textures(t_info *info, t_img_data *img_data, t_map_data *map)
+int	initialize_textures(t_info (**info), t_img_data *img_data, t_map_data *map)
 {
 	int	i;
 
-	if (!(info->texture = malloc(sizeof(int *) * 4)))
+	if (!((*info)->texture = malloc(sizeof(int *) * 4)))
 		return (EXIT_FAILURE);
 	i = 0;
 	while (i < 4)
 	{
-		if (!(info->texture[i] = ft_calloc((texHeight * texWidth), sizeof(int))))
+		if (!((*info)->texture[i] = ft_calloc((texHeight * texWidth), sizeof(int))))
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -95,18 +95,18 @@ int	initialize_textures(t_info *info, t_img_data *img_data, t_map_data *map)
 	return (EXIT_SUCCESS);
 }
 
-int	malloc_buf(int ***buf)
+int	malloc_buf(t_info **info)
 {
 	int	i;
 
-	*buf = malloc(sizeof(int *) * height);
-	if (!*buf)
+	(*info)->buf = malloc(sizeof(int *) * height);
+	if (!(*info)->buf)
 		return (MALLOC_ERR);
 	i = 0;
 	while (i < height)
 	{
-		(*buf)[i] = ft_calloc(width, sizeof(int));
-		if (!(*buf)[i])
+		(*info)->buf[i] = ft_calloc(width, sizeof(int));
+		if (!(*info)->buf[i])
 			return (MALLOC_ERR);
 		i++;
 	}
@@ -121,22 +121,24 @@ int	malloc_buf(int ***buf)
  * @throws
  */
 int	initialize_info_structure(
-	t_info *info,
+	t_info **info,
 	t_map_data *map_data)
 {
-	if (malloc_buf(&info->buf))
+
+
+	if (malloc_buf(info))
 		return (MALLOC_ERR);
-	info->mlx = mlx_init();
-	if (info->mlx == NULL)
+	(*info)->mlx = mlx_init();
+	if ((*info)->mlx == NULL)
 		return (MLX_ERR);
-	info->posX = 22.0;
-	info->posY = 11.5;
-	info->dirX = -1.0;
-	info->dirY = 0.0;
-	info->planeX = 0.0;
-	info->planeY = 0.66;
-	info->moveSpeed = 0.05;
-	info->rotSpeed = 0.05;
-	info->map_data = map_data;
+	(*info)->posX = 22.0;
+	(*info)->posY = 11.5;
+	(*info)->dirX = -1.0;
+	(*info)->dirY = 0.0;
+	(*info)->planeX = 0.0;
+	(*info)->planeY = 0.66;
+	(*info)->moveSpeed = 0.05;
+	(*info)->rotSpeed = 0.05;
+	(*info)->map_data = map_data;
 	return (EXIT_SUCCESS);
 }

@@ -78,7 +78,7 @@ void 	print_only_map(t_map_data *map);
 
 // Raycasting //
 int		raycaster(t_info *info, t_map_data *map_data);
-int		initialize_info_structure(t_info *info, t_map_data *map_data);
-int		initialize_textures(t_info *info, t_img_data *img, t_map_data *map);
+int		initialize_info_structure(t_info **info, t_map_data *map_data);
+int		initialize_textures(t_info **info, t_img_data *img, t_map_data *map);
 
 #endif

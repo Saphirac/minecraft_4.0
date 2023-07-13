@@ -166,8 +166,8 @@ void	calc_floor_texture(t_fc_data *data, t_draw_floor_data *draw_data)
 			(draw_data->floor_y - draw_data->cell_y)) & (texHeight - 1);
 	draw_data->floor_x += data->floor_step_x;
 	draw_data->floor_y += data->floor_step_y;
-	draw_data->floor_texture = 3;
-	draw_data->ceiling_texture = 6;
+	draw_data->floor_texture = 0;
+	draw_data->ceiling_texture = 1;
 }
 
 /**
