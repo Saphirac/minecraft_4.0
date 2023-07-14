@@ -49,6 +49,7 @@ typedef struct	s_info
 int	floor_casting(t_info *info);
 int	wall_casting(t_info *info);
 
+
 //DEBUG FUNCTIONS
 void	print_textures(t_info *info);
 

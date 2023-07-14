@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:42:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/10 17:35:03 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/14 13:26:07 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,9 @@ void	calc_lineheight(t_wc_data *data)
 */
 void	calc_texturing(t_wc_data *data, char **map)
 {
-	data->tex_num = map[data->map_x][data->map_y] - 1;
+	//TODO: Change calc_texturing with NO SO EA WE
+	(void)map;
+	data->tex_num = 3;
 }
 
 /**
@@ -344,7 +346,8 @@ void	draw_texture(t_wc_data *data, t_info *info, int x)
 	{
 		tex_y = (int)tex_pos & (texHeight - 1);
 		tex_pos += data->step;
-		color = info->texture[data->tex_num][texHeight * tex_y + data->tex_x];
+		color = info->texture[0][texHeight * tex_y + data->tex_x];
+		//color = info->texture[data->tex_num][texHeight * tex_y + data->tex_x];
 		if (data->side == 1)
 			color = (color >> 1) & 8355711;
 		info->buf[y][x] = color;

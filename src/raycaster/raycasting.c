@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/14 09:39:54 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/14 13:25:40 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,12 @@ int	calc(t_info *info)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief
- *
- * @param
- * @return
- * @throws
- */
-int	main_loop(t_info *info)
-{
-	if (calc(info) == MALLOC_ERR)
-		return (MALLOC_ERR);
-	draw(info);
-	return (0);
-}
-
 //move forwards if no wall in front of you
 void	key_w(int key, t_info *info)
 {
 	if (key == KEY_W)
 	{
+		printf("WWWWWWWWWWw\n");
 		if (!info->map_data->map[(int)(info->posX + info->dirX * info->moveSpeed)] \
 				[(int)(info->posY)])
 			info->posX += info->dirX * info->moveSpeed;
@@ -125,14 +111,17 @@ void	key_d(int key, t_info *info)
 //both camera direction and camera plane must be rotated
 void	key_a(int key, t_info *info)
 {
+	double	oldDirX;
+	double	oldPlaneX;
+
 	if (key == KEY_A)
 	{
-		double oldDirX = info->dirX;
+		oldDirX = info->dirX;
 		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * \
 					 sin(info->rotSpeed);
 		info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * \
 					 cos(info->rotSpeed);
-		double oldPlaneX = info->planeX;
+		oldPlaneX = info->planeX;
 		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * \
 					   sin(info->rotSpeed);
 		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * \
@@ -323,6 +312,21 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
  * @return
  * @throws
  */
+int	main_loop(t_info *info)
+{
+	if (calc(info) == MALLOC_ERR)
+		return (MALLOC_ERR);
+	draw(info);
+	return (0);
+}
+
+/**
+ * @brief
+ *
+ * @param
+ * @return
+ * @throws
+ */
 int		raycaster(t_map_data *map_data)
 {
 	t_info *info;
@@ -337,11 +341,15 @@ int		raycaster(t_map_data *map_data)
 
 	info->img.img = mlx_new_image(info->mlx, width, height);
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
-
 	mlx_loop_hook(info->mlx, &main_loop, info);
-	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+	mlx_key_hook(info->win, &key_press, info);
+	//mlx_loop_hook(info->mlx, &main_loop, info);
+	//mlx_hook(info->win, 17, 0L, &key_press, info);
+	//mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
 
 	mlx_loop(info->mlx);
+	free(info);
+	info = NULL;
 	return (EXIT_SUCCESS);
 }
 
