@@ -38,8 +38,8 @@ typedef struct	s_info
 	double planeY;
 	void	*mlx;
 	void	*win;
-	t_img	*img;
-	int		**buf;
+	t_img	img;
+	int		buf[height][width];
 	int		**texture;
 	double	moveSpeed;
 	double	rotSpeed;

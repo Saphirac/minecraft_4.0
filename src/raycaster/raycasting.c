@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/10 17:32:38 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/14 08:48:50 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,43 @@ void	draw(t_info *info)
 		x = 0;
 		while (x < width)
 		{
-			info->img->data[y * width + x] = info->buf[y][x];
+			info->img.data[y * width + x] = info->buf[y][x];
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(info->mlx, info->win, info->img->img, 0, 0);
+	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
+}
+
+/**
+ * @brief
+ *
+ * @param
+ * @return
+ * @throws
+ */
+int	calc(t_info *info)
+{
+	if (floor_casting(info) == MALLOC_ERR)
+		return (MALLOC_ERR);
+	if (wall_casting(info) == MALLOC_ERR)
+		return (MALLOC_ERR);
+	return (EXIT_SUCCESS);
+}
+
+/**
+ * @brief
+ *
+ * @param
+ * @return
+ * @throws
+ */
+int	main_loop(t_info *info)
+{
+	if (calc(info) == MALLOC_ERR)
+		return (MALLOC_ERR);
+	draw(info);
+	return (0);
 }
 
 //move forwards if no wall in front of you
@@ -142,21 +173,14 @@ int	key_press(int key, t_info *info)
  */
 void	load_image(t_info *info, int *texture, char *path, t_img *img)
 {
-	int y;
-	int	x;
-
 	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	y = 0;
-	while (y < img->img_height)
+	for (int y = 0; y < img->img_height; y++)
 	{
-		x = 0;
-		while (x < img->img_width)
+		for (int x = 0; x < img->img_width; x++)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
-			x++;
 		}
-		y++;
 	}
 	mlx_destroy_image(info->mlx, img->img);
 }
@@ -168,14 +192,20 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
  * @return
  * @throws
  */
-void	load_texture(t_info *info, t_map_data *map)
+void	load_texture(t_info *info)
 {
 	t_img	img;
 
-	load_image(info, info->texture[0], map->textures_colours[NO], &img);
-	load_image(info, info->texture[1], map->textures_colours[SO], &img);
-	load_image(info, info->texture[2], map->textures_colours[EA], &img);
-	load_image(info, info->texture[3], map->textures_colours[WE], &img);
+	//load_image(info, info->texture[0], "textures/eagle.xpm", &img);
+	//load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
+	load_image(info, info->texture[0], "textures/diamond.xpm", &img);
+	load_image(info, info->texture[1], "textures/stone_minecraft.xpm", &img);
+	load_image(info, info->texture[2], "textures/stone_minecraft.xpm", &img);
+	load_image(info, info->texture[3], "textures/stone_minecraft.xpm", &img);
+	load_image(info, info->texture[4], "textures/stone_minecraft.xpm", &img);
+	load_image(info, info->texture[5], "textures/stone_minecraft.xpm", &img);
+	load_image(info, info->texture[6], "textures/stone_minecraft.xpm", &img);
+	load_image(info, info->texture[7], "textures/stone_minecraft.xpm", &img);
 }
 
 /**
@@ -185,12 +215,12 @@ void	load_texture(t_info *info, t_map_data *map)
  * @return
  * @throws
  */
-int	initialize_textures(t_info *info, t_map_data *map)
+int	initialize_textures(t_info *info)
 {
 	int	i;
 	int	j;
 
-	if (!(info->texture = (int **)malloc(sizeof(int *) * 4)))
+	if (!(info->texture = (int **)malloc(sizeof(int *) * 8)))
 		return (-1);
 	i = 0;
 	while (i < 8)
@@ -210,25 +240,7 @@ int	initialize_textures(t_info *info, t_map_data *map)
 		}
 		i++;
 	}
-	load_texture(info, map);
-	return (1);
-}
-
-int	malloc_buf(int ***buf)
-{
-	int	i;
-
-	*buf = malloc(sizeof(int *) * height);
-	if (!*buf)
-		return (MALLOC_ERR);
-	i = 0;
-	while (i < height)
-	{
-		*buf[i] = malloc(sizeof(int) * width);
-		if (!*buf[i])
-			return (MALLOC_ERR);
-		i++;
-	}
+	load_texture(info);
 	return (EXIT_SUCCESS);
 }
 
@@ -244,12 +256,7 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 	int	i;
 	int	j;
 
-	if (malloc_buf(&info->buf))
-		return (MALLOC_ERR);
-	info->mlx = NULL;
 	info->mlx = mlx_init();
-	if (info->mlx == NULL)
-		return (MLX_ERR);
 	info->posX = 22.0;
 	info->posY = 11.5;
 	info->dirX = -1.0;
@@ -270,9 +277,9 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 		}
 		i++;
 	}
-	if (initialize_textures(info, map_data) == -1)
+	if (initialize_textures(info) == -1)
 		return (-1);
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -282,53 +289,22 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
  * @return
  * @throws
  */
-int	calc(t_info *info)
-{
-	if (floor_casting(info) == MALLOC_ERR)
-		return (MALLOC_ERR);
-	if (wall_casting(info) == MALLOC_ERR)
-		return (MALLOC_ERR);
-	return (1);
-}
-
-/**
- * @brief
- *
- * @param
- * @return
- * @throws
- */
-int	raycaster_loop(t_info *info)
-{
-	if (calc(info) == MALLOC_ERR)
-		return (MALLOC_ERR);
-	draw(info);
-	return (0);
-}
-
-/**
- * @brief
- *
- * @param
- * @return
- * @throws
- */
-int	raycaster(t_map_data *map_data)
+int		raycaster(t_map_data *map_data)
 {
 	t_info info;
-
-	ft_bzero(&info, sizeof(t_info));
 	initialize_info_structure(&info, map_data);
 
-	info.win = mlx_new_window(info.mlx, width, height, "mlx");
 
-	info.img->img = mlx_new_image(info.mlx, width, height);
-	info.img->data = (int *)mlx_get_data_addr(info.img->img, &info.img->bpp, &info.img->size_l, &info.img->endian);
+	
+	info.win = mlx_new_window(info.mlx, width, height, "minecraft4.0");
 
-	mlx_loop_hook(info.mlx, &raycaster_loop, &info);
+	info.img.img = mlx_new_image(info.mlx, width, height);
+	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
+
+	mlx_loop_hook(info.mlx, &main_loop, &info);
 	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
 
 	mlx_loop(info.mlx);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
