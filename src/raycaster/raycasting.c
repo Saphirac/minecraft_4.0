@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/14 08:48:50 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/14 09:39:54 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,38 @@ void	load_texture(t_info *info)
 }
 
 /**
+ * @brief debug function, print all textures
+ *
+ * @param
+ * @return
+ * @throws
+ */
+void	print_textures(t_info *info)
+{
+	int i;
+	int	x;
+	int	y;
+
+	i = 0;
+	while (i < 4)
+	{
+		y = 0;
+		while (y < texHeight)
+		{
+			x = 0;
+			while (x < texWidth)
+			{
+				//printf("x:%d | y:%d\n", x, y);
+				printf("%d", info->texture[i][y + x]);	
+				x++;
+			}
+			printf("\n");	
+			y++;
+		}
+	}
+}
+
+/**
  * @brief
  *
  * @param
@@ -257,6 +289,8 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 	int	j;
 
 	info->mlx = mlx_init();
+	if (info->mlx == NULL)
+		return (MLX_ERR);
 	info->posX = 22.0;
 	info->posY = 11.5;
 	info->dirX = -1.0;
@@ -291,20 +325,23 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
  */
 int		raycaster(t_map_data *map_data)
 {
-	t_info info;
-	initialize_info_structure(&info, map_data);
+	t_info *info;
+
+	info = ft_calloc(1, sizeof(t_info));
+	if (info == NULL)
+		return (MALLOC_ERR);
+	initialize_info_structure(info, map_data);
 
 
-	
-	info.win = mlx_new_window(info.mlx, width, height, "minecraft4.0");
+	info->win = mlx_new_window(info->mlx, width, height, "minecraft4.0");
 
-	info.img.img = mlx_new_image(info.mlx, width, height);
-	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
+	info->img.img = mlx_new_image(info->mlx, width, height);
+	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
 
-	mlx_loop_hook(info.mlx, &main_loop, &info);
-	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+	mlx_loop_hook(info->mlx, &main_loop, info);
+	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
 
-	mlx_loop(info.mlx);
+	mlx_loop(info->mlx);
 	return (EXIT_SUCCESS);
 }
 

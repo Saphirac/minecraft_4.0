@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:45:41 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/08 20:21:25 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/14 09:40:09 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,8 @@ void	calc_floor_texture(t_fc_data *data, t_draw_floor_data *draw_data)
 			(draw_data->floor_y - draw_data->cell_y)) & (texHeight - 1);
 	draw_data->floor_x += data->floor_step_x;
 	draw_data->floor_y += data->floor_step_y;
-	draw_data->floor_texture = 3;
-	draw_data->ceiling_texture = 6;
+	draw_data->floor_texture = 5;
+	draw_data->ceiling_texture = 5;
 }
 
 /**
@@ -202,7 +202,7 @@ int	draw_floor(t_fc_data *data, t_info *info, int y)
 	t_draw_floor_data	*draw_data;
 	int					x;
 
-	draw_data = malloc(sizeof(t_draw_floor_data) * 1);
+	draw_data = ft_calloc(1, sizeof(t_draw_floor_data));
 	if (draw_data == NULL)
 		return (MALLOC_ERR);
 	x = 0;
@@ -213,11 +213,11 @@ int	draw_floor(t_fc_data *data, t_info *info, int y)
 		calc_floor_texture(data, draw_data);
 		draw_data->color = info->texture[draw_data->floor_texture][texWidth * \
 							draw_data->ty + draw_data->tx];
-		draw_data->color = (draw_data->color >> 1) & 8355711;
+		//draw_data->color = (draw_data->color >> 1) & 8355711;
 		info->buf[y][x] = draw_data->color;
 		draw_data->color = info->texture[draw_data->ceiling_texture] \
 							[texWidth * draw_data->ty + draw_data->tx];
-		draw_data->color = (draw_data->color >> 1) & 8355711;
+		//draw_data->color = (draw_data->color >> 1) & 8355711;
 		info->buf[height - y - 1][x] = draw_data->color;
 		x++;
 	}
