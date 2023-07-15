@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:42:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/14 13:26:07 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:43:45 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 
  * double ray_dir_x, double ray_dir_y: the ray direction
  *
- * int map_x, int map_y: which vox we're in
+ * int map_x, int map_y: which box we're in
  *
  * double side_dist_x, double side_dist_y: side_dist_x and side_dist_y are 
  * initially the distance the ray has to travel from its start position 
@@ -117,6 +117,7 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
  * @brief Perform the DDA: DDA is a fast algorithm typically used on square grids
  * to find which squares a line hits
  *
+
  * delta_dist_x and delta_dist_y are the distance the ray has to 
  * travel to go from 1 x-side to the next x-side, or from 
  * 1 y-side to the next y-side
@@ -134,7 +135,7 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
  * @return 
  * @throws
 */
-void	dda_algorithm(t_wc_data *data, char **map)
+void	dda_algorithm(t_wc_data *data, char **map, t_info *info)
 {
 	while (data->hit == 0)
 	{
@@ -150,6 +151,8 @@ void	dda_algorithm(t_wc_data *data, char **map)
 			data->map_y += data->step_y;
 			data->side = 1;
 		}
+		//printf("DDA | data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
+		print_map_char(info);
 		if (map[data->map_x][data->map_y] > 0)
 			data->hit = 1;
 	}
@@ -219,8 +222,10 @@ void	init_data(t_wc_data *data, t_info *info, int x)
 	data->camera_x = 2 * x / (double)width - 1;
 	data->ray_dir_x = info->dirX + info->planeX * data->camera_x;
 	data->ray_dir_y = info->dirY + info->planeY * data->camera_x;
+	//printf("info->posX:%f | info->posY:%f\n", info->posX, info->posY);
 	data->map_x = (int)info->posX;
 	data->map_y = (int)info->posY;
+	//printf("data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
 	//data->side_dist_x;
 	//data->side_dist_y;
 	data->delta_dist_x = fabs(1 / data->ray_dir_x);
@@ -260,7 +265,7 @@ void	calc_texturing(t_wc_data *data, char **map)
 {
 	//TODO: Change calc_texturing with NO SO EA WE
 	(void)map;
-	data->tex_num = 3;
+	data->tex_num = map[data->map_x][data->map_y] - 1;
 }
 
 /**
@@ -287,6 +292,7 @@ void	calc_wallx_value(t_wc_data *data, t_info *info)
  * @brief Calculate the x coordinate on the texture
  * 
  * @param t_wc_data *data: the data structure that store 
+
  * all variable used for the wall casting
  *
  * @return 
@@ -296,6 +302,7 @@ void	calc_x_coordinate_on_texture(t_wc_data *data)
 {
 	data->tex_x = (int)(data->wall_x * (double)texWidth);
 	data->tex_x = texWidth - data->tex_x - 1;
+	//printf("tex_x:%d\n", data->tex_x);
 }
 
 /**
@@ -346,7 +353,7 @@ void	draw_texture(t_wc_data *data, t_info *info, int x)
 	{
 		tex_y = (int)tex_pos & (texHeight - 1);
 		tex_pos += data->step;
-		color = info->texture[0][texHeight * tex_y + data->tex_x];
+		color = info->texture[data->tex_num][texHeight * tex_y + data->tex_x];
 		//color = info->texture[data->tex_num][texHeight * tex_y + data->tex_x];
 		if (data->side == 1)
 			color = (color >> 1) & 8355711;
@@ -372,11 +379,13 @@ int	wall_casting(t_info *info)
 	if (data == NULL)
 		return (MALLOC_ERR);
 	x = 0;
+	printf("info player| x: %f | y: %f\n", info->posX, info->posY);
 	while (x < width)
 	{
 		init_data(data, info, x);
+		printf("data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
 		calc_step_and_init_sidedist(data, info);
-		dda_algorithm(data, info->map_data->map);
+		dda_algorithm(data, info->map_data->map, info);
 		calc_perpendicular_distance(data, info);
 		calc_lineheight(data);
 		calc_step_and_init_sidedist(data, info);

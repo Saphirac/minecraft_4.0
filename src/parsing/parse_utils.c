@@ -91,14 +91,14 @@ void print_map(t_map_data *map)
 	}
 }
 
-void print_only_map(t_map_data *map)
+void print_only_map(char **map)
 {
 	int y;
 
 	y = 0;
-	while (map->map[y])
+	while (map[y])
 	{
-		printf("%s\n", map->map[y]);
+		printf("%s\n", map[y]);
 		y++;
 	}
 }

@@ -73,7 +73,7 @@ bool	is_line_empty(char const *const line);
 bool	is_textures_full(t_map_data *map);
 bool	check_border(t_map_data *map);
 int		find_player(t_map_data *map);
-void 	print_only_map(t_map_data *map);
+void 	print_only_map(char **map);
 
 // Raycasting //
 void	render(t_data *data, t_map_data *map);

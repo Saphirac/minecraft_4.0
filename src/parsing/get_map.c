@@ -100,6 +100,5 @@ int	get_map(t_map_data *map, int fd, char *line)
 	str_lst_clear(&list);
 	if (find_player(map))
 		return (EXIT_SUCCESS);
-	print_only_map(map);
 	return (EXIT_SUCCESS);
 }

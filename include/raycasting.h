@@ -46,8 +46,9 @@ typedef struct	s_info
 	t_map_data	*map_data;
 }				t_info;
 
-int	floor_casting(t_info *info);
-int	wall_casting(t_info *info);
+int		floor_casting(t_info *info);
+int		wall_casting(t_info *info);
+void	print_map_char(t_info *info);
 
 
 //DEBUG FUNCTIONS

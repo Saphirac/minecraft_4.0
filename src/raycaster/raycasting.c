@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/14 13:25:40 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:41:30 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	key_w(int key, t_info *info)
 {
 	if (key == KEY_W)
 	{
-		printf("WWWWWWWWWWw\n");
 		if (!info->map_data->map[(int)(info->posX + info->dirX * info->moveSpeed)] \
 				[(int)(info->posY)])
 			info->posX += info->dirX * info->moveSpeed;
 		if (!info->map_data->map[(int)(info->posX)][(int)(info->posY + info->dirY * \
 					info->moveSpeed)])
 			info->posY += info->dirY * info->moveSpeed;
+		//printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
 	}
 }
 
@@ -75,11 +75,11 @@ void	key_s(int key, t_info *info)
 {
 	if (key == KEY_S)
 	{
-		if (!info->map_data->map[(int)(info->posX - info->dirX * info->moveSpeed)] \
-				[(int)(info->posY)])
+		if (info->map_data->map[(int)(info->posX - info->dirX * info->moveSpeed)] \
+				[(int)(info->posY)] != '0')
 			info->posX -= info->dirX * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posY - info->dirY * \
-					info->moveSpeed)])
+		if (info->map_data->map[(int)(info->posX)][(int)(info->posY - info->dirY * \
+					info->moveSpeed)] != '0')
 			info->posY -= info->dirY * info->moveSpeed;
 	}
 }
@@ -141,7 +141,7 @@ void	key_esc(int key, t_info *info)
  *
  * @param
  * @return
- * @throws
+ * @throwns
  */
 int	key_press(int key, t_info *info)
 {
@@ -162,14 +162,21 @@ int	key_press(int key, t_info *info)
  */
 void	load_image(t_info *info, int *texture, char *path, t_img *img)
 {
+	int x;
+	int y;
+
 	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	for (int y = 0; y < img->img_height; y++)
+	y = 0;
+	while (y < img->img_height)
 	{
-		for (int x = 0; x < img->img_width; x++)
+		x = 0;
+		while (x < img->img_width)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			x++;
 		}
+		y++;
 	}
 	mlx_destroy_image(info->mlx, img->img);
 }
@@ -195,6 +202,27 @@ void	load_texture(t_info *info)
 	load_image(info, info->texture[5], "textures/stone_minecraft.xpm", &img);
 	load_image(info, info->texture[6], "textures/stone_minecraft.xpm", &img);
 	load_image(info, info->texture[7], "textures/stone_minecraft.xpm", &img);
+}
+
+void print_map_char(t_info *info)
+{
+	int	x;
+	int	y;
+	t_map_data *map_data;
+
+	map_data = info->map_data;
+	y = 0;
+	while (y < map_data->map_size[Y])
+	{
+		x = 0;
+		while (x < map_data->map_size[X])
+		{
+			printf("%d", map_data->map[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
 }
 
 /**
@@ -280,8 +308,8 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 	info->mlx = mlx_init();
 	if (info->mlx == NULL)
 		return (MLX_ERR);
-	info->posX = 22.0;
-	info->posY = 11.5;
+	info->posX = map_data->player[X];
+	info->posY = map_data->player[Y];
 	info->dirX = -1.0;
 	info->dirY = 0.0;
 	info->planeX = 0.0;
@@ -320,6 +348,24 @@ int	main_loop(t_info *info)
 	return (0);
 }
 
+void	convert_map(t_map_data *map_data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < map_data->map_size[Y])
+	{
+		x = 0;
+		while (x < map_data->map_size[X])
+		{
+			map_data->map[y][x] -= '0';
+			x++;
+		}
+		y++;
+	}
+}
+
 /**
  * @brief
  *
@@ -330,12 +376,15 @@ int	main_loop(t_info *info)
 int		raycaster(t_map_data *map_data)
 {
 	t_info *info;
-
+	
+	convert_map(map_data);
+	printf("map_size| x: %d | y: %d\n", map_data->map_size[X], map_data->map_size[Y]);
+	printf("player| x: %f | y: %f\n", map_data->player[X], map_data->player[Y]);
 	info = ft_calloc(1, sizeof(t_info));
 	if (info == NULL)
 		return (MALLOC_ERR);
 	initialize_info_structure(info, map_data);
-
+	printf("info player| x: %f | y: %f\n", info->posX, info->posY);
 
 	info->win = mlx_new_window(info->mlx, width, height, "minecraft4.0");
 
