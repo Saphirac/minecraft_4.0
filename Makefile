@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/08 20:03:22 by gle-mini         ###   ########.fr        #
+#    Updated: 2023/07/16 14:10:43 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRC					=							\
 						wall_casting.c			\
 				}								\
 						keys.c					\
+						keys_2.c				\
 						vectors.c				\
 						get_next_line.c			\
 						main.c

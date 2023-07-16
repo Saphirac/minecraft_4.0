@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_casting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:42:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/15 23:43:45 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/16 13:58:15 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 */
 void	dda_algorithm(t_wc_data *data, char **map, t_info *info)
 {
+	(void)info;
 	while (data->hit == 0)
 	{
 		if (data->side_dist_x < data->side_dist_y)
@@ -152,7 +153,7 @@ void	dda_algorithm(t_wc_data *data, char **map, t_info *info)
 			data->side = 1;
 		}
 		//printf("DDA | data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
-		print_map_char(info);
+		//print_map_char(info);
 		if (map[data->map_x][data->map_y] > 0)
 			data->hit = 1;
 	}
@@ -379,11 +380,11 @@ int	wall_casting(t_info *info)
 	if (data == NULL)
 		return (MALLOC_ERR);
 	x = 0;
-	printf("info player| x: %f | y: %f\n", info->posX, info->posY);
+	//printf("info player| x: %f | y: %f\n", info->posX, info->posY);
 	while (x < width)
 	{
 		init_data(data, info, x);
-		printf("data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
+		//printf("data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
 		calc_step_and_init_sidedist(data, info);
 		dda_algorithm(data, info->map_data->map, info);
 		calc_perpendicular_distance(data, info);

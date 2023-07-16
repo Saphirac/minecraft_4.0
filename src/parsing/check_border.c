@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/11 13:32:13 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/16 14:04:43 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ char	**create_map_tmp(t_map_data *src)
 	int		x;
 	int		y;
 
-	tmp = malloc(sizeof(char *) * src->map_size[Y]);
+	tmp = malloc(sizeof(char *) * (src->map_size[Y] + 1));
 	if (!tmp)
 		return (NULL);
 	y = 0;
 	while (y < src->map_size[Y])
 	{
 		x = 0;
-		tmp[y] = malloc(sizeof(char) * src->map_size[X]);
+		tmp[y] = malloc(sizeof(char) * (src->map_size[X] + 1));
 		if (!tmp[y])
 			return (NULL);
 		while (x < src->map_size[X])
@@ -116,9 +116,11 @@ char	**create_map_tmp(t_map_data *src)
 			tmp[y][x] = src->map[y][x];
 			x++;
 		}
+		tmp[y][x] = '\0';
 		y++;
 	}
-	print_only_map(tmp);
+	tmp[y] = 0;
+	//print_only_map(tmp);
 	return (tmp);
 }
 
@@ -145,6 +147,8 @@ bool	check_border(t_map_data *map)
 		ft_free(tmp);
 		return (false);
 	}
+	//print_only_map(map->map);
+	//print_only_map(tmp);
 	ft_free(tmp);
 	return (true);
 }

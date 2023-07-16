@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/15 23:41:30 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/16 14:10:13 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,104 +53,6 @@ int	calc(t_info *info)
 	if (wall_casting(info) == MALLOC_ERR)
 		return (MALLOC_ERR);
 	return (EXIT_SUCCESS);
-}
-
-//move forwards if no wall in front of you
-void	key_w(int key, t_info *info)
-{
-	if (key == KEY_W)
-	{
-		if (!info->map_data->map[(int)(info->posX + info->dirX * info->moveSpeed)] \
-				[(int)(info->posY)])
-			info->posX += info->dirX * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posY + info->dirY * \
-					info->moveSpeed)])
-			info->posY += info->dirY * info->moveSpeed;
-		//printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
-	}
-}
-
-//move backwards if no wall behind you
-void	key_s(int key, t_info *info)
-{
-	if (key == KEY_S)
-	{
-		if (info->map_data->map[(int)(info->posX - info->dirX * info->moveSpeed)] \
-				[(int)(info->posY)] != '0')
-			info->posX -= info->dirX * info->moveSpeed;
-		if (info->map_data->map[(int)(info->posX)][(int)(info->posY - info->dirY * \
-					info->moveSpeed)] != '0')
-			info->posY -= info->dirY * info->moveSpeed;
-	}
-}
-
-//rotate to the right
-//both camera direction and camera plane must be rotated
-void	key_d(int key, t_info *info)
-{
-	double	oldDirX;
-	double	oldPlaneX;
-
-	if (key == KEY_D)
-	{
-		oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * \
-					 sin(-info->rotSpeed);
-		info->dirY = oldDirX * sin(-info->rotSpeed) + info->dirY * \
-					 cos(-info->rotSpeed);
-		oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * \
-					   sin(-info->rotSpeed);
-		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * \
-					   cos(-info->rotSpeed);
-	}
-}
-
-
-//rotate to the left
-//both camera direction and camera plane must be rotated
-void	key_a(int key, t_info *info)
-{
-	double	oldDirX;
-	double	oldPlaneX;
-
-	if (key == KEY_A)
-	{
-		oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * \
-					 sin(info->rotSpeed);
-		info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * \
-					 cos(info->rotSpeed);
-		oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * \
-					   sin(info->rotSpeed);
-		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * \
-					   cos(info->rotSpeed);
-	}
-}
-
-void	key_esc(int key, t_info *info)
-{
-	(void)info;
-	if (key == KEY_ESC)
-		exit(0);
-}
-
-/**
- * @brief
- *
- * @param
- * @return
- * @throwns
- */
-int	key_press(int key, t_info *info)
-{
-	key_w(key, info);
-	key_s(key, info);
-	key_d(key, info);
-	key_a(key, info);
-	key_esc(key, info);	
-	return (0);
 }
 
 /**
@@ -378,13 +280,13 @@ int		raycaster(t_map_data *map_data)
 	t_info *info;
 	
 	convert_map(map_data);
-	printf("map_size| x: %d | y: %d\n", map_data->map_size[X], map_data->map_size[Y]);
-	printf("player| x: %f | y: %f\n", map_data->player[X], map_data->player[Y]);
+	//printf("map_size| x: %d | y: %d\n", map_data->map_size[X], map_data->map_size[Y]);
+	//printf("player| x: %f | y: %f\n", map_data->player[X], map_data->player[Y]);
 	info = ft_calloc(1, sizeof(t_info));
 	if (info == NULL)
 		return (MALLOC_ERR);
 	initialize_info_structure(info, map_data);
-	printf("info player| x: %f | y: %f\n", info->posX, info->posY);
+	//printf("info player| x: %f | y: %f\n", info->posX, info->posY);
 
 	info->win = mlx_new_window(info->mlx, width, height, "minecraft4.0");
 
@@ -392,8 +294,8 @@ int		raycaster(t_map_data *map_data)
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
 	mlx_loop_hook(info->mlx, &main_loop, info);
 	mlx_key_hook(info->win, &key_press, info);
+	mlx_hook(info->win, 17, 0L, &handle_cross, info);
 	//mlx_loop_hook(info->mlx, &main_loop, info);
-	//mlx_hook(info->win, 17, 0L, &key_press, info);
 	//mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
 
 	mlx_loop(info->mlx);
