@@ -6,37 +6,11 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:45:41 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/14 09:40:09 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:17:35 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/**
- * @brief t_fc_data *data: the data structure that store 
- * all variable used for the floor casting
- *
- * float ray_dir_x0, float ray_dir_y0: ray direction for leftmost i.e.(x = 0)
- *
- * float ray_dir_x1, float ray_dir_y1: ray direction for rightmost 
- * i.e. (x = width)
- *
- * float row_distance: Vertical distance from the camera to the floor for 
- * the current row. 0.5 is the z position exactly in the middle between 
- * floor and ceiling.
- *
- *  
- */
-typedef struct s_fc_data
-{
-	float	ray_dir_x0;
-	float	ray_dir_y0;
-	float	ray_dir_x1;
-	float	ray_dir_y1;
-	float	row_distance;
-	float	floor_step_x;
-	float	floor_step_y;
-}				t_fc_data;
 
 /**
  * @brief Caculate row_distance
@@ -107,45 +81,6 @@ void	calc_floor_step(t_fc_data *data)
 						(data->ray_dir_y1 - data->ray_dir_y0) / width;
 }
 
-/**
- *
- * @brief data structure used in draw_floor function
- *
- * float floor_y, float floor_x: are real world coordinates of the leftmost 
- * column. This will be updated as we step to the right.
- *
- * int cell_x, int cell_y: the cell coord is simply got from the integer 
- * parts of floor_x and floor_y
- *
- * int tx, int ty: are used to get the texture coordinate from the fractional 
- * part
- *
- * int floor_texture: the texture's number for the floor
- *
- * int ceiling_texture: the texture's number for the ceiling
- *
- * int color: pixel's color
- *
- * info->buf: the buffer image where we stock our pixel before to print it
- *
- * color = (color >> 1) & 8355711; is used to make a bit darker and simulate
- * basic shadow 
- *
- *
- */
-typedef struct s_draw_floor_data
-{
-	float	floor_x;
-	float	floor_y;
-	int		x;
-	int		cell_x;
-	int		cell_y;
-	int		tx;
-	int		ty;
-	int		floor_texture;
-	int		ceiling_texture;
-	int		color;
-}				t_draw_floor_data;
 
 /**
  *
@@ -240,7 +175,7 @@ int	floor_casting(t_info *info)
 	int			y;
 
 	y = 0;
-	data = malloc(sizeof(t_fc_data) * 1);
+	data = info->fc_data;
 	if (data == NULL)
 		return (MALLOC_ERR);
 	while (y < height)
@@ -251,7 +186,6 @@ int	floor_casting(t_info *info)
 		draw_floor(data, info, y);
 		y++;
 	}
-	free(data);
 	data = NULL;
 	return (0);
 }

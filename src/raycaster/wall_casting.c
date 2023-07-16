@@ -6,73 +6,11 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:42:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/16 13:58:15 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:11:49 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/**
- * @brief t_wc_data *data: the data structure that store 
- * all variable used for the wall casting
- *
- * double camera_x: the ray position
- * 
- * double ray_dir_x, double ray_dir_y: the ray direction
- *
- * int map_x, int map_y: which box we're in
- *
- * double side_dist_x, double side_dist_y: side_dist_x and side_dist_y are 
- * initially the distance the ray has to travel from its start position 
- * to the first x-side and the first y-side
- *
- * double delta_dist_x, double delta_dist_y: length of ray from one x 
- * or y-side to next x or y-side
- *
- * double perp_wall_dist: the perpendicular distance from the player 
- * (posX, posY) to the position (map_x, map_y)
- * 
- * int step_x, int step_y:  step_x and step_y are the distance to the 
- * next side of a wall
- *
- * int hit: was the a wall hit ? we initialize at 0 for "no wall was hit"
- *
- * int side: was a NS or a EW wall hit ?
- *
- * int	draw_start;
- * int	draw_end;
- *
- * int	lineheight;
- * int tex_num;
- * double wall_x;
- * int tex_x;
- * double step;
- *
- */
-typedef struct s_wc_data
-{
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		draw_start;
-	int		draw_end;
-	int		lineheight;
-	int		tex_num;
-	double	wall_x;
-	int		tex_x;
-	double	step;
-}				t_wc_data;
 
 /**
  * @brief Calculate step and initial sideDist
@@ -376,9 +314,7 @@ int	wall_casting(t_info *info)
 	t_wc_data	*data;
 	int			x;
 
-	data = malloc(sizeof(t_wc_data) * 1);
-	if (data == NULL)
-		return (MALLOC_ERR);
+	data = info->wc_data;
 	x = 0;
 	//printf("info player| x: %f | y: %f\n", info->posX, info->posY);
 	while (x < width)
@@ -398,7 +334,7 @@ int	wall_casting(t_info *info)
 		draw_texture(data, info, x);
 		x++;
 	}
-	free(data);
+	//free(data);
 	data = NULL;
 	return (0);
 }

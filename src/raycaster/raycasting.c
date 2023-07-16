@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/16 14:10:13 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:15:54 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,12 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.05;
 	info->map_data = map_data;
+	info->wc_data = malloc(sizeof(t_wc_data) * 1);
+	if (info->wc_data == NULL)
+		return (MALLOC_ERR);
+	info->fc_data = malloc(sizeof(t_fc_data) * 1);
+	if (info->fc_data == NULL)
+		return (MALLOC_ERR);
 	i = 0;
 	while (i < height)
 	{
