@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 15:42:20 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:43:26 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:08:29 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void			ft_putnbr_fd(int n, int fd);
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 char			*ft_itoa(int n);
-char			**ft_split(char const *s, char c);
+char			**ft_split(char const *str, char const *const set);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *s);
 char			*ft_strjoin(char const *s1, char const *s2);

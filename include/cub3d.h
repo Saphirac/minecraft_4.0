@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/16 14:10:27 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:08:50 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ bool	is_textures_full(t_map_data *map);
 bool	check_border(t_map_data *map);
 int		find_player(t_map_data *map);
 void 	print_only_map(char **map);
+int		get_color_ceiling_floor(t_map_data *map_data);
 
 // Raycasting //
 void	render(t_data *data, t_map_data *map);

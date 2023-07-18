@@ -6,98 +6,62 @@
 /*   By: mcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:10:09 by mcourtoi          #+#    #+#             */
-/*   Updated: 2022/01/10 20:49:55 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:07:13 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_word(char const *str, char c)
+inline static char	**__populate(
+	char **output,
+	char *ptr,
+	char const *str,
+	char const *const set)
 {
-	int	i;
-	int	m;
+	size_t	i;
 
 	i = 0;
-	m = 0;
-	while (str[i] == c && str[i])
-		i++;
-	while (str[i])
+	while (*str)
 	{
-		while (str[i] != c && str[i])
-			i++;
-		m++;
-		while (str[i] == c && str[i])
-			i++;
+		output[i++] = ptr;
+		while (*str && !ft_strchr(set, *str))
+			*ptr++ = *str++;
+		*ptr++ = 0;
+		while (*str && ft_strchr(set, *str))
+			++str;
 	}
-	return (m);
+	return (output);
 }
 
-static char	*ft_strdupbis(char const *src, char c, int i)
-{
-	char	*dest;
-	int		size;
-	int		n;
-	int		p;
-
-	n = i;
-	p = 0;
-	size = 0;
-	while (src[n] && src[n] != c)
-	{
-		size++;
-		n++;
-	}
-	dest = malloc(sizeof(char) * size + 1);
-	if (!dest)
-		return (NULL);
-	while (p < size && src[i] && src[i] != c)
-	{
-		dest[p] = src[i];
-		i++;
-		p++;
-	}
-	dest[p] = '\0';
-	return (dest);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**tab;
-	int		i;
-	int		p;
-	int		n;
-
-	n = ft_count_word(s, c);
-	tab = malloc(sizeof(char *) * (n + 1));
-	i = 0;
-	p = 0;
-	if (!tab)
-		return (NULL);
-	while (s[i] && p < n)
-	{
-		while (s[i] == c && s[i])
-			i++;
-		tab[p] = ft_strdupbis(s, c, i);
-		while (s[i] != c && s[i])
-			i++;
-		p++;
-	}
-	tab[p] = 0;
-	return (tab);
-}
 /*
-#include <stdio.h>
-
-int	main (int ac, char **av)
+	Split the given string `str` whenever char `c` is encountered
+	Return an array of strings resulting of the spliting
+*/
+char	**ft_split(char const *str, char const *const set)
 {
-	char	**tab;
-	int	i;
+	register char const	*ptr;
+	char				**output;
+	size_t				size;
+	size_t				len;
 
-	i = 0;
-	tab = ft_split(av[1], av[2][0]);
-	while (tab[i])
+	while (*str && ft_strchr(set, *str))
+		++str;
+	ptr = str;
+	size = 0;
+	len = 0;
+	while (*ptr)
 	{
-		printf("%s\n", tab[i]);
-		i++;
-	}	
-}*/
+		if (!ft_strchr(set, *ptr))
+		{
+			++len;
+			if (ptr == str || ft_strchr(set, *(ptr - 1)))
+				++size;
+		}
+		++ptr;
+	}
+	output = malloc((size + 1) * sizeof(char *) + (len + size) * sizeof(char));
+	if (!output)
+		return (NULL);
+	output[size] = NULL;
+	return (__populate(output, (char *)(output + size + 1), str, set));
+}

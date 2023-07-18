@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 16:23:10 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/01 20:42:20 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/07/18 10:11:18 by gle-mini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c \
 
 OBJS = ${SRCS:.c=.o}
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 
 .c.o:
 	${CC} ${FLAGS} -I ./include -c $< -o ${<:.c=.o}

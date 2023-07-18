@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/16 16:15:54 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:34:42 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,8 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 	info->dirY = 0.0;
 	info->planeX = 0.0;
 	info->planeY = 0.66;
-	info->moveSpeed = 0.05;
-	info->rotSpeed = 0.05;
+	info->moveSpeed = 0.15;
+	info->rotSpeed = 0.15;
 	info->map_data = map_data;
 	info->wc_data = malloc(sizeof(t_wc_data) * 1);
 	if (info->wc_data == NULL)

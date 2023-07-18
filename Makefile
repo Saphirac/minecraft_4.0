@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/16 14:10:43 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/07/18 10:05:55 by gle-mini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRC					=							\
 						parse_utils.c			\
 						check_border.c			\
 						find_player.c			\
+						convert_ceiling_floors_colors.c \
 				}								\
 				${addprefix str_lst/,			\
 						str_lst_add_back.c		\

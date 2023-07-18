@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/14 09:55:44 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:59:57 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int ac, char **av)
 	if (set_params(&data) == EXIT_FAILURE)
 		return (1);
 	draw_mini_map(&data, &map);
+	//printf("color1: %s | color2: %s\n", map.textures_colours[4], map.textures_colours[5]);
 	raycaster(&map);
 	/*
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);

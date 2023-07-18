@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/10 17:19:19 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:28:20 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int	get_all_data(t_map_data *const map, int const fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (get_color_ceiling_floor(map) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	free(line);
 	return (printf("No map.\n"), EXIT_FAILURE);
 }
