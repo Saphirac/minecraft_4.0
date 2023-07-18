@@ -12,32 +12,33 @@
 
 #include "cub3d.h"
 
-//move forwards if no wall in front of you
-void	key_a(int key, t_info *info)
-{
-	if (key == KEY_A)
-	{
-		if (!info->map_data->map[(int)(info->posX + 0 * info->moveSpeed)] \
-				[(int)(info->posY)])
-			info->posX += 0 * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posY - 1 * \
-					info->moveSpeed)])
-			info->posY += - 1 * info->moveSpeed;
-		//printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
-	}
-}
-
-//move backwards if no wall behind you
 void	key_d(int key, t_info *info)
 {
 	if (key == KEY_D)
 	{
-		if (info->map_data->map[(int)(info->posX - 0 * info->moveSpeed)] \
-				[(int)(info->posY)] != '0')
-			info->posX -= 0 * info->moveSpeed;
-		if (info->map_data->map[(int)(info->posX)][(int)(info->posY + 1 * \
-					info->moveSpeed)] != '0')
-			info->posY -= -1 * info->moveSpeed;
+		printf("before info->posY: %f | info->posX: %f\n", info->posY, info->posX);
+		if (!info->map_data->map[(int)(info->posX + info->dirY * info->moveSpeed)] \
+				[(int)(info->posY)])
+			info->posX += info->dirY * info->moveSpeed;
+		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX + info->dirY * \
+					info->moveSpeed)])
+			info->posY -= info->dirX * info->moveSpeed;
+		printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
+	}
+}
+
+void	key_a(int key, t_info *info)
+{
+	if (key == KEY_A)
+	{
+		//printf("before info->posY: %f | info->posX: %f\n", info->posY, info->posX);
+		if (!info->map_data->map[(int)(info->posX + info->dirY * info->moveSpeed)] \
+				[(int)(info->posY)])
+			info->posX -= info->dirY * info->moveSpeed;
+		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX + info->dirY * \
+					info->moveSpeed)])
+			info->posY += info->dirX * info->moveSpeed;
+		//printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
 	}
 }
 

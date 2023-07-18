@@ -213,7 +213,7 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 	info->posX = map_data->player[X];
 	info->posY = map_data->player[Y];
 	info->dirX = -1.0;
-	info->dirY = 0.0;
+	info->dirY = 0;
 	info->planeX = 0.0;
 	info->planeY = 0.66;
 	info->moveSpeed = 0.15;
@@ -253,6 +253,7 @@ int	main_loop(t_info *info)
 	if (calc(info) == MALLOC_ERR)
 		return (MALLOC_ERR);
 	draw(info);
+	//printf("info->dirX: %f | info->dirY: %f\n", info->dirX, info->dirY);
 	return (0);
 }
 
