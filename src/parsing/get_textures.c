@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/18 11:28:20 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:44:20 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	get_all_data(t_map_data *const map, int const fd)
 {
 	char	*line;
 
+	printf("TESSSST1\n");
 	line = get_next_line(fd);
 	if (!line)
 		return (EXIT_FAILURE);
@@ -97,14 +98,15 @@ int	get_all_data(t_map_data *const map, int const fd)
 				return (EXIT_FAILURE);
 		}
 		else if (check_line(line) == -1)
-			return (get_map(map, fd, line));
+			return (printf("TESSSST2\n"), get_map(map, fd, line));
 		else if (check_line(line) == -2)
 			return (printf("Incorrect given data.\n"), EXIT_FAILURE);	
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd);	
 	}
 	if (get_color_ceiling_floor(map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	printf("color_floor : %x | color_ceiling : %x\n", map->color_floor, map->color_ceiling);
 	free(line);
 	return (printf("No map.\n"), EXIT_FAILURE);
 }

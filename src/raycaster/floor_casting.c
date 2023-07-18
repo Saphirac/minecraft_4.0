@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:45:41 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/18 11:30:13 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:59:48 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,15 +145,8 @@ int	draw_floor(t_fc_data *data, t_info *info, int y)
 	draw_data->floor_y = info->posY + data->row_distance * data->ray_dir_y0;
 	while (x < width)
 	{
-		calc_floor_texture(data, draw_data);
-		draw_data->color = info->texture[draw_data->floor_texture][texWidth * \
-							draw_data->ty + draw_data->tx];
-		//draw_data->color = (draw_data->color >> 1) & 8355711;
-		info->buf[y][x] = draw_data->color;
-		draw_data->color = info->texture[draw_data->ceiling_texture] \
-							[texWidth * draw_data->ty + draw_data->tx];
-		//draw_data->color = (draw_data->color >> 1) & 8355711;
-		info->buf[height - y - 1][x] = draw_data->color;
+		info->buf[y][x] = info->map_data->color_floor;
+		info->buf[height - y - 1][x] = info->map_data->color_ceiling;
 		x++;
 	}
 	free(draw_data);

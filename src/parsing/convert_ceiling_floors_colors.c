@@ -6,7 +6,7 @@
 /*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:00:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/18 11:23:54 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:36:53 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	convert_colors(char *str)
 	s = ft_split(str, ".");
 	if (ft_arrstrlen(s) != 3)
 		return (EXIT_FAILURE);
+	printf("r = %d | g = %d | b = %d\n", ft_atoi(s[0]), ft_atoi(s[1]), ft_atoi(s[2]));
 	color = create_trgb(1, ft_atoi(s[0]), ft_atoi(s[1]), ft_atoi(s[2]));
 	free(s);
 	s = NULL;

@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/18 10:05:55 by gle-mini         ###   ########.fr        #
+#    Updated: 2023/07/18 11:50:54 by gle-mini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,6 @@ MLX_A				:=	${addprefix ${MLX_DIR}/, ${MLX_A}}
 #            SOURCE FILES            #
 ######################################
 SRC					=							\
-				${addprefix drawing/,			\
-						draw_pixel.c			\
-						draw_line.c				\
-						draw_mini_map.c			\
-				}								\
 				${addprefix parsing/,			\
 						get_block.c				\
 						get_map.c				\
@@ -98,7 +93,7 @@ DEP					=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS				=	-Wall -Wextra -Werror -g3
+CFLAGS				=	-Wall -Wextra -Werror
 CFLAGS				+=	-MMD -MP
 CFLAGS				+=	-I${INC_DIR}
 CFLAGS				+=	-I${FT_INC_DIR}

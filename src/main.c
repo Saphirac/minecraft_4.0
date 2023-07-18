@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/17 17:59:57 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:52:00 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,6 @@ int	set_params(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 		exit(0);
-	data->lg = 1200;
-	data->wd = 700;
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->lg, data->wd, "cub3d");
-	if (!data->win_ptr)
-		return (free(data->mlx_ptr), perror("Mlx error"), EXIT_FAILURE);
-	data->img = mlx_new_image(data->mlx_ptr, data->lg, data->wd);
-	if (!data->img)
-		return (free(data->win_ptr), perror("Mlx error"), EXIT_FAILURE);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp,
-			&data->line_len, &data->endian);
 	return (EXIT_SUCCESS);
 }
 
@@ -77,7 +67,9 @@ int	main(int ac, char **av)
 		return (1);
 	if (set_params(&data) == EXIT_FAILURE)
 		return (1);
-	draw_mini_map(&data, &map);
+	if (get_color_ceiling_floor(&map) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	printf("color_floor : %x | color_ceiling : %x\n", map.color_floor, map.color_ceiling);
 	//printf("color1: %s | color2: %s\n", map.textures_colours[4], map.textures_colours[5]);
 	raycaster(&map);
 	/*

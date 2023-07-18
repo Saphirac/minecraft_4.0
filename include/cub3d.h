@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/18 10:08:50 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:45:35 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ typedef struct s_data {
 	int		bpp;
 	int		line_len;
 	int		endian;
-	int		lg;
-	int		wd;
 }				t_data;
 
 // Keys events //
