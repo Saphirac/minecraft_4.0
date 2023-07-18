@@ -13,6 +13,35 @@
 #include "cub3d.h"
 
 //move forwards if no wall in front of you
+void	key_a(int key, t_info *info)
+{
+	if (key == KEY_A)
+	{
+		if (!info->map_data->map[(int)(info->posX + 0 * info->moveSpeed)] \
+				[(int)(info->posY)])
+			info->posX += 0 * info->moveSpeed;
+		if (!info->map_data->map[(int)(info->posX)][(int)(info->posY - 1 * \
+					info->moveSpeed)])
+			info->posY += - 1 * info->moveSpeed;
+		//printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
+	}
+}
+
+//move backwards if no wall behind you
+void	key_d(int key, t_info *info)
+{
+	if (key == KEY_D)
+	{
+		if (info->map_data->map[(int)(info->posX - 0 * info->moveSpeed)] \
+				[(int)(info->posY)] != '0')
+			info->posX -= 0 * info->moveSpeed;
+		if (info->map_data->map[(int)(info->posX)][(int)(info->posY + 1 * \
+					info->moveSpeed)] != '0')
+			info->posY -= -1 * info->moveSpeed;
+	}
+}
+
+//move forwards if no wall in front of you
 void	key_w(int key, t_info *info)
 {
 	if (key == KEY_W)
@@ -43,12 +72,12 @@ void	key_s(int key, t_info *info)
 
 //rotate to the right
 //both camera direction and camera plane must be rotated
-void	key_d(int key, t_info *info)
+void	key_right(int key, t_info *info)
 {
 	double	oldDirX;
 	double	oldPlaneX;
 
-	if (key == KEY_D)
+	if (key == KEY_RIGHT)
 	{
 		oldDirX = info->dirX;
 		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * \
@@ -66,12 +95,12 @@ void	key_d(int key, t_info *info)
 
 //rotate to the left
 //both camera direction and camera plane must be rotated
-void	key_a(int key, t_info *info)
+void	key_left(int key, t_info *info)
 {
 	double	oldDirX;
 	double	oldPlaneX;
 
-	if (key == KEY_A)
+	if (key == KEY_LEFT)
 	{
 		oldDirX = info->dirX;
 		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * \
@@ -104,8 +133,10 @@ int	key_press(int key, t_info *info)
 {
 	key_w(key, info);
 	key_s(key, info);
-	key_d(key, info);
 	key_a(key, info);
+	key_d(key, info);
+	key_right(key, info);
+	key_left(key, info);
 	key_esc(key, info);	
 	return (0);
 }
