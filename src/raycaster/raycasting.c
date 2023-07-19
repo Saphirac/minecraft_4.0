@@ -93,15 +93,11 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
 void	load_texture(t_info *info)
 {
 	t_img	img;
-	
-	load_image(info, info->texture[0], "textures/diamond.xpm", &img);
-	load_image(info, info->texture[1], "textures/stone_minecraft.xpm", &img);
-	load_image(info, info->texture[2], "textures/stone_minecraft.xpm", &img);
-	load_image(info, info->texture[3], "textures/stone_minecraft.xpm", &img);
-	load_image(info, info->texture[4], "textures/stone_minecraft.xpm", &img);
-	load_image(info, info->texture[5], "textures/stone_minecraft.xpm", &img);
-	load_image(info, info->texture[6], "textures/stone_minecraft.xpm", &img);
-	load_image(info, info->texture[7], "textures/stone_minecraft.xpm", &img);
+
+	load_image(info, info->texture[0], info->map_data->textures_colours[0], &img);
+	load_image(info, info->texture[1], info->map_data->textures_colours[1], &img);
+	load_image(info, info->texture[2], info->map_data->textures_colours[2], &img);
+	load_image(info, info->texture[3], info->map_data->textures_colours[3], &img);
 }
 
 void print_map_char(t_info *info)
@@ -147,7 +143,6 @@ void	print_textures(t_info *info)
 			x = 0;
 			while (x < texWidth)
 			{
-				//printf("x:%d | y:%d\n", x, y);
 				printf("%d", info->texture[i][y + x]);	
 				x++;
 			}
@@ -172,14 +167,14 @@ int	initialize_textures(t_info *info)
 	if (!(info->texture = (int **)malloc(sizeof(int *) * 8)))
 		return (-1);
 	i = 0;
-	while (i < 8)
+	while (i < 4)
 	{
 		if (!(info->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
 			return (-1);
 		i++;
 	}
 	i = 0;
-	while (i < 8)
+	while (i < 4)
 	{
 		j = 0;
 		while (j < texHeight * texWidth)

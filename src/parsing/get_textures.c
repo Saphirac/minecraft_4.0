@@ -36,7 +36,7 @@ static int	get_textures_colours(
 	while (*ptr == ' ')
 		ptr++;
 	if (*ptr)
-		map->textures_colours[n] = ft_strndup(ptr, ft_strlen(ptr));
+		map->textures_colours[n] = ft_strndup(ptr, ft_strlen(ptr) - 1);
 	if (!*ptr || !map->textures_colours[n])
 		return (perror("get_textures :"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
