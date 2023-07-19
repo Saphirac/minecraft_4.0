@@ -93,9 +93,7 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
 void	load_texture(t_info *info)
 {
 	t_img	img;
-
-	//load_image(info, info->texture[0], "textures/eagle.xpm", &img);
-	//load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
+	
 	load_image(info, info->texture[0], "textures/diamond.xpm", &img);
 	load_image(info, info->texture[1], "textures/stone_minecraft.xpm", &img);
 	load_image(info, info->texture[2], "textures/stone_minecraft.xpm", &img);
@@ -287,24 +285,17 @@ int		raycaster(t_map_data *map_data)
 	t_info *info;
 	
 	convert_map(map_data);
-	//printf("map_size| x: %d | y: %d\n", map_data->map_size[X], map_data->map_size[Y]);
-	//printf("player| x: %f | y: %f\n", map_data->player[X], map_data->player[Y]);
 	info = ft_calloc(1, sizeof(t_info));
 	if (info == NULL)
 		return (MALLOC_ERR);
 	initialize_info_structure(info, map_data);
-	//printf("info player| x: %f | y: %f\n", info->posX, info->posY);
 
 	info->win = mlx_new_window(info->mlx, width, height, "minecraft4.0");
-
 	info->img.img = mlx_new_image(info->mlx, width, height);
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
 	mlx_loop_hook(info->mlx, &main_loop, info);
 	mlx_key_hook(info->win, &key_press, info);
 	mlx_hook(info->win, 17, 0L, &handle_cross, info);
-	//mlx_loop_hook(info->mlx, &main_loop, info);
-	//mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
-
 	mlx_loop(info->mlx);
 	free(info);
 	info = NULL;

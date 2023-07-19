@@ -12,33 +12,30 @@
 
 #include "cub3d.h"
 
+//move right if no wall in right of you
 void	key_d(int key, t_info *info)
 {
 	if (key == KEY_D)
 	{
-		printf("before info->posY: %f | info->posX: %f\n", info->posY, info->posX);
 		if (!info->map_data->map[(int)(info->posX + info->dirY * info->moveSpeed)] \
 				[(int)(info->posY)])
 			info->posX += info->dirY * info->moveSpeed;
 		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX + info->dirY * \
 					info->moveSpeed)])
 			info->posY -= info->dirX * info->moveSpeed;
-		printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
 	}
 }
-
+//move left if no wall in left of you
 void	key_a(int key, t_info *info)
 {
 	if (key == KEY_A)
 	{
-		//printf("before info->posY: %f | info->posX: %f\n", info->posY, info->posX);
 		if (!info->map_data->map[(int)(info->posX + info->dirY * info->moveSpeed)] \
 				[(int)(info->posY)])
 			info->posX -= info->dirY * info->moveSpeed;
 		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX + info->dirY * \
 					info->moveSpeed)])
 			info->posY += info->dirX * info->moveSpeed;
-		//printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
 	}
 }
 
