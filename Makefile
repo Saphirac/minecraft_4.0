@@ -6,7 +6,7 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/18 11:50:54 by gle-mini         ###   ########.fr        #
+#    Updated: 2023/07/20 12:46:29 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,7 +112,7 @@ endif
 #                RULES                #
 #######################################
 ${NAME}: ${OBJ} ${FT_A} ${MLX_A}
-	${LINK} $^ ${LDFLAGS} ${OUTPUT_OPTION}
+	${LINK} ${OBJ} ${LDFLAGS} ${OUTPUT_OPTION}
 
 all: ${NAME}
 

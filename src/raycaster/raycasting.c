@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/16 16:34:42 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:25:40 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int	initialize_textures(t_info *info)
 	int	i;
 	int	j;
 
-	if (!(info->texture = (int **)malloc(sizeof(int *) * 8)))
+	if (!(info->texture = (int **)malloc(sizeof(int *) * 4)))
 		return (-1);
 	i = 0;
 	while (i < 4)
@@ -268,6 +268,31 @@ void	convert_map(t_map_data *map_data)
 	}
 }
 
+void	free_textures(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+	{
+		free(str[i]);
+		i++;
+	}
+}
+
+void	free_int(int **tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 /**
  * @brief
  *
@@ -292,8 +317,16 @@ int		raycaster(t_map_data *map_data)
 	mlx_key_hook(info->win, &key_press, info);
 	mlx_hook(info->win, 17, 0L, &handle_cross, info);
 	mlx_loop(info->mlx);
+	mlx_destroy_window(info->mlx, info->win);
+	mlx_destroy_image(info->mlx, info->img.img);
+	mlx_destroy_display(info->mlx);
+	free(info->mlx);
+	free_textures(map_data->textures_colours);
+	ft_free(map_data->map);
+	free_int(info->texture);
+	free(info->wc_data);
+	free(info->fc_data);
 	free(info);
-	info = NULL;
 	return (EXIT_SUCCESS);
 }
 

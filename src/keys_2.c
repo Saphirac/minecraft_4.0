@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 14:09:47 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/16 14:10:16 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:03:51 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,8 @@ void	key_left(int key, t_info *info)
 
 void	key_esc(int key, t_info *info)
 {
-	(void)info;
 	if (key == KEY_ESC)
-		exit(0);
+		mlx_loop_end(info->mlx);
 }
 
 /**

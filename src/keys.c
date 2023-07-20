@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:29:25 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/16 14:08:37 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:26:52 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ int	handle_no_event(void *data)
 int	handle_cross(t_info *info)
 {
 	(void)info;
-	exit(0);
-}
-
-int	handle_input(int keysym, t_data *data)
-{
-	if (keysym == XK_Escape)
-		mlx_loop_end(data->mlx_ptr);
+	mlx_loop_end(info->mlx);
 	return (0);
 }

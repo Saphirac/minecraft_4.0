@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_ceiling_floors_colors.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:00:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/18 12:01:23 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:47:56 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	convert_colors(char *str)
 	char	**s;
 	int		color;
 
-	ft_strlen(str);
 	s = ft_split(str, ".");
 	if (ft_arrstrlen(s) != 3)
 		return (EXIT_FAILURE);
@@ -40,6 +39,7 @@ int	get_color_ceiling_floor(t_map_data *map_data)
 
 	color_floor = convert_colors(map_data->textures_colours[4]);
 	color_ceiling = convert_colors(map_data->textures_colours[5]);
+	printf("color floor : %d color_ceiling :%d\n", color_floor, color_ceiling);
 	if (color_floor == EXIT_FAILURE || color_ceiling == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	map_data->color_floor = color_floor;
