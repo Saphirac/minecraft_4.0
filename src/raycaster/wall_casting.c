@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:42:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/25 18:50:23 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:52:39 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	dda_algorithm(t_wc_data *data, int **map, t_info *info)
 		}
 		//printf("DDA | data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
 		//print_map_char(info);
-		if (map[data->map_x][data->map_y] > 0)
+		if (map[data->map_y][data->map_x] > 0)
 			data->hit = 1;
 	}
 }
@@ -204,7 +204,7 @@ void	calc_texturing(t_wc_data *data, int **map)
 {
 	//TODO: Change calc_texturing with NO SO EA WE
 	(void)map;
-	data->tex_num = map[data->map_x][data->map_y] - 1;
+	data->tex_num = map[data->map_y][data->map_x] - 1;
 }
 
 /**
