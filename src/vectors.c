@@ -12,13 +12,13 @@
 
 #include "vectors.h"
 
-float	v2f_mag(t_v2f vec)
+inline float	v2f_mag(t_v2f vec)
 {
 	vec *= vec;
 	return (sqrtf(vec[X] + vec[Y]));
 }
 
-t_v2f	v2f_norm(t_v2f vec, float lenght)
+inline t_v2f	v2f_norm(t_v2f vec, float lenght)
 {
 	return ((vec / v2f_mag(vec)) * lenght);
 }
