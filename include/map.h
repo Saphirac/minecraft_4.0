@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:07:30 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/18 09:42:44 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:09:58 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ struct s_get_texture
  * char	*c : ceiling colour
  */
 struct s_map_data {
-	char	**map;
+	char	**map_char;
+	int		**map;
 	t_v2i	map_size;
 	char	*textures_colours[6];
 	t_v2f	player;

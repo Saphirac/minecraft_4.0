@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/16 14:04:43 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:10:45 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	**create_map_tmp(t_map_data *src)
 			return (NULL);
 		while (x < src->map_size[X])
 		{
-			tmp[y][x] = src->map[y][x];
+			tmp[y][x] = src->map_char[y][x];
 			x++;
 		}
 		tmp[y][x] = '\0';

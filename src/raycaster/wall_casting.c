@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:42:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/16 16:11:49 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:50:23 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
  * @return 
  * @throws
 */
-void	dda_algorithm(t_wc_data *data, char **map, t_info *info)
+void	dda_algorithm(t_wc_data *data, int **map, t_info *info)
 {
 	(void)info;
 	while (data->hit == 0)
@@ -200,7 +200,7 @@ void	calc_lineheight(t_wc_data *data)
  * @return 
  * @throws
 */
-void	calc_texturing(t_wc_data *data, char **map)
+void	calc_texturing(t_wc_data *data, int **map)
 {
 	//TODO: Change calc_texturing with NO SO EA WE
 	(void)map;

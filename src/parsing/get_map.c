@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/03 20:25:52 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:32:38 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,17 @@ static int	ft_list_to_array_str(t_map_data *map, t_str_lst *list)
 	i = 0;
 	while (iter)
 	{
-		map->map[i] = malloc(sizeof(char) * (list->max_line_size));
-		if (!map->map[i])
+		map->map_char[i] = malloc(sizeof(char) * (list->max_line_size));
+		if (!map->map_char[i])
 			return (EXIT_FAILURE);
-		copy_or_fill_with_x(list, iter->str, map->map[i]);
+		copy_or_fill_with_x(list, iter->str, map->map_char[i]);
 		i++;
 		iter = iter->next;
 	}
-	map->map[i] = NULL;
+	map->map_char[i] = 0;
 	return (EXIT_SUCCESS);
 }
 
-// TODO : remplace player starting position with a 0
 int	get_map(t_map_data *map, int fd, char *line)
 {
 	t_str_lst	list;
@@ -92,8 +91,8 @@ int	get_map(t_map_data *map, int fd, char *line)
 		return (EXIT_FAILURE);
 	map->map_size[X] = list.max_line_size - 1;
 	map->map_size[Y] = list.size;
-	map->map = malloc(sizeof(char *) * (list.size + 1));
-	if (!map->map)
+	map->map_char = malloc(sizeof(char *) * (list.size + 1));
+	if (!map->map_char)
 		return (EXIT_FAILURE);
 	if (ft_list_to_array_str(map, &list))
 		return (EXIT_FAILURE);

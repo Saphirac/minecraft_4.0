@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/20 13:25:40 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:27:59 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void print_map_char(t_info *info)
 		x = 0;
 		while (x < map_data->map_size[X])
 		{
-			printf("%d", map_data->map[y][x]);
+			printf("%d", map_data->map_char[y][x]);
 			x++;
 		}
 		printf("\n");
@@ -162,26 +162,14 @@ void	print_textures(t_info *info)
 int	initialize_textures(t_info *info)
 {
 	int	i;
-	int	j;
 
-	if (!(info->texture = (int **)malloc(sizeof(int *) * 4)))
-		return (-1);
+	if (!(info->texture = malloc(sizeof(int *) * 4)))
+		return (MALLOC_ERR);
 	i = 0;
 	while (i < 4)
 	{
-		if (!(info->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
-			return (-1);
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < texHeight * texWidth)
-		{
-			info->texture[i][j] = 0;
-			j++;
-		}
+		if (!(info->texture[i] = ft_calloc((texHeight * texWidth), sizeof(int))))
+			return (MALLOC_ERR);
 		i++;
 	}
 	load_texture(info);
@@ -217,7 +205,7 @@ int	initialize_info_structure(t_info *info, t_map_data *map_data)
 		return (MALLOC_ERR);
 	info->fc_data = malloc(sizeof(t_fc_data) * 1);
 	if (info->fc_data == NULL)
-		return (MALLOC_ERR);
+		return (free(info->wc_data), free(info->mlx), MALLOC_ERR);
 	i = 0;
 	while (i < height)
 	{
@@ -250,22 +238,29 @@ int	main_loop(t_info *info)
 	return (0);
 }
 
-void	convert_map(t_map_data *map_data)
+int	convert_map(t_map_data *map_data)
 {
 	int	x;
 	int	y;
-
+	
+	map_data->map = malloc(sizeof(int *) * map_data->map_size[Y]);
+	if (!map_data->map)
+		return (MALLOC_ERR);
 	y = 0;
-	while (y < map_data->map_size[Y])
+	while (map_data->map_char[y])
 	{
 		x = 0;
-		while (x < map_data->map_size[X])
+		map_data->map[y] = malloc(sizeof(int) * map_data->map_size[X]);
+		if (!map_data->map[y])
+			return (free(map_data->map), MALLOC_ERR);
+		while (map_data->map_char[y][x])
 		{
-			map_data->map[y][x] -= '0';
+			map_data->map[y][x] = map_data->map_char[y][x] - '0';
 			x++;
 		}
 		y++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 void	free_textures(char **str)
@@ -304,6 +299,7 @@ int		raycaster(t_map_data *map_data)
 {
 	t_info *info;
 	
+	//print_only_map(map_data->map);
 	convert_map(map_data);
 	info = ft_calloc(1, sizeof(t_info));
 	if (info == NULL)
@@ -322,8 +318,9 @@ int		raycaster(t_map_data *map_data)
 	mlx_destroy_display(info->mlx);
 	free(info->mlx);
 	free_textures(map_data->textures_colours);
-	ft_free(map_data->map);
+	ft_free(map_data->map_char);
 	free_int(info->texture);
+	free_int(map_data->map);
 	free(info->wc_data);
 	free(info->fc_data);
 	free(info);

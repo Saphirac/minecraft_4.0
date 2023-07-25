@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/03 20:18:50 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:25:30 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void print_map(t_map_data *map)
 		y++;
 	}
 	y = 0;
-	while (map->map[y])
+	while (map->map_char[y])
 	{
-		printf("%s\n", map->map[y]);
+		printf("%s\n", map->map_char[y]);
 		y++;
 	}
 }
