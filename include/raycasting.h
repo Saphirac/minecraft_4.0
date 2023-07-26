@@ -87,6 +87,7 @@ typedef struct s_wc_data
 	double	wall_x;
 	int		tex_x;
 	double	step;
+	int		tex;
 }				t_wc_data;
 
 /**

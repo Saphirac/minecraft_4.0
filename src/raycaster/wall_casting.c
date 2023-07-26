@@ -83,15 +83,20 @@ void	dda_algorithm(t_wc_data *data, char **map, t_info *info)
 			data->side_dist_x += data->delta_dist_x;
 			data->map_x += data->step_x;
 			data->side = 0;
+			if (data->ray_dir_x > 0)
+				data->tex = 2;
+			else
+				data->tex = 3;
 		}
 		else
 		{
 			data->side_dist_y += data->delta_dist_y;
 			data->map_y += data->step_y;
-			if (data->ray_dir_y < 0)
-				data->side = 1;
+			data->side = 1;
+			if (data->ray_dir_y > 0)
+				data->tex = 0;
 			else
-				data->side = 2;
+				data->tex = 1;
 		}
 		//printf("DDA | data->map_x:%d | data->map_y:%d\n", data->map_x, data->map_y);
 		//print_map_char(info);
@@ -207,7 +212,7 @@ void	calc_texturing(t_wc_data *data, char **map)
 {
 	//TODO: Change calc_texturing with NO SO EA WE
 	(void)map;
-	data->tex_num = data->side;
+	data->tex_num = data->tex;
 }
 
 /**
