@@ -63,6 +63,9 @@ typedef struct	s_img
  * int tex_x;
  * double step;
  *
+ *
+ * int tex: was a NO SO EA WE cube face was hit ?
+ *
  */
 typedef struct s_wc_data
 {
