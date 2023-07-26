@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/24 15:11:23 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:55:09 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	create_map(t_map_data *map, char *file)
 	int	fd;
 
 	ft_bzero(map, sizeof(t_map_data));
-
 	fd = open_file(file);
 	if (fd < 0)
 		return (EXIT_FAILURE);

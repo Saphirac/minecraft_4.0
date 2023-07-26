@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/25 18:25:30 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:32:49 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	min(int a, int b)
 
 int	find_max_x(char **map)
 {
-	int max_x;
+	int	max_x;
 	int	y;
 
 	max_x = 0;
@@ -73,9 +73,9 @@ void	ft_free(char **tab)
 	free(tab);
 }
 
-void print_map(t_map_data *map)
+void	print_map(t_map_data *map)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	while (map->textures_colours[y])
@@ -91,9 +91,9 @@ void print_map(t_map_data *map)
 	}
 }
 
-void print_only_map(char **map)
+void	print_only_map(char **map)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	while (map[y])

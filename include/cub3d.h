@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/18 11:45:35 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:33:39 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ typedef struct s_data {
 // Keys events //
 
 int		handle_no_event(void *data);
-int		handle_input(int keysym, t_data *data);
 int		handle_cross(t_info *info);
 int		key_press(int key, t_info *info);
+void	key_esc(int key, t_info *info);
+void	key_d(int key, t_info *info);
+void	key_a(int key, t_info *info);
+void	key_w(int key, t_info *info);
+void	key_s(int key, t_info *info);
 
 // Drawing //
 
@@ -72,11 +76,19 @@ bool	is_line_empty(char const *const line);
 bool	is_textures_full(t_map_data *map);
 bool	check_border(t_map_data *map);
 int		find_player(t_map_data *map);
-void 	print_only_map(char **map);
+void	print_only_map(char **map);
 int		get_color_ceiling_floor(t_map_data *map_data);
 
 // Raycasting //
-void	render(t_data *data, t_map_data *map);
 int		raycaster(t_map_data *map_data);
+void	calc_step(t_wc_data *data);
+void	calc_x_coordinate_on_texture(t_wc_data *data);
+void	calc_wallx_value(t_wc_data *data, t_info *info);
+void	calc_texturing(t_wc_data *data, int **map);
+void	calc_lineheight(t_wc_data *data);
+void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info);
+void	dda_algorithm(t_wc_data *data, int **map, t_info *info);
+void	calc_draw_start_and_draw_end(t_wc_data *data);
+void	calc_perpendicular_distance(t_wc_data *data, t_info *info);
 
 #endif

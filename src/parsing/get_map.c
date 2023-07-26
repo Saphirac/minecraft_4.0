@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/25 18:32:38 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:31:30 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	ft_list_to_array_str(t_map_data *map, t_str_lst *list)
 {
 	t_str		*iter;
 	size_t		i;
-	
+
 	iter = list->head;
 	i = 0;
 	while (iter)
