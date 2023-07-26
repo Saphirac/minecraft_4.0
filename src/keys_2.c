@@ -17,11 +17,11 @@ void	key_d(int key, t_info *info)
 {
 	if (key == KEY_D)
 	{
-		if (!info->map_data->map[(int)(info->posX + info->dirY * info->moveSpeed)] \
-				[(int)(info->posY)])
+		if (!info->map_data->map[(int)(info->posY)] \
+				[(int)(info->posX + info->dirY * info->moveSpeed)])
 			info->posX += info->dirY * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX + info->dirY * \
-					info->moveSpeed)])
+		if (!info->map_data->map[(int)(info->posY - info->dirX * \
+					info->moveSpeed)][(int)(info->posX)])
 			info->posY -= info->dirX * info->moveSpeed;
 	}
 }
@@ -30,11 +30,11 @@ void	key_a(int key, t_info *info)
 {
 	if (key == KEY_A)
 	{
-		if (!info->map_data->map[(int)(info->posX + info->dirY * info->moveSpeed)] \
-				[(int)(info->posY)])
+		if (!info->map_data->map[(int)(info->posY)] \
+				[(int)(info->posX - info->dirY * info->moveSpeed)])
 			info->posX -= info->dirY * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX + info->dirY * \
-					info->moveSpeed)])
+		if (!info->map_data->map[(int)(info->posY + info->dirX * info->moveSpeed)] \
+				[(int)(info->posX)])
 			info->posY += info->dirX * info->moveSpeed;
 	}
 }
@@ -44,11 +44,11 @@ void	key_w(int key, t_info *info)
 {
 	if (key == KEY_W)
 	{
-		if (!info->map_data->map[(int)(info->posX + info->dirX * info->moveSpeed)] \
-				[(int)(info->posY)])
+		if (!info->map_data->map[(int)(info->posY)] \
+				[(int)(info->posX + info->dirX * info->moveSpeed)])
 			info->posX += info->dirX * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posY + info->dirY * \
-					info->moveSpeed)])
+		if (!info->map_data->map[(int)(info->posY + info->dirY * info->moveSpeed)] \
+				[(int)(info->posX)])
 			info->posY += info->dirY * info->moveSpeed;
 		//printf("after info->posY: %f | info->posX: %f\n", info->posY, info->posX);
 	}
@@ -59,11 +59,11 @@ void	key_s(int key, t_info *info)
 {
 	if (key == KEY_S)
 	{
-		if (info->map_data->map[(int)(info->posX - info->dirX * info->moveSpeed)] \
-				[(int)(info->posY)] != '0')
+		if (!info->map_data->map[(int)(info->posY)] \
+				[(int)(info->posX - info->dirX * info->moveSpeed)])
 			info->posX -= info->dirX * info->moveSpeed;
-		if (info->map_data->map[(int)(info->posX)][(int)(info->posY - info->dirY * \
-					info->moveSpeed)] != '0')
+		if (!info->map_data->map[(int)(info->posY - info->dirY * \
+					info->moveSpeed)][(int)(info->posX)])
 			info->posY -= info->dirY * info->moveSpeed;
 	}
 }
