@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/16 14:04:43 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:31:21 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,13 @@ char	**create_map_tmp(t_map_data *src)
 			return (NULL);
 		while (x < src->map_size[X])
 		{
-			tmp[y][x] = src->map[y][x];
+			tmp[y][x] = src->map_char[y][x];
 			x++;
 		}
 		tmp[y][x] = '\0';
 		y++;
 	}
 	tmp[y] = 0;
-	//print_only_map(tmp);
 	return (tmp);
 }
 
@@ -147,8 +146,6 @@ bool	check_border(t_map_data *map)
 		ft_free(tmp);
 		return (false);
 	}
-	//print_only_map(map->map);
-	//print_only_map(tmp);
 	ft_free(tmp);
 	return (true);
 }

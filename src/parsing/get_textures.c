@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/18 12:01:41 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:31:44 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ int	get_all_data(t_map_data *const map, int const fd)
 		else if (check_line(line) == -1)
 			return (get_map(map, fd, line));
 		else if (check_line(line) == -2)
-			return (printf("Incorrect given data.\n"), EXIT_FAILURE);	
+			return (printf("Incorrect given data.\n"), EXIT_FAILURE);
 		free(line);
-		line = get_next_line(fd);	
+		line = get_next_line(fd);
 	}
 	free(line);
 	return (printf("No map.\n"), EXIT_FAILURE);

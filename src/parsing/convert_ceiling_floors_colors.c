@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:00:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/20 12:47:56 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:07:25 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-// TODO: free le s
 int	convert_colors(char *str)
 {
 	char	**s;
@@ -39,7 +38,6 @@ int	get_color_ceiling_floor(t_map_data *map_data)
 
 	color_floor = convert_colors(map_data->textures_colours[4]);
 	color_ceiling = convert_colors(map_data->textures_colours[5]);
-	printf("color floor : %d color_ceiling :%d\n", color_floor, color_ceiling);
 	if (color_floor == EXIT_FAILURE || color_ceiling == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	map_data->color_floor = color_floor;

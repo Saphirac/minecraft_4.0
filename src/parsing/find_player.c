@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:01:48 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/03 20:26:23 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:11:41 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	find_player(t_map_data *map)
 		x = 0;
 		while (x < map->map_size[X])
 		{
-			if (map->map[y][x] == 'N' || map->map[y][x] == 'S'
-				|| map->map[y][x] == 'W' || map->map[y][x] == 'E')
+			if (map->map_char[y][x] == 'N' || map->map_char[y][x] == 'S'
+				|| map->map_char[y][x] == 'W' || map->map_char[y][x] == 'E')
 			{
 				map->player[X] = (float)x;
 				map->player[Y] = (float)y;
-				map->player_orientation = map->map[y][x];
-				map->map[y][x] = '0';
+				map->player_orientation = map->map_char[y][x];
+				map->map_char[y][x] = '0';
 				return (EXIT_SUCCESS);
 			}
 			x++;

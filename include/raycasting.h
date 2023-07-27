@@ -1,20 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/26 22:33:54 by mcourtoi          #+#    #+#             */
+/*   Updated: 2023/07/26 22:34:37 by mcourtoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RAYCASTING_H
 # define RAYCASTING_H
 
-#include <math.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#define X_EVENT_KEY_PRESS	2
-#define X_EVENT_KEY_EXIT	17
-#define texWidth 64
-#define texHeight 64
-#define mapWidth 24
-#define mapHeight 24
-#define width 1920
-#define height 1080
-#define MALLOC_ERR 2
-#define MLX_ERR 3
+# include <math.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "map.h"
+
+# define X_EVENT_KEY_PRESS	2
+# define X_EVENT_KEY_EXIT	17
+# define texWidth 64
+# define texHeight 64
+# define mapWidth 24
+# define mapHeight 24
+# define width 1920
+# define height 1080
+# define MALLOC_ERR 2
+# define MLX_ERR 3
 
 typedef struct	s_img
 {
@@ -179,12 +193,9 @@ typedef struct	s_info
 	t_fc_data	*fc_data;
 }				t_info;
 
-
-
 int		floor_casting(t_info *info);
 int		wall_casting(t_info *info);
 void	print_map_char(t_info *info);
-
 
 //DEBUG FUNCTIONS
 void	print_textures(t_info *info);
