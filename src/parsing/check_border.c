@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/26 22:31:21 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:09:08 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,34 +93,6 @@ static int	ft_find_border(t_map_data *map, char **map_tmp, int x, int y)
 			return (1);
 	}
 	return (0);
-}
-
-char	**create_map_tmp(t_map_data *src)
-{
-	char	**tmp;
-	int		x;
-	int		y;
-
-	tmp = malloc(sizeof(char *) * (src->map_size[Y] + 1));
-	if (!tmp)
-		return (NULL);
-	y = 0;
-	while (y < src->map_size[Y])
-	{
-		x = 0;
-		tmp[y] = malloc(sizeof(char) * (src->map_size[X] + 1));
-		if (!tmp[y])
-			return (NULL);
-		while (x < src->map_size[X])
-		{
-			tmp[y][x] = src->map_char[y][x];
-			x++;
-		}
-		tmp[y][x] = '\0';
-		y++;
-	}
-	tmp[y] = 0;
-	return (tmp);
 }
 
 /**

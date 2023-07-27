@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:32:49 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:10:52 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,61 +58,4 @@ bool	is_correct_char(char c)
 	if (c == '1' || c == '0' || c == 'N' || c == 'W' || c == 'E' || c == 'S')
 		return (true);
 	return (false);
-}
-
-void	ft_free(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	print_map(t_map_data *map)
-{
-	int	y;
-
-	y = 0;
-	while (map->textures_colours[y])
-	{
-		printf("%s\n", map->textures_colours[y]);
-		y++;
-	}
-	y = 0;
-	while (map->map_char[y])
-	{
-		printf("%s\n", map->map_char[y]);
-		y++;
-	}
-}
-
-void	print_only_map(char **map)
-{
-	int	y;
-
-	y = 0;
-	while (map[y])
-	{
-		printf("%s\n", map[y]);
-		y++;
-	}
-}
-
-bool	is_line_empty(char const *const line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\n')
-			return (false);
-		i++;
-	}
-	return (true);
 }

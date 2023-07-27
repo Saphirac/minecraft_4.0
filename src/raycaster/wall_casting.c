@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_casting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:42:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/26 22:23:08 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:35:16 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 */
 void	init_data(t_wc_data *data, t_info *info, int x)
 {
-	data->camera_x = 2 * x / (double)width - 1;
-	data->ray_dir_x = info->dirX + info->planeX * data->camera_x;
-	data->ray_dir_y = info->dirY + info->planeY * data->camera_x;
-	data->map_x = (int)info->posX;
-	data->map_y = (int)info->posY;
+	data->camera_x = 2 * x / (double)WIDTH - 1;
+	data->ray_dir_x = info->dir_x + info->plane_x * data->camera_x;
+	data->ray_dir_y = info->dir_y + info->plane_y * data->camera_x;
+	data->map_x = (int)info->pos_x;
+	data->map_y = (int)info->pos_y;
 	data->delta_dist_x = fabs(1 / data->ray_dir_x);
 	data->delta_dist_y = fabs(1 / data->ray_dir_y);
 	data->hit = 0;
@@ -60,16 +60,14 @@ void	draw_texture(t_wc_data *data, t_info *info, int x)
 	int		color;
 	int		y;
 
-	tex_pos = (data->draw_start - height / 2 + data->lineheight / 2) * \
+	tex_pos = (data->draw_start - HEIGHT / 2 + data->lineheight / 2) * \
 				data->step;
 	y = data->draw_start;
 	while (y < data->draw_end)
 	{
-		tex_y = (int)tex_pos & (texHeight - 1);
+		tex_y = (int)tex_pos & (TEXHEIGHT - 1);
 		tex_pos += data->step;
-		color = info->texture[data->tex_num][texHeight * tex_y + data->tex_x];
-		if (data->side == 1)
-			color = (color >> 1) & 8355711;
+		color = info->texture[data->tex_num][TEXHEIGHT * tex_y + data->tex_x];
 		info->buf[y][x] = color;
 		y++;
 	}
@@ -90,11 +88,11 @@ int	wall_casting(t_info *info)
 
 	data = info->wc_data;
 	x = 0;
-	while (x < width)
+	while (x < WIDTH)
 	{
 		init_data(data, info, x);
 		calc_step_and_init_sidedist(data, info);
-		dda_algorithm(data, info->map_data->map, info);
+		dda_algorithm(data, info->map_data->map);
 		calc_perpendicular_distance(data, info);
 		calc_lineheight(data);
 		calc_step_and_init_sidedist(data, info);

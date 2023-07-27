@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:08:19 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:08:29 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:39:55 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	key_d(int key, t_info *info)
 {
 	if (key == KEY_D)
 	{
-		if (!info->map_data->map[(int)(info->posX + \
-		info->dirY * info->moveSpeed)][(int)(info->posY)])
-			info->posX += info->dirY * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX + \
-				info->dirY * info->moveSpeed)])
-			info->posY -= info->dirX * info->moveSpeed;
+		if (!info->map_data->map[(int)(info->pos_y)] \
+				[(int)(info->pos_x + info->dir_y * info->move_speed)])
+			info->pos_x += info->dir_y * info->move_speed;
+		if (!info->map_data->map[(int)(info->pos_y - info->dir_x * \
+					info->move_speed)][(int)(info->pos_x)])
+			info->pos_y -= info->dir_x * info->move_speed;
 	}
 }
 
@@ -31,12 +31,12 @@ void	key_a(int key, t_info *info)
 {
 	if (key == KEY_A)
 	{
-		if (!info->map_data->map[(int)(info->posX + info->dirY \
-			* info->moveSpeed)][(int)(info->posY)])
-			info->posX -= info->dirY * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posX \
-			+ info->dirY * info->moveSpeed)])
-			info->posY += info->dirX * info->moveSpeed;
+		if (!info->map_data->map[(int)(info->pos_y)] \
+				[(int)(info->pos_x - info->dir_y * info->move_speed)])
+			info->pos_x -= info->dir_y * info->move_speed;
+		if (!info->map_data->map[(int)(info->pos_y + info->dir_x * \
+			info->move_speed)][(int)(info->pos_x)])
+			info->pos_y += info->dir_x * info->move_speed;
 	}
 }
 
@@ -45,12 +45,12 @@ void	key_w(int key, t_info *info)
 {
 	if (key == KEY_W)
 	{
-		if (!info->map_data->map[(int)(info->posX + info->dirX \
-			* info->moveSpeed)][(int)(info->posY)])
-			info->posX += info->dirX * info->moveSpeed;
-		if (!info->map_data->map[(int)(info->posX)][(int)(info->posY \
-			+ info->dirY * info->moveSpeed)])
-			info->posY += info->dirY * info->moveSpeed;
+		if (!info->map_data->map[(int)(info->pos_y)] \
+				[(int)(info->pos_x + info->dir_x * info->move_speed)])
+			info->pos_x += info->dir_x * info->move_speed;
+		if (!info->map_data->map[(int)(info->pos_y + info->dir_y * \
+			info->move_speed)][(int)(info->pos_x)])
+			info->pos_y += info->dir_y * info->move_speed;
 	}
 }
 
@@ -59,11 +59,11 @@ void	key_s(int key, t_info *info)
 {
 	if (key == KEY_S)
 	{
-		if (info->map_data->map[(int)(info->posX - info->dirX \
-			* info->moveSpeed)][(int)(info->posY)] != '0')
-			info->posX -= info->dirX * info->moveSpeed;
-		if (info->map_data->map[(int)(info->posX)][(int)(info->posY \
-			- info->dirY * info->moveSpeed)] != '0')
-			info->posY -= info->dirY * info->moveSpeed;
+		if (!info->map_data->map[(int)(info->pos_y)] \
+				[(int)(info->pos_x - info->dir_x * info->move_speed)])
+			info->pos_x -= info->dir_x * info->move_speed;
+		if (!info->map_data->map[(int)(info->pos_y - info->dir_y * \
+					info->move_speed)][(int)(info->pos_x)])
+			info->pos_y -= info->dir_y * info->move_speed;
 	}
 }

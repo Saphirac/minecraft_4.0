@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 14:09:47 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:08:06 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:38:21 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	key_right(int key, t_info *info)
 
 	if (key == KEY_RIGHT)
 	{
-		olddirx = info->dirX;
-		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * \
-					sin(-info->rotSpeed);
-		info->dirY = olddirx * sin(-info->rotSpeed) + info->dirY * \
-					cos(-info->rotSpeed);
-		oldplanex = info->planeX;
-		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * \
-					sin(-info->rotSpeed);
-		info->planeY = oldplanex * sin(-info->rotSpeed) + info->planeY * \
-					cos(-info->rotSpeed);
+		olddirx = info->dir_x;
+		info->dir_x = info->dir_x * cos(-info->rot_speed) - info->dir_y * \
+					sin(-info->rot_speed);
+		info->dir_y = olddirx * sin(-info->rot_speed) + info->dir_y * \
+					cos(-info->rot_speed);
+		oldplanex = info->plane_x;
+		info->plane_x = info->plane_x * cos(-info->rot_speed) - info->plane_y * \
+					sin(-info->rot_speed);
+		info->plane_y = oldplanex * sin(-info->rot_speed) + info->plane_y * \
+					cos(-info->rot_speed);
 	}
 }
 
@@ -43,16 +43,16 @@ void	key_left(int key, t_info *info)
 
 	if (key == KEY_LEFT)
 	{
-		olddirx = info->dirX;
-		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * \
-					sin(info->rotSpeed);
-		info->dirY = olddirx * sin(info->rotSpeed) + info->dirY * \
-					cos(info->rotSpeed);
-		oldplanex = info->planeX;
-		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * \
-					sin(info->rotSpeed);
-		info->planeY = oldplanex * sin(info->rotSpeed) + info->planeY * \
-					cos(info->rotSpeed);
+		olddirx = info->dir_x;
+		info->dir_x = info->dir_x * cos(info->rot_speed) - info->dir_y * \
+					sin(info->rot_speed);
+		info->dir_y = olddirx * sin(info->rot_speed) + info->dir_y * \
+					cos(info->rot_speed);
+		oldplanex = info->plane_x;
+		info->plane_x = info->plane_x * cos(info->rot_speed) - info->plane_y * \
+					sin(info->rot_speed);
+		info->plane_y = oldplanex * sin(info->rot_speed) + info->plane_y * \
+					cos(info->rot_speed);
 	}
 }
 
@@ -65,6 +65,7 @@ void	key_left(int key, t_info *info)
  */
 int	key_press(int key, t_info *info)
 {
+	printf("dir_x: %f | dir_y: %f\n", info->dir_x, info->dir_y);
 	key_w(key, info);
 	key_s(key, info);
 	key_a(key, info);

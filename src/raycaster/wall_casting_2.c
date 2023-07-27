@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_casting_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:18:06 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:22:59 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:35:41 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 */
 void	calc_lineheight(t_wc_data *data)
 {
-		data->lineheight = (int)(height / data->perp_wall_dist);
+		data->lineheight = (int)(HEIGHT / data->perp_wall_dist);
 }
 
 /**
@@ -39,7 +39,7 @@ void	calc_lineheight(t_wc_data *data)
 void	calc_texturing(t_wc_data *data, int **map)
 {
 	(void)map;
-	data->tex_num = map[data->map_y][data->map_x] - 1;
+	data->tex_num = data->tex;
 }
 
 /**
@@ -56,9 +56,9 @@ void	calc_texturing(t_wc_data *data, int **map)
 void	calc_wallx_value(t_wc_data *data, t_info *info)
 {
 	if (data->side == 0)
-		data->wall_x = info->posY + data->perp_wall_dist * data->ray_dir_y;
+		data->wall_x = info->pos_y + data->perp_wall_dist * data->ray_dir_y;
 	else
-		data->wall_x = info->posX + data->perp_wall_dist * data->ray_dir_x;
+		data->wall_x = info->pos_x + data->perp_wall_dist * data->ray_dir_x;
 	data->wall_x -= floor(data->wall_x);
 }
 
@@ -74,8 +74,8 @@ void	calc_wallx_value(t_wc_data *data, t_info *info)
 */
 void	calc_x_coordinate_on_texture(t_wc_data *data)
 {
-	data->tex_x = (int)(data->wall_x * (double)texWidth);
-	data->tex_x = texWidth - data->tex_x - 1;
+	data->tex_x = (int)(data->wall_x * (double)TEXWIDTH);
+	data->tex_x = TEXWIDTH - data->tex_x - 1;
 }
 
 /**
@@ -91,5 +91,5 @@ void	calc_x_coordinate_on_texture(t_wc_data *data)
 */
 void	calc_step(t_wc_data *data)
 {
-	data->step = 1.0 * texHeight / data->lineheight;
+	data->step = 1.0 * TEXHEIGHT / data->lineheight;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:33:39 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:09:41 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		find_max_x(char **map);
 bool	is_correct_char(char c);
 int		get_all_data(t_map_data *const map, int const fd);
 int		ft_arrstrlen(char **array);
-void	ft_free(char **tab);
 void	print_map(t_map_data *map);
 int		get_map(t_map_data *map, int fd, char *line);
 int		open_file(char const *const file);
@@ -78,6 +77,7 @@ bool	check_border(t_map_data *map);
 int		find_player(t_map_data *map);
 void	print_only_map(char **map);
 int		get_color_ceiling_floor(t_map_data *map_data);
+char	**create_map_tmp(t_map_data *src);
 
 // Raycasting //
 int		raycaster(t_map_data *map_data);
@@ -87,8 +87,16 @@ void	calc_wallx_value(t_wc_data *data, t_info *info);
 void	calc_texturing(t_wc_data *data, int **map);
 void	calc_lineheight(t_wc_data *data);
 void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info);
-void	dda_algorithm(t_wc_data *data, int **map, t_info *info);
+void	dda_algorithm(t_wc_data *data, int **map);
 void	calc_draw_start_and_draw_end(t_wc_data *data);
 void	calc_perpendicular_distance(t_wc_data *data, t_info *info);
+int		initialize_info_structure(t_info *info, t_map_data *map_data);
+int		draw_floor(t_fc_data *data, t_info *info, int y);
+
+// Free //
+void	free_textures(char **str);
+void	free_int(int **tab);
+void	free_all(t_map_data *map_data, t_info *info);
+void	ft_free(char **tab);
 
 #endif

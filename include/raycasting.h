@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:33:54 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:34:37 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:32:00 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@
 
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_EXIT	17
-# define texWidth 64
-# define texHeight 64
-# define mapWidth 24
-# define mapHeight 24
-# define width 1920
-# define height 1080
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
+# define WIDTH 1920
+# define HEIGHT 1080
 # define MALLOC_ERR 2
 # define MLX_ERR 3
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	int		*data;
@@ -173,21 +171,21 @@ typedef struct s_fc_data
 	float	floor_step_y;
 }				t_fc_data;
 
-typedef struct	s_info
+typedef struct s_info
 {
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 	void		*mlx;
 	void		*win;
 	t_img		img;
-	int			buf[height][width];
+	int			buf[HEIGHT][WIDTH];
 	int			**texture;
-	double		moveSpeed;
-	double		rotSpeed;
+	double		move_speed;
+	double		rot_speed;
 	t_map_data	*map_data;
 	t_wc_data	*wc_data;
 	t_fc_data	*fc_data;
@@ -195,9 +193,5 @@ typedef struct	s_info
 
 int		floor_casting(t_info *info);
 int		wall_casting(t_info *info);
-void	print_map_char(t_info *info);
-
-//DEBUG FUNCTIONS
-void	print_textures(t_info *info);
 
 #endif

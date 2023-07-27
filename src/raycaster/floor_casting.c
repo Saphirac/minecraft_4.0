@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_casting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:45:41 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/26 22:30:54 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:34:06 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	calc_row_distance(t_fc_data *data, int y)
 	int		p;
 	float	pos_z;
 
-	p = y - height / 2;
-	pos_z = 0.5 * height;
+	p = y - HEIGHT / 2;
+	pos_z = 0.5 * HEIGHT;
 	data->row_distance = pos_z / p;
 }
 
@@ -55,10 +55,10 @@ void	calc_row_distance(t_fc_data *data, int y)
  */
 void	calc_ray_direction(t_fc_data *data, t_info *info)
 {
-	data->ray_dir_x0 = info->dirX - info->planeX;
-	data->ray_dir_y0 = info->dirY - info->planeY;
-	data->ray_dir_x1 = info->dirX + info->planeX;
-	data->ray_dir_y1 = info->dirY + info->planeY;
+	data->ray_dir_x0 = info->dir_x - info->plane_x;
+	data->ray_dir_y0 = info->dir_y - info->plane_y;
+	data->ray_dir_x1 = info->dir_x + info->plane_x;
+	data->ray_dir_y1 = info->dir_y + info->plane_y;
 }
 
 /**
@@ -76,9 +76,9 @@ void	calc_ray_direction(t_fc_data *data, t_info *info)
 void	calc_floor_step(t_fc_data *data)
 {
 	data->floor_step_x = data->row_distance * \
-						(data->ray_dir_x1 - data->ray_dir_x0) / width;
+						(data->ray_dir_x1 - data->ray_dir_x0) / WIDTH;
 	data->floor_step_y = data->row_distance * \
-						(data->ray_dir_y1 - data->ray_dir_y0) / width;
+						(data->ray_dir_y1 - data->ray_dir_y0) / WIDTH;
 }
 
 /**
@@ -94,62 +94,14 @@ void	calc_floor_texture(t_fc_data *data, t_draw_floor_data *draw_data)
 {
 	draw_data->cell_x = (int)(draw_data->floor_x);
 	draw_data->cell_y = (int)(draw_data->floor_y);
-	draw_data->tx = (int)(texWidth * \
-			(draw_data->floor_x - draw_data->cell_x)) & (texWidth - 1);
-	draw_data->ty = (int)(texHeight * \
-			(draw_data->floor_y - draw_data->cell_y)) & (texHeight - 1);
+	draw_data->tx = (int)(TEXWIDTH * \
+			(draw_data->floor_x - draw_data->cell_x)) & (TEXWIDTH - 1);
+	draw_data->ty = (int)(TEXHEIGHT * \
+			(draw_data->floor_y - draw_data->cell_y)) & (TEXHEIGHT - 1);
 	draw_data->floor_x += data->floor_step_x;
 	draw_data->floor_y += data->floor_step_y;
 	draw_data->floor_texture = 5;
 	draw_data->ceiling_texture = 5;
-}
-
-/**
- * @brief This function store the right color in info->buf for each pixel
- *
- * float floor_y, float floor_x: are real world coordinates of the leftmost 
- * column. This will be updated as we step to the right.
- *
- * int cell_x, int cell_y: the cell coord is simply got from the integer 
- * parts of floor_x and floor_y
- *
- * int tx, int ty: are used to get the texture coordinate from the fractional 
- * part
- *
- * int floor_texture: the texture's number for the floor
- *
- * int ceiling_texture: the texture's number for the ceiling
- *
- * int color: pixel's color
- *
- * info->buf: the buffer image where we stock our pixel before to print it
- *
- * color = (color >> 1) & 8355711; is used to make a bit darker and simulate
- * basic shadow 
- *
- * @param 
- * @return
- * @throws
- */
-int	draw_floor(t_fc_data *data, t_info *info, int y)
-{
-	t_draw_floor_data	*draw_data;
-	int					x;
-
-	draw_data = ft_calloc(1, sizeof(t_draw_floor_data));
-	if (draw_data == NULL)
-		return (MALLOC_ERR);
-	x = 0;
-	draw_data->floor_x = info->posX + data->row_distance * data->ray_dir_x0;
-	draw_data->floor_y = info->posY + data->row_distance * data->ray_dir_y0;
-	while (x < width)
-	{
-		info->buf[y][x] = info->map_data->color_floor;
-		info->buf[height - y - 1][x] = info->map_data->color_ceiling;
-		x++;
-	}
-	free(draw_data);
-	return (1);
 }
 
 /**
@@ -170,7 +122,7 @@ int	floor_casting(t_info *info)
 	data = info->fc_data;
 	if (data == NULL)
 		return (MALLOC_ERR);
-	while (y < height)
+	while (y < HEIGHT)
 	{
 		calc_ray_direction(data, info);
 		calc_row_distance(data, y);

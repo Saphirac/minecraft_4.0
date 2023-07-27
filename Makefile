@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
+#    By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/20 12:46:29 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/07/27 20:14:03 by gle-mini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,35 +51,43 @@ MLX_A				:=	${addprefix ${MLX_DIR}/, ${MLX_A}}
 ######################################
 #            SOURCE FILES            #
 ######################################
-SRC					=							\
-				${addprefix parsing/,			\
-						get_block.c				\
-						get_map.c				\
-						get_textures.c			\
-						open_file.c				\
-						parse_utils.c			\
-						check_border.c			\
-						find_player.c			\
+SRC					=									\
+				${addprefix parsing/,					\
+						get_block.c						\
+						get_map.c						\
+						get_textures.c					\
+						open_file.c						\
+						parse_utils.c					\
+						parse_utils_2.c					\
+						check_border.c					\
+						check_border_2.c				\
+						find_player.c					\
 						convert_ceiling_floors_colors.c \
-				}								\
-				${addprefix str_lst/,			\
-						str_lst_add_back.c		\
-						str_lst_add_front.c 	\
-						str_lst_clear.c			\
-						str_lst_del_one.c		\
-						str_lst_push_back.c		\
-						str_lst_push_front.c	\
-						str_new.c				\
-				}								\
-				${addprefix raycaster/,			\
-						raycasting.c			\
-						floor_casting.c			\
-						wall_casting.c			\
-				}								\
-						keys.c					\
-						keys_2.c				\
-						vectors.c				\
-						get_next_line.c			\
+				}										\
+				${addprefix str_lst/,					\
+						str_lst_add_back.c				\
+						str_lst_add_front.c				\
+						str_lst_clear.c					\
+						str_lst_del_one.c				\
+						str_lst_push_back.c				\
+						str_lst_push_front.c			\
+						str_new.c						\
+				}										\
+				${addprefix raycaster/,					\
+						raycasting.c					\
+						raycasting_2.c					\
+						floor_casting.c					\
+						floor_casting_2.c				\
+						wall_casting.c					\
+						wall_casting_2.c 				\
+						wall_casting_3.c 				\
+						free_all.c						\
+				}										\
+						keys.c							\
+						keys_2.c						\
+						keys_3.c						\
+						vectors.c						\
+						get_next_line.c					\
 						main.c
 
 ######################################

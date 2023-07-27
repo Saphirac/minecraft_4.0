@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_casting_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:19:43 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:20:48 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:37:00 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 	if (data->ray_dir_x < 0)
 	{
 		data->step_x = -1;
-		data->side_dist_x = (info->posX - data->map_x) * data->delta_dist_x;
+		data->side_dist_x = (info->pos_x - data->map_x) * data->delta_dist_x;
 	}
 	else
 	{
 		data->step_x = 1;
-		data->side_dist_x = (data->map_x + 1.0 - info->posX) * \
+		data->side_dist_x = (data->map_x + 1.0 - info->pos_x) * \
 							data->delta_dist_x;
 	}
 	if (data->ray_dir_y < 0)
 	{
 		data->step_y = -1;
-		data->side_dist_y = (info->posY - data->map_y) * data->delta_dist_y;
+		data->side_dist_y = (info->pos_y - data->map_y) * data->delta_dist_y;
 	}
 	else
 	{
 		data->step_y = 1;
-		data->side_dist_y = (data->map_y + 1.0 - info->posY) * \
+		data->side_dist_y = (data->map_y + 1.0 - info->pos_y) * \
 							data->delta_dist_y;
 	}
 }
@@ -73,9 +73,8 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
  * @return 
  * @throws
 */
-void	dda_algorithm(t_wc_data *data, int **map, t_info *info)
+void	dda_algorithm(t_wc_data *data, int **map)
 {
-	(void)info;
 	while (data->hit == 0)
 	{
 		if (data->side_dist_x < data->side_dist_y)
@@ -83,12 +82,20 @@ void	dda_algorithm(t_wc_data *data, int **map, t_info *info)
 			data->side_dist_x += data->delta_dist_x;
 			data->map_x += data->step_x;
 			data->side = 0;
+			if (data->ray_dir_x > 0)
+				data->tex = 2;
+			else
+				data->tex = 3;
 		}
 		else
 		{
 			data->side_dist_y += data->delta_dist_y;
 			data->map_y += data->step_y;
 			data->side = 1;
+			if (data->ray_dir_y > 0)
+				data->tex = 0;
+			else
+				data->tex = 1;
 		}
 		if (map[data->map_y][data->map_x] > 0)
 			data->hit = 1;
@@ -110,12 +117,12 @@ void	dda_algorithm(t_wc_data *data, int **map, t_info *info)
 */
 void	calc_draw_start_and_draw_end(t_wc_data *data)
 {
-	data->draw_start = -data->lineheight / 2 + height / 2;
+	data->draw_start = -data->lineheight / 2 + HEIGHT / 2;
 	if (data->draw_start < 0)
 		data->draw_start = 0;
-	data->draw_end = data->lineheight / 2 + height / 2;
-	if (data->draw_end >= height)
-		data->draw_end = height - 1;
+	data->draw_end = data->lineheight / 2 + HEIGHT / 2;
+	if (data->draw_end >= HEIGHT)
+		data->draw_end = HEIGHT - 1;
 }
 
 /**
@@ -136,9 +143,9 @@ void	calc_draw_start_and_draw_end(t_wc_data *data)
 void	calc_perpendicular_distance(t_wc_data *data, t_info *info)
 {
 	if (data->side == 0)
-		data->perp_wall_dist = (data->map_x - info->posX + \
+		data->perp_wall_dist = (data->map_x - info->pos_x + \
 				(1 - data->step_x) / 2) / data->ray_dir_x;
 	else
-		data->perp_wall_dist = (data->map_y - info->posY + \
+		data->perp_wall_dist = (data->map_y - info->pos_y + \
 				(1 - data->step_y) / 2) / data->ray_dir_y;
 }
