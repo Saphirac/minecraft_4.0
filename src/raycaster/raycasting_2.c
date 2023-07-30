@@ -93,10 +93,34 @@ int	sub_initialize_info(t_info *info, t_map_data *map_data)
 {
 	info->pos_x = map_data->player[X];
 	info->pos_y = map_data->player[Y];
-	info->dir_x = -1.0;
-	info->dir_y = 0;
-	info->plane_x = 0.00;
-	info->plane_y = 0.66;
+	if (map_data->player_orientation == 'E')
+	{
+		info->dir_x = -1.0;
+		info->dir_y = 0;
+		info->plane_x = 0.00;
+		info->plane_y = 0.66;
+	}
+	else if (map_data->player_orientation == 'W')
+	{
+		info->dir_x = 1.0;
+		info->dir_y = 0;
+		info->plane_x = 0.00;
+		info->plane_y = 0.66;
+	}
+	else if (map_data->player_orientation == 'S')
+	{
+		info->dir_x = 0;
+		info->dir_y = 1.0;
+		info->plane_x = 0.66;
+		info->plane_y = 0.00;
+	}
+	else if (map_data->player_orientation == 'N')
+	{
+		info->dir_x = 0;
+		info->dir_y = -1.0;
+		info->plane_x = 0.66;
+		info->plane_y = 0.00;
+	}
 	info->move_speed = 0.15;
 	info->rot_speed = 0.15;
 	info->map_data = map_data;
