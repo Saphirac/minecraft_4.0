@@ -15,11 +15,11 @@
 /**
  * @brief This function store the right color in info->buf for each pixel
  *
- * float floor_y, float floor_x: are real world coordinates of the leftmost 
+ * float floor[Y], float floor[X]: are real world coordinates of the leftmost 
  * column. This will be updated as we step to the right.
  *
  * int cell_x, int cell_y: the cell coord is simply got from the integer 
- * parts of floor_x and floor_y
+ * parts of floor[X] and floor[Y]
  *
  * int tx, int ty: are used to get the texture coordinate from the fractional 
  * part
@@ -48,8 +48,8 @@ int	draw_floor(t_fc_data *data, t_info *info, int y)
 	if (draw_data == NULL)
 		return (MALLOC_ERR);
 	x = 0;
-	draw_data->floor_x = info->pos_x + data->row_distance * data->ray_dir_x0;
-	draw_data->floor_y = info->pos_y + data->row_distance * data->ray_dir_y0;
+	draw_data->floor[X] = info->pos_x + data->row_distance * data->ray_dir_x0;
+	draw_data->floor[Y] = info->pos_y + data->row_distance * data->ray_dir_y0;
 	while (x < WIDTH)
 	{
 		info->buf[y][x] = info->map_data->color_floor;

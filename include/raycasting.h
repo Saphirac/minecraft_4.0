@@ -128,8 +128,7 @@ typedef struct s_wc_data
  */
 typedef struct s_draw_floor_data
 {
-	float	floor_x;
-	float	floor_y;
+	t_v2f	floor;
 	int		x;
 	int		cell_x;
 	int		cell_y;
