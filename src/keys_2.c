@@ -65,7 +65,6 @@ void	key_left(int key, t_info *info)
  */
 int	key_press(int key, t_info *info)
 {
-	printf("dir_x: %f | dir_y: %f\n", info->dir_x, info->dir_y);
 	key_w(key, info);
 	key_s(key, info);
 	key_a(key, info);
