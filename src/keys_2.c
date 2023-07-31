@@ -21,10 +21,10 @@ void	key_right(int key, t_info *info)
 
 	if (key == KEY_RIGHT)
 	{
-		olddirx = info->dir_x;
-		info->dir_x = info->dir_x * cos(-info->rot_speed) - info->dir_y * \
+		olddirx = info->vec_dir[X];
+		info->vec_dir[X] = info->vec_dir[X] * cos(-info->rot_speed) - info->vec_dir[Y] * \
 					sin(-info->rot_speed);
-		info->dir_y = olddirx * sin(-info->rot_speed) + info->dir_y * \
+		info->vec_dir[Y] = olddirx * sin(-info->rot_speed) + info->vec_dir[Y] * \
 					cos(-info->rot_speed);
 		oldplanex = info->plane_x;
 		info->plane_x = info->plane_x * cos(-info->rot_speed) - info->plane_y * \
@@ -43,10 +43,10 @@ void	key_left(int key, t_info *info)
 
 	if (key == KEY_LEFT)
 	{
-		olddirx = info->dir_x;
-		info->dir_x = info->dir_x * cos(info->rot_speed) - info->dir_y * \
+		olddirx = info->vec_dir[X];
+		info->vec_dir[X] = info->vec_dir[X] * cos(info->rot_speed) - info->vec_dir[Y] * \
 					sin(info->rot_speed);
-		info->dir_y = olddirx * sin(info->rot_speed) + info->dir_y * \
+		info->vec_dir[Y] = olddirx * sin(info->rot_speed) + info->vec_dir[Y] * \
 					cos(info->rot_speed);
 		oldplanex = info->plane_x;
 		info->plane_x = info->plane_x * cos(info->rot_speed) - info->plane_y * \

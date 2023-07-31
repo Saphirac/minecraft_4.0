@@ -18,11 +18,11 @@ void	key_d(int key, t_info *info)
 	if (key == KEY_D)
 	{
 		if (!info->map_data->map[(int)(info->vec_pos[Y])] \
-				[(int)(info->vec_pos[X] + info->dir_y * info->move_speed)])
-			info->vec_pos[X] += info->dir_y * info->move_speed;
-		if (!info->map_data->map[(int)(info->vec_pos[Y] - info->dir_x * \
+				[(int)(info->vec_pos[X] + info->vec_dir[Y] * info->move_speed)])
+			info->vec_pos[X] += info->vec_dir[Y] * info->move_speed;
+		if (!info->map_data->map[(int)(info->vec_pos[Y] - info->vec_dir[X] * \
 					info->move_speed)][(int)(info->vec_pos[X])])
-			info->vec_pos[Y] -= info->dir_x * info->move_speed;
+			info->vec_pos[Y] -= info->vec_dir[X] * info->move_speed;
 	}
 }
 
@@ -32,11 +32,11 @@ void	key_a(int key, t_info *info)
 	if (key == KEY_A)
 	{
 		if (!info->map_data->map[(int)(info->vec_pos[Y])] \
-				[(int)(info->vec_pos[X] - info->dir_y * info->move_speed)])
-			info->vec_pos[X] -= info->dir_y * info->move_speed;
-		if (!info->map_data->map[(int)(info->vec_pos[Y] + info->dir_x * \
+				[(int)(info->vec_pos[X] - info->vec_dir[Y] * info->move_speed)])
+			info->vec_pos[X] -= info->vec_dir[Y] * info->move_speed;
+		if (!info->map_data->map[(int)(info->vec_pos[Y] + info->vec_dir[X] * \
 			info->move_speed)][(int)(info->vec_pos[X])])
-			info->vec_pos[Y] += info->dir_x * info->move_speed;
+			info->vec_pos[Y] += info->vec_dir[X] * info->move_speed;
 	}
 }
 
@@ -46,11 +46,11 @@ void	key_w(int key, t_info *info)
 	if (key == KEY_W)
 	{
 		if (!info->map_data->map[(int)(info->vec_pos[Y])] \
-				[(int)(info->vec_pos[X] + info->dir_x * info->move_speed)])
-			info->vec_pos[X] += info->dir_x * info->move_speed;
-		if (!info->map_data->map[(int)(info->vec_pos[Y] + info->dir_y * \
+				[(int)(info->vec_pos[X] + info->vec_dir[X] * info->move_speed)])
+			info->vec_pos[X] += info->vec_dir[X] * info->move_speed;
+		if (!info->map_data->map[(int)(info->vec_pos[Y] + info->vec_dir[Y] * \
 			info->move_speed)][(int)(info->vec_pos[X])])
-			info->vec_pos[Y] += info->dir_y * info->move_speed;
+			info->vec_pos[Y] += info->vec_dir[Y] * info->move_speed;
 	}
 }
 
@@ -60,10 +60,10 @@ void	key_s(int key, t_info *info)
 	if (key == KEY_S)
 	{
 		if (!info->map_data->map[(int)(info->vec_pos[Y])] \
-				[(int)(info->vec_pos[X] - info->dir_x * info->move_speed)])
-			info->vec_pos[X] -= info->dir_x * info->move_speed;
-		if (!info->map_data->map[(int)(info->vec_pos[Y] - info->dir_y * \
+				[(int)(info->vec_pos[X] - info->vec_dir[X] * info->move_speed)])
+			info->vec_pos[X] -= info->vec_dir[X] * info->move_speed;
+		if (!info->map_data->map[(int)(info->vec_pos[Y] - info->vec_dir[Y] * \
 					info->move_speed)][(int)(info->vec_pos[X])])
-			info->vec_pos[Y] -= info->dir_y * info->move_speed;
+			info->vec_pos[Y] -= info->vec_dir[Y] * info->move_speed;
 	}
 }
