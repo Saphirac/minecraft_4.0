@@ -130,10 +130,8 @@ typedef struct s_draw_floor_data
 {
 	t_v2f	floor;
 	int		x;
-	int		cell_x;
-	int		cell_y;
-	int		tx;
-	int		ty;
+	t_v2i	cell;
+	t_v2i	vec_t;
 	int		floor_texture;
 	int		ceiling_texture;
 	int		color;

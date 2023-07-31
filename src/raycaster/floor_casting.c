@@ -92,12 +92,12 @@ void	calc_floor_step(t_fc_data *data)
  */
 void	calc_floor_texture(t_fc_data *data, t_draw_floor_data *draw_data)
 {
-	draw_data->cell_x = (int)(draw_data->floor[X]);
-	draw_data->cell_y = (int)(draw_data->floor[Y]);
-	draw_data->tx = (int)(TEXWIDTH * \
-			(draw_data->floor[X] - draw_data->cell_x)) & (TEXWIDTH - 1);
-	draw_data->ty = (int)(TEXHEIGHT * \
-			(draw_data->floor[Y] - draw_data->cell_y)) & (TEXHEIGHT - 1);
+	draw_data->cell[X] = (int)(draw_data->floor[X]);
+	draw_data->cell[Y] = (int)(draw_data->floor[Y]);
+	draw_data->vec_t[X] = (int)(TEXWIDTH * \
+			(draw_data->floor[X] - draw_data->cell[X])) & (TEXWIDTH - 1);
+	draw_data->vec_t[Y] = (int)(TEXHEIGHT * \
+			(draw_data->floor[Y] - draw_data->cell[Y])) & (TEXHEIGHT - 1);
 	draw_data->floor[X] += data->floor_step_x;
 	draw_data->floor[Y] += data->floor_step_y;
 	draw_data->floor_texture = 5;
