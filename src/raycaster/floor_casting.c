@@ -55,8 +55,8 @@ void	calc_row_distance(t_fc_data *data, int y)
  */
 void	calc_ray_direction(t_fc_data *data, t_info *info)
 {
-	data->ray_dir_x0 = info->dir_x - info->plane_x;
-	data->ray_dir_y0 = info->dir_y - info->plane_y;
+	data->ray_dir_0[X] = info->dir_x - info->plane_x;
+	data->ray_dir_0[Y] = info->dir_y - info->plane_y;
 	data->ray_dir_x1 = info->dir_x + info->plane_x;
 	data->ray_dir_y1 = info->dir_y + info->plane_y;
 }
@@ -76,9 +76,9 @@ void	calc_ray_direction(t_fc_data *data, t_info *info)
 void	calc_floor_step(t_fc_data *data)
 {
 	data->floor_step_x = data->row_distance * \
-						(data->ray_dir_x1 - data->ray_dir_x0) / WIDTH;
+						(data->ray_dir_x1 - data->ray_dir_0[X]) / WIDTH;
 	data->floor_step_y = data->row_distance * \
-						(data->ray_dir_y1 - data->ray_dir_y0) / WIDTH;
+						(data->ray_dir_y1 - data->ray_dir_0[Y]) / WIDTH;
 }
 
 /**
