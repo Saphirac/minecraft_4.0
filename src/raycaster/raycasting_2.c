@@ -91,8 +91,8 @@ int	initialize_textures(t_info *info)
 
 int	sub_initialize_info(t_info *info, t_map_data *map_data)
 {
-	info->pos_x = map_data->player[X];
-	info->pos_y = map_data->player[Y];
+	info->vec_pos[X] = map_data->player[X];
+	info->vec_pos[Y] = map_data->player[Y];
 	if (map_data->player_orientation == 'E')
 	{
 		info->dir_x = -1.0;

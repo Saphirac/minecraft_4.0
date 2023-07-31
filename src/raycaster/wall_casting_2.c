@@ -56,9 +56,9 @@ void	calc_texturing(t_wc_data *data, int **map)
 void	calc_wallx_value(t_wc_data *data, t_info *info)
 {
 	if (data->side == 0)
-		data->wall_x = info->pos_y + data->perp_wall_dist * data->ray_dir[Y];
+		data->wall_x = info->vec_pos[Y] + data->perp_wall_dist * data->ray_dir[Y];
 	else
-		data->wall_x = info->pos_x + data->perp_wall_dist * data->ray_dir[X];
+		data->wall_x = info->vec_pos[X] + data->perp_wall_dist * data->ray_dir[X];
 	data->wall_x -= floor(data->wall_x);
 }
 

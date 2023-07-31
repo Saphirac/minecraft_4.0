@@ -162,8 +162,7 @@ typedef struct s_fc_data
 
 typedef struct s_info
 {
-	double		pos_x;
-	double		pos_y;
+	t_v2f		vec_pos;
 	double		dir_x;
 	double		dir_y;
 	double		plane_x;

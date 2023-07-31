@@ -30,23 +30,23 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 	if (data->ray_dir[X] < 0)
 	{
 		data->vec_step[X] = -1;
-		data->side_dist[X] = (info->pos_x - data->vec_map[X]) * data->delta_dist[X];
+		data->side_dist[X] = (info->vec_pos[X] - data->vec_map[X]) * data->delta_dist[X];
 	}
 	else
 	{
 		data->vec_step[X] = 1;
-		data->side_dist[X] = (data->vec_map[X] + 1.0 - info->pos_x) * \
+		data->side_dist[X] = (data->vec_map[X] + 1.0 - info->vec_pos[X]) * \
 							data->delta_dist[X];
 	}
 	if (data->ray_dir[Y] < 0)
 	{
 		data->vec_step[Y] = -1;
-		data->side_dist[Y] = (info->pos_y - data->vec_map[Y]) * data->delta_dist[Y];
+		data->side_dist[Y] = (info->vec_pos[Y] - data->vec_map[Y]) * data->delta_dist[Y];
 	}
 	else
 	{
 		data->vec_step[Y] = 1;
-		data->side_dist[Y] = (data->vec_map[Y] + 1.0 - info->pos_y) * \
+		data->side_dist[Y] = (data->vec_map[Y] + 1.0 - info->vec_pos[Y]) * \
 							data->delta_dist[Y];
 	}
 }
@@ -143,9 +143,9 @@ void	calc_draw_start_and_draw_end(t_wc_data *data)
 void	calc_perpendicular_distance(t_wc_data *data, t_info *info)
 {
 	if (data->side == 0)
-		data->perp_wall_dist = (data->vec_map[X] - info->pos_x + \
+		data->perp_wall_dist = (data->vec_map[X] - info->vec_pos[X] + \
 				(1 - data->vec_step[X]) / 2) / data->ray_dir[X];
 	else
-		data->perp_wall_dist = (data->vec_map[Y] - info->pos_y + \
+		data->perp_wall_dist = (data->vec_map[Y] - info->vec_pos[Y] + \
 				(1 - data->vec_step[Y]) / 2) / data->ray_dir[Y];
 }
