@@ -155,8 +155,7 @@ typedef struct s_draw_floor_data
 typedef struct s_fc_data
 {
 	t_v2f	ray_dir_0;
-	float	ray_dir_x1;
-	float	ray_dir_y1;
+	t_v2f	ray_dir_1;
 	float	row_distance;
 	float	floor_step_x;
 	float	floor_step_y;
