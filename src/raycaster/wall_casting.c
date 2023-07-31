@@ -26,12 +26,12 @@
 void	init_data(t_wc_data *data, t_info *info, int x)
 {
 	data->camera_x = 2 * x / (double)WIDTH - 1;
-	data->ray_dir_x = info->dir_x + info->plane_x * data->camera_x;
-	data->ray_dir_y = info->dir_y + info->plane_y * data->camera_x;
-	data->map_x = (int)info->pos_x;
-	data->map_y = (int)info->pos_y;
-	data->delta_dist_x = fabs(1 / data->ray_dir_x);
-	data->delta_dist_y = fabs(1 / data->ray_dir_y);
+	data->ray_dir[X] = info->dir_x + info->plane_x * data->camera_x;
+	data->ray_dir[Y] = info->dir_y + info->plane_y * data->camera_x;
+	data->vec_map[X] = (int)info->pos_x;
+	data->vec_map[Y] = (int)info->pos_y;
+	data->delta_dist_x = fabs(1 / data->ray_dir[X]);
+	data->delta_dist_y = fabs(1 / data->ray_dir[Y]);
 	data->hit = 0;
 }
 

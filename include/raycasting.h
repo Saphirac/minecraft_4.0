@@ -82,10 +82,8 @@ typedef struct s_img
 typedef struct s_wc_data
 {
 	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
+	t_v2f	ray_dir;
+	t_v2i	vec_map;
 	double	side_dist_x;
 	double	side_dist_y;
 	double	delta_dist_x;

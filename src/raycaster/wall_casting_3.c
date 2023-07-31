@@ -27,26 +27,26 @@
 */
 void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 {
-	if (data->ray_dir_x < 0)
+	if (data->ray_dir[X] < 0)
 	{
 		data->vec_step[X] = -1;
-		data->side_dist_x = (info->pos_x - data->map_x) * data->delta_dist_x;
+		data->side_dist_x = (info->pos_x - data->vec_map[X]) * data->delta_dist_x;
 	}
 	else
 	{
 		data->vec_step[X] = 1;
-		data->side_dist_x = (data->map_x + 1.0 - info->pos_x) * \
+		data->side_dist_x = (data->vec_map[X] + 1.0 - info->pos_x) * \
 							data->delta_dist_x;
 	}
-	if (data->ray_dir_y < 0)
+	if (data->ray_dir[Y] < 0)
 	{
 		data->vec_step[Y] = -1;
-		data->side_dist_y = (info->pos_y - data->map_y) * data->delta_dist_y;
+		data->side_dist_y = (info->pos_y - data->vec_map[Y]) * data->delta_dist_y;
 	}
 	else
 	{
 		data->vec_step[Y] = 1;
-		data->side_dist_y = (data->map_y + 1.0 - info->pos_y) * \
+		data->side_dist_y = (data->vec_map[Y] + 1.0 - info->pos_y) * \
 							data->delta_dist_y;
 	}
 }
@@ -64,7 +64,7 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
  * OR in y-directionl
  *
  * Check if ray has hit a wall:
- * if (worldMap[data->map_x][data->map_y] > 0) data->hit = 1;  
+ * if (worldMap[data->vec_map[X]][data->vec_map[Y]] > 0) data->hit = 1;  
  *
  *
  * @param t_wc_data *data: the data structure that store 
@@ -80,9 +80,9 @@ void	dda_algorithm(t_wc_data *data, int **map)
 		if (data->side_dist_x < data->side_dist_y)
 		{
 			data->side_dist_x += data->delta_dist_x;
-			data->map_x += data->vec_step[X];
+			data->vec_map[X] += data->vec_step[X];
 			data->side = 0;
-			if (data->ray_dir_x > 0)
+			if (data->ray_dir[X] > 0)
 				data->tex = 2;
 			else
 				data->tex = 3;
@@ -90,14 +90,14 @@ void	dda_algorithm(t_wc_data *data, int **map)
 		else
 		{
 			data->side_dist_y += data->delta_dist_y;
-			data->map_y += data->vec_step[Y];
+			data->vec_map[Y] += data->vec_step[Y];
 			data->side = 1;
-			if (data->ray_dir_y > 0)
+			if (data->ray_dir[Y] > 0)
 				data->tex = 0;
 			else
 				data->tex = 1;
 		}
-		if (map[data->map_y][data->map_x] > 0)
+		if (map[data->vec_map[Y]][data->vec_map[X]] > 0)
 			data->hit = 1;
 	}
 }
@@ -130,7 +130,7 @@ void	calc_draw_start_and_draw_end(t_wc_data *data)
  * (Euclidean distance would give fisheye effect!)
  * 
  * perp_wall_dist is the perpendicular distance from the player (posX, posY) 
- * to the position (map_x, map_y)
+ * to the position (vec_map[X], vec_map[Y])
  *
  * @param t_wc_data *data: the data structure that store 
  * all variable used for the wall casting
@@ -143,9 +143,9 @@ void	calc_draw_start_and_draw_end(t_wc_data *data)
 void	calc_perpendicular_distance(t_wc_data *data, t_info *info)
 {
 	if (data->side == 0)
-		data->perp_wall_dist = (data->map_x - info->pos_x + \
-				(1 - data->vec_step[X]) / 2) / data->ray_dir_x;
+		data->perp_wall_dist = (data->vec_map[X] - info->pos_x + \
+				(1 - data->vec_step[X]) / 2) / data->ray_dir[X];
 	else
-		data->perp_wall_dist = (data->map_y - info->pos_y + \
-				(1 - data->vec_step[Y]) / 2) / data->ray_dir_y;
+		data->perp_wall_dist = (data->vec_map[Y] - info->pos_y + \
+				(1 - data->vec_step[Y]) / 2) / data->ray_dir[Y];
 }
