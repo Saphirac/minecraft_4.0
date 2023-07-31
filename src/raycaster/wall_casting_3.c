@@ -15,7 +15,7 @@
 /**
  * @brief Calculate step and initial sideDist
  * 
- * step_x and step_y are the distance to the next side of a wall
+ * vec_step[X] and vec_step[Y] are the distance to the next side of a wall
  * 
  * sideDist are initially the distance the ray has to travel
  * from its start position to the first x-side and the 
@@ -29,23 +29,23 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 {
 	if (data->ray_dir_x < 0)
 	{
-		data->step_x = -1;
+		data->vec_step[X] = -1;
 		data->side_dist_x = (info->pos_x - data->map_x) * data->delta_dist_x;
 	}
 	else
 	{
-		data->step_x = 1;
+		data->vec_step[X] = 1;
 		data->side_dist_x = (data->map_x + 1.0 - info->pos_x) * \
 							data->delta_dist_x;
 	}
 	if (data->ray_dir_y < 0)
 	{
-		data->step_y = -1;
+		data->vec_step[Y] = -1;
 		data->side_dist_y = (info->pos_y - data->map_y) * data->delta_dist_y;
 	}
 	else
 	{
-		data->step_y = 1;
+		data->vec_step[Y] = 1;
 		data->side_dist_y = (data->map_y + 1.0 - info->pos_y) * \
 							data->delta_dist_y;
 	}
@@ -80,7 +80,7 @@ void	dda_algorithm(t_wc_data *data, int **map)
 		if (data->side_dist_x < data->side_dist_y)
 		{
 			data->side_dist_x += data->delta_dist_x;
-			data->map_x += data->step_x;
+			data->map_x += data->vec_step[X];
 			data->side = 0;
 			if (data->ray_dir_x > 0)
 				data->tex = 2;
@@ -90,7 +90,7 @@ void	dda_algorithm(t_wc_data *data, int **map)
 		else
 		{
 			data->side_dist_y += data->delta_dist_y;
-			data->map_y += data->step_y;
+			data->map_y += data->vec_step[Y];
 			data->side = 1;
 			if (data->ray_dir_y > 0)
 				data->tex = 0;
@@ -144,8 +144,8 @@ void	calc_perpendicular_distance(t_wc_data *data, t_info *info)
 {
 	if (data->side == 0)
 		data->perp_wall_dist = (data->map_x - info->pos_x + \
-				(1 - data->step_x) / 2) / data->ray_dir_x;
+				(1 - data->vec_step[X]) / 2) / data->ray_dir_x;
 	else
 		data->perp_wall_dist = (data->map_y - info->pos_y + \
-				(1 - data->step_y) / 2) / data->ray_dir_y;
+				(1 - data->vec_step[Y]) / 2) / data->ray_dir_y;
 }

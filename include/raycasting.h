@@ -91,8 +91,7 @@ typedef struct s_wc_data
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
+	t_v2i	vec_step;
 	int		hit;
 	int		side;
 	int		draw_start;
