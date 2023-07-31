@@ -75,9 +75,9 @@ void	calc_ray_direction(t_fc_data *data, t_info *info)
  */
 void	calc_floor_step(t_fc_data *data)
 {
-	data->floor_step_x = data->row_distance * \
+	data->floor_step[X] = data->row_distance * \
 						(data->ray_dir_1[X] - data->ray_dir_0[X]) / WIDTH;
-	data->floor_step_y = data->row_distance * \
+	data->floor_step[Y] = data->row_distance * \
 						(data->ray_dir_1[Y] - data->ray_dir_0[Y]) / WIDTH;
 }
 
@@ -98,8 +98,8 @@ void	calc_floor_texture(t_fc_data *data, t_draw_floor_data *draw_data)
 			(draw_data->floor[X] - draw_data->cell[X])) & (TEXWIDTH - 1);
 	draw_data->vec_t[Y] = (int)(TEXHEIGHT * \
 			(draw_data->floor[Y] - draw_data->cell[Y])) & (TEXHEIGHT - 1);
-	draw_data->floor[X] += data->floor_step_x;
-	draw_data->floor[Y] += data->floor_step_y;
+	draw_data->floor[X] += data->floor_step[X];
+	draw_data->floor[Y] += data->floor_step[Y];
 	draw_data->floor_texture = 5;
 	draw_data->ceiling_texture = 5;
 }

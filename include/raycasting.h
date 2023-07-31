@@ -157,8 +157,7 @@ typedef struct s_fc_data
 	t_v2f	ray_dir_0;
 	t_v2f	ray_dir_1;
 	float	row_distance;
-	float	floor_step_x;
-	float	floor_step_y;
+	t_v2f	floor_step;
 }				t_fc_data;
 
 typedef struct s_info
