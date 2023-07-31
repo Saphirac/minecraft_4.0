@@ -85,8 +85,7 @@ typedef struct s_wc_data
 	t_v2f	ray_dir;
 	t_v2i	vec_map;
 	t_v2f	side_dist;
-	double	delta_dist_x;
-	double	delta_dist_y;
+	t_v2f	delta_dist;
 	double	perp_wall_dist;
 	t_v2i	vec_step;
 	int		hit;

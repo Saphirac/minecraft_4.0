@@ -30,24 +30,24 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 	if (data->ray_dir[X] < 0)
 	{
 		data->vec_step[X] = -1;
-		data->side_dist[X] = (info->pos_x - data->vec_map[X]) * data->delta_dist_x;
+		data->side_dist[X] = (info->pos_x - data->vec_map[X]) * data->delta_dist[X];
 	}
 	else
 	{
 		data->vec_step[X] = 1;
 		data->side_dist[X] = (data->vec_map[X] + 1.0 - info->pos_x) * \
-							data->delta_dist_x;
+							data->delta_dist[X];
 	}
 	if (data->ray_dir[Y] < 0)
 	{
 		data->vec_step[Y] = -1;
-		data->side_dist[Y] = (info->pos_y - data->vec_map[Y]) * data->delta_dist_y;
+		data->side_dist[Y] = (info->pos_y - data->vec_map[Y]) * data->delta_dist[Y];
 	}
 	else
 	{
 		data->vec_step[Y] = 1;
 		data->side_dist[Y] = (data->vec_map[Y] + 1.0 - info->pos_y) * \
-							data->delta_dist_y;
+							data->delta_dist[Y];
 	}
 }
 
@@ -56,7 +56,7 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
  * to find which squares a line hits
  *
 
- * delta_dist_x and delta_dist_y are the distance the ray has to 
+ * delta_dist[X] and delta_dist[Y] are the distance the ray has to 
  * travel to go from 1 x-side to the next x-side, or from 
  * 1 y-side to the next y-side
  *
@@ -79,7 +79,7 @@ void	dda_algorithm(t_wc_data *data, int **map)
 	{
 		if (data->side_dist[X] < data->side_dist[Y])
 		{
-			data->side_dist[X] += data->delta_dist_x;
+			data->side_dist[X] += data->delta_dist[X];
 			data->vec_map[X] += data->vec_step[X];
 			data->side = 0;
 			if (data->ray_dir[X] > 0)
@@ -89,7 +89,7 @@ void	dda_algorithm(t_wc_data *data, int **map)
 		}
 		else
 		{
-			data->side_dist[Y] += data->delta_dist_y;
+			data->side_dist[Y] += data->delta_dist[Y];
 			data->vec_map[Y] += data->vec_step[Y];
 			data->side = 1;
 			if (data->ray_dir[Y] > 0)
