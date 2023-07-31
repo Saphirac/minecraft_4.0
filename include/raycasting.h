@@ -84,8 +84,7 @@ typedef struct s_wc_data
 	double	camera_x;
 	t_v2f	ray_dir;
 	t_v2i	vec_map;
-	double	side_dist_x;
-	double	side_dist_y;
+	t_v2f	side_dist;
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perp_wall_dist;

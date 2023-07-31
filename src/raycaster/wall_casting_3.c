@@ -30,23 +30,23 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 	if (data->ray_dir[X] < 0)
 	{
 		data->vec_step[X] = -1;
-		data->side_dist_x = (info->pos_x - data->vec_map[X]) * data->delta_dist_x;
+		data->side_dist[X] = (info->pos_x - data->vec_map[X]) * data->delta_dist_x;
 	}
 	else
 	{
 		data->vec_step[X] = 1;
-		data->side_dist_x = (data->vec_map[X] + 1.0 - info->pos_x) * \
+		data->side_dist[X] = (data->vec_map[X] + 1.0 - info->pos_x) * \
 							data->delta_dist_x;
 	}
 	if (data->ray_dir[Y] < 0)
 	{
 		data->vec_step[Y] = -1;
-		data->side_dist_y = (info->pos_y - data->vec_map[Y]) * data->delta_dist_y;
+		data->side_dist[Y] = (info->pos_y - data->vec_map[Y]) * data->delta_dist_y;
 	}
 	else
 	{
 		data->vec_step[Y] = 1;
-		data->side_dist_y = (data->vec_map[Y] + 1.0 - info->pos_y) * \
+		data->side_dist[Y] = (data->vec_map[Y] + 1.0 - info->pos_y) * \
 							data->delta_dist_y;
 	}
 }
@@ -77,9 +77,9 @@ void	dda_algorithm(t_wc_data *data, int **map)
 {
 	while (data->hit == 0)
 	{
-		if (data->side_dist_x < data->side_dist_y)
+		if (data->side_dist[X] < data->side_dist[Y])
 		{
-			data->side_dist_x += data->delta_dist_x;
+			data->side_dist[X] += data->delta_dist_x;
 			data->vec_map[X] += data->vec_step[X];
 			data->side = 0;
 			if (data->ray_dir[X] > 0)
@@ -89,7 +89,7 @@ void	dda_algorithm(t_wc_data *data, int **map)
 		}
 		else
 		{
-			data->side_dist_y += data->delta_dist_y;
+			data->side_dist[Y] += data->delta_dist_y;
 			data->vec_map[Y] += data->vec_step[Y];
 			data->side = 1;
 			if (data->ray_dir[Y] > 0)
