@@ -55,10 +55,10 @@ void	calc_row_distance(t_fc_data *data, int y)
  */
 void	calc_ray_direction(t_fc_data *data, t_info *info)
 {
-	data->ray_dir_0[X] = info->vec_dir[X] - info->plane_x;
-	data->ray_dir_0[Y] = info->vec_dir[Y] - info->plane_y;
-	data->ray_dir_1[X] = info->vec_dir[X] + info->plane_x;
-	data->ray_dir_1[Y] = info->vec_dir[Y] + info->plane_y;
+	data->ray_dir_0[X] = info->vec_dir[X] - info->vec_plane[X];
+	data->ray_dir_0[Y] = info->vec_dir[Y] - info->vec_plane[Y];
+	data->ray_dir_1[X] = info->vec_dir[X] + info->vec_plane[X];
+	data->ray_dir_1[Y] = info->vec_dir[Y] + info->vec_plane[Y];
 }
 
 /**

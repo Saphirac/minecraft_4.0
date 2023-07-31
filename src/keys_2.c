@@ -26,10 +26,10 @@ void	key_right(int key, t_info *info)
 					sin(-info->rot_speed);
 		info->vec_dir[Y] = olddirx * sin(-info->rot_speed) + info->vec_dir[Y] * \
 					cos(-info->rot_speed);
-		oldplanex = info->plane_x;
-		info->plane_x = info->plane_x * cos(-info->rot_speed) - info->plane_y * \
+		oldplanex = info->vec_plane[X];
+		info->vec_plane[X] = info->vec_plane[X] * cos(-info->rot_speed) - info->vec_plane[Y] * \
 					sin(-info->rot_speed);
-		info->plane_y = oldplanex * sin(-info->rot_speed) + info->plane_y * \
+		info->vec_plane[Y] = oldplanex * sin(-info->rot_speed) + info->vec_plane[Y] * \
 					cos(-info->rot_speed);
 	}
 }
@@ -48,10 +48,10 @@ void	key_left(int key, t_info *info)
 					sin(info->rot_speed);
 		info->vec_dir[Y] = olddirx * sin(info->rot_speed) + info->vec_dir[Y] * \
 					cos(info->rot_speed);
-		oldplanex = info->plane_x;
-		info->plane_x = info->plane_x * cos(info->rot_speed) - info->plane_y * \
+		oldplanex = info->vec_plane[X];
+		info->vec_plane[X] = info->vec_plane[X] * cos(info->rot_speed) - info->vec_plane[Y] * \
 					sin(info->rot_speed);
-		info->plane_y = oldplanex * sin(info->rot_speed) + info->plane_y * \
+		info->vec_plane[Y] = oldplanex * sin(info->rot_speed) + info->vec_plane[Y] * \
 					cos(info->rot_speed);
 	}
 }

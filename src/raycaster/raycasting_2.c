@@ -97,29 +97,29 @@ int	sub_initialize_info(t_info *info, t_map_data *map_data)
 	{
 		info->vec_dir[X] = -1.0;
 		info->vec_dir[Y] = 0;
-		info->plane_x = 0.00;
-		info->plane_y = 0.66;
+		info->vec_plane[X] = 0.00;
+		info->vec_plane[Y] = 0.66;
 	}
 	else if (map_data->player_orientation == 'W')
 	{
 		info->vec_dir[X] = 1.0;
 		info->vec_dir[Y] = 0;
-		info->plane_x = 0.00;
-		info->plane_y = -0.66;
+		info->vec_plane[X] = 0.00;
+		info->vec_plane[Y] = -0.66;
 	}
 	else if (map_data->player_orientation == 'S')
 	{
 		info->vec_dir[X] = 0;
 		info->vec_dir[Y] = 1.0;
-		info->plane_x = 0.66;
-		info->plane_y = 0.00;
+		info->vec_plane[X] = 0.66;
+		info->vec_plane[Y] = 0.00;
 	}
 	else if (map_data->player_orientation == 'N')
 	{
 		info->vec_dir[X] = 0;
 		info->vec_dir[Y] = -1.0;
-		info->plane_x = -0.66;
-		info->plane_y = 0.00;
+		info->vec_plane[X] = -0.66;
+		info->vec_plane[Y] = 0.00;
 	}
 	info->move_speed = 0.15;
 	info->rot_speed = 0.15;

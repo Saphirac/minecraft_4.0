@@ -164,8 +164,7 @@ typedef struct s_info
 {
 	t_v2f		vec_pos;
 	t_v2f		vec_dir;
-	double		plane_x;
-	double		plane_y;
+	t_v2f		vec_plane;
 	void		*mlx;
 	void		*win;
 	t_img		img;
