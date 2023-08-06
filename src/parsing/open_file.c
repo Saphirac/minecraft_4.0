@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 21:31:15 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:33:05 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:23:24 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	open_file(char const *const file)
 	int	fd;
 
 	if (is_filename_ok(file) == false)
-		return (-1);
+		return (printf("Incorrect filename.\n"), -1);
 	fd = open(file, O_RDWR);
 	return (fd);
 }

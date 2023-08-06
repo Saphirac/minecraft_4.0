@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/27 20:09:41 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:16:06 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	key_s(int key, t_info *info);
 
 // Drawing //
 
-void	img_pix_put(t_data *img, int x, int y, int color)
+void	img_pix_put(t_img img, int x, int y, int color)
 		__attribute__((always_inline));
-void	draw_line(t_data *data, t_v2i p1, t_v2i p2, int color);
-void	draw_mini_map(t_data *img, t_map_data *map);
+void	draw_line(t_img data, t_v2i p1, t_v2i p2, int color);
+void	draw_mini_map(t_img img, t_map_data *map);
 char	get_block(t_map_data *map, t_v2i pos);
 
 // Parsing //

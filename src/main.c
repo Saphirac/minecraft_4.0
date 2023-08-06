@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 21:55:09 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:23:42 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	create_map(t_map_data *map, char *file)
 	ft_bzero(map, sizeof(t_map_data));
 	fd = open_file(file);
 	if (fd < 0)
-		return (EXIT_FAILURE);
+		return (printf("Error : can't open map.\n"), EXIT_FAILURE);
 	if (get_all_data(map, fd) || check_border(map) == false)
 		return (EXIT_FAILURE);
 	if (close(fd) == -1)
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 	t_map_data	map;
 
 	if (ac != 2)
-		return (1);
+		return (printf("Error : incorrect number of arguments.\n"), 1);
 	if (create_map(&map, av[1]))
 		return (1);
 	if (get_color_ceiling_floor(&map) == EXIT_FAILURE)

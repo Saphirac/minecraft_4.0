@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/26 22:31:44 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:25:29 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_textures_colours(
 	char const	*ptr;
 
 	if (map->textures_colours[n])
-		return (printf("Data already exists.\n"), EXIT_FAILURE);
+		return (printf("Error : data already exists.\n"), EXIT_FAILURE);
 	ptr = line;
 	while (*ptr != ' ')
 		ptr++;
@@ -88,7 +88,7 @@ int	get_all_data(t_map_data *const map, int const fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		return (EXIT_FAILURE);
+		return (printf("Error : gnl fail.\n"), EXIT_FAILURE);
 	while (line)
 	{
 		if (check_line(line) >= 0)

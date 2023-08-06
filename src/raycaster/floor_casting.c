@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_casting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:45:41 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/27 20:34:06 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:23:53 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ int	floor_casting(t_info *info)
 		y++;
 	}
 	data = NULL;
+	draw_mini_map(info->img, info->map_data);
 	return (0);
 }

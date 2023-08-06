@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/27 20:09:08 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:33:14 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ bool	check_border(t_map_data *map)
 
 	tmp = create_map_tmp(map);
 	if (!tmp)
-		return (false);
+		return (printf("Error : malloc failed.\n"), false);
 	if (ft_find_border(map, tmp, (int)map->player[X], (int)map->player[Y]) == 1)
 	{
-		printf("Map is not closed by wall\n");
+		printf("Error : map is not closed by wall\n");
 		ft_free(tmp);
 		return (false);
 	}

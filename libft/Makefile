@@ -6,13 +6,13 @@
 #    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 16:23:10 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/18 10:11:18 by gle-mini         ###   ########.fr        #
+#    Updated: 2023/08/06 22:19:30 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = gcc
+CC = cc
 
 SRCS = ft_atoi.c ft_bzero.c ft_calloc.c \
 		ft_isalnum.c ft_isalpha.c ft_isascii.c \
@@ -29,7 +29,7 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c \
 
 OBJS = ${SRCS:.c=.o}
 
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror
 
 .c.o:
 	${CC} ${FLAGS} -I ./include -c $< -o ${<:.c=.o}

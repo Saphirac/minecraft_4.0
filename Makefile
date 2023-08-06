@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/07/27 20:14:03 by gle-mini         ###   ########.fr        #
+#    Updated: 2023/08/06 22:33:43 by mcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ NAME				=	cub3d
 SRC_DIR				=	src
 OBJ_DIR				=	obj
 INC_DIR				=	include
-PRV_DIR				=	private
 
 FT_DIR			=	libft
 FT_INC_DIR		=	include
@@ -63,6 +62,10 @@ SRC					=									\
 						check_border_2.c				\
 						find_player.c					\
 						convert_ceiling_floors_colors.c \
+				}										\
+				${addprefix mini_map/,					\
+						draw_mini_map.c					\
+						draw_line.c						\
 				}										\
 				${addprefix str_lst/,					\
 						str_lst_add_back.c				\
@@ -101,13 +104,13 @@ DEP					=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS				=	-Wall -Wextra -Werror -g3
+CFLAGS				=	-Wall -Wextra -Werror
 CFLAGS				+=	-MMD -MP
 CFLAGS				+=	-I${INC_DIR}
 CFLAGS				+=	-I${FT_INC_DIR}
 CFLAGS				+=	-I${MLX_INC_DIR}
 
-LDFLAGS				+=	-L${FT_DIR} -lft
+LDFLAGS				=	-L${FT_DIR} -lft
 LDFLAGS				+=	-L${MLX_DIR} -lmlx -lX11 -lXext
 LDFLAGS				+=	-lm
 
@@ -131,7 +134,7 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	${CC} ${CFLAGS} $< ${OUTPUT_OPTION}
 
 ${FT_A}:
-	@${MAKE} ${@F} -C ${@D}
+	${MAKE} ${@F} -C ${@D}
 
 ${MLX_A}:
 	${MAKE} -C ${@D}
