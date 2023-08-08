@@ -75,7 +75,7 @@ int	convert_map(t_map_data *map_data)
 	int	x;
 	int	y;
 
-	map_data->map = malloc(sizeof(int *) * map_data->map_size[Y]);
+	map_data->map = malloc(sizeof(int *) * (map_data->map_size[Y] + 1));
 	if (!map_data->map)
 		return (MALLOC_ERR);
 	y = 0;
@@ -92,6 +92,7 @@ int	convert_map(t_map_data *map_data)
 		}
 		y++;
 	}
+	map_data->map[y] = NULL;
 	return (EXIT_SUCCESS);
 }
 
