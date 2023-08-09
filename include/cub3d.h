@@ -98,5 +98,6 @@ void	free_textures(char **str);
 void	free_int(int **tab);
 void	free_all(t_map_data *map_data, t_info *info);
 void	ft_free(char **tab);
+void	ft_free_int_tab(int **tab);
 
 #endif
