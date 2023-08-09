@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/06 22:43:57 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:55:27 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	read_map(t_str_lst *map_list, char *line, int fd)
 	while (line && __is_map_line_correct(line) == true)
 	{
 		if (!str_lst_add_back(map_list, line))
-			return (printf("Error : str_lst creation.\n"), EXIT_FAILURE);
+			return (printf("Error : str_lst creation.\n"), free(line), EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -85,21 +85,21 @@ int	get_map(t_map_data *map, int fd, char *line)
 	t_str_lst	list;
 
 	if (is_textures_full(map) == false)
-		return (printf("Error : didn't get all data.\n"), EXIT_FAILURE);
+		return (printf("Error : didn't get all data.\n"), free(line), EXIT_FAILURE);
 	ft_bzero(&list, sizeof(t_str_lst));
 	if (read_map(&list, line, fd))
-		return (printf("Error : incorrect map.\n"), EXIT_FAILURE);
+		return (printf("Error : incorrect map.\n"), free_textures(map->textures_colours), EXIT_FAILURE);
 	map->map_size[X] = list.max_line_size - 1;
 	map->map_size[Y] = list.size;
 	map->map_char = malloc(sizeof(char *) * (list.size + 1));
 	if (!map->map_char)
-		return (printf("Error : malloc failed.\n"), EXIT_FAILURE);
+		return (printf("Error : malloc failed.\n"), free_textures(map->textures_colours), EXIT_FAILURE);
 	if (ft_list_to_array_str(map, &list))
 		return (EXIT_FAILURE);
 	str_lst_clear(&list);
 	map->player[X] = -1;
 	map->player[Y] = -1;
 	if (find_player(map))
-		return (EXIT_FAILURE);
+		return (free_textures(map->textures_colours), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

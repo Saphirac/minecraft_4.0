@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/06 22:25:29 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:53:01 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool	is_textures_full(t_map_data *map)
 	while (map->textures_colours[i])
 		i++;
 	if (i < 6)
-		return (false);
+		return (free_textures(map->textures_colours), false);
 	return (true);
 }
 
@@ -87,6 +87,7 @@ int	get_all_data(t_map_data *const map, int const fd)
 	char	*line;
 
 	line = get_next_line(fd);
+	ft_bzero(map->textures_colours, sizeof(int *) * 6);
 	if (!line)
 		return (printf("Error : gnl fail.\n"), EXIT_FAILURE);
 	while (line)
@@ -94,12 +95,12 @@ int	get_all_data(t_map_data *const map, int const fd)
 		if (check_line(line) >= 0)
 		{
 			if (get_textures_colours(map, line, check_line(line)))
-				return (EXIT_FAILURE);
+				return (free(line), free_textures(map->textures_colours), EXIT_FAILURE);
 		}
 		else if (check_line(line) == -1)
 			return (get_map(map, fd, line));
 		else if (check_line(line) == -2)
-			return (printf("Incorrect given data.\n"), EXIT_FAILURE);
+			return (printf("Incorrect given data.\n"), free(line), free_textures(map->textures_colours), EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
 	}
