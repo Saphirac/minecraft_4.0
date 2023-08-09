@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/09 11:55:27 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:29:49 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ int	get_map(t_map_data *map, int fd, char *line)
 	map->player[X] = -1;
 	map->player[Y] = -1;
 	if (find_player(map))
-		return (free_textures(map->textures_colours), EXIT_FAILURE);
+		return (free_textures(map->textures_colours), ft_free(map->map_char), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
