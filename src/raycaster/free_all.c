@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:01:15 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/27 20:06:37 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:35:16 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,30 @@ void	free_int(int **tab)
 	free(tab);
 }
 
+void	free_int_tab(int **tab)
+{
+	int	i;
+
+	i = 0;
+	if (tab == NULL)
+		return ;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
+
 void	free_all(t_map_data *map_data, t_info *info)
 {
 	free(info->mlx);
 	free_textures(map_data->textures_colours);
 	ft_free(map_data->map_char);
 	free_int(info->texture);
-	free_int(map_data->map);
+	free_int_tab(map_data->map);
 	free(info->wc_data);
 	free(info->fc_data);
 	free(info);

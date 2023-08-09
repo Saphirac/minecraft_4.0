@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 17:39:40 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/08/02 16:23:17 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:29:31 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	convert_map(t_map_data *map_data)
 	int	x;
 	int	y;
 
-	map_data->map = malloc(sizeof(int *) * map_data->map_size[Y]);
+	map_data->map = malloc(sizeof(int *) * (map_data->map_size[Y] + 1));
 	if (!map_data->map)
 		return (MALLOC_ERR);
 	y = 0;
@@ -92,6 +92,7 @@ int	convert_map(t_map_data *map_data)
 		}
 		y++;
 	}
+	map_data->map[y] = NULL;
 	return (EXIT_SUCCESS);
 }
 
