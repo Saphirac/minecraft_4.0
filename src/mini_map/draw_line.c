@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:04:13 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/02 16:04:13 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:48:21 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void	draw_line(t_img img, t_v2i p1, t_v2i p2, int colour)
 		xy += inc;
 	}
 	if (__in_border(xy[X], xy[Y], img) == true)
-			img_pix_put(img, (int)xy[X], (int)xy[Y], colour);
+		img_pix_put(img, (int)xy[X], (int)xy[Y], colour);
 }

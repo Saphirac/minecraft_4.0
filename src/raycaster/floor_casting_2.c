@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:07:43 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/27 20:34:37 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:42:20 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ int	draw_floor(t_fc_data *data, t_info *info, int y)
 	if (draw_data == NULL)
 		return (MALLOC_ERR);
 	x = 0;
-	draw_data->floor[X] = info->vec_pos[X] + data->row_distance * data->ray_dir_0[X];
-	draw_data->floor[Y] = info->vec_pos[Y] + data->row_distance * data->ray_dir_0[Y];
+	draw_data->floor[X] = info->vec_pos[X] + data->row_distance * \
+							data->ray_dir_0[X];
+	draw_data->floor[Y] = info->vec_pos[Y] + data->row_distance * \
+							data->ray_dir_0[Y];
 	while (x < WIDTH)
 	{
 		info->buf[y][x] = info->map_data->color_floor;

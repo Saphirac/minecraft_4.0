@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:56:10 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/02 16:16:06 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:28:04 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,14 @@ void	calc_draw_start_and_draw_end(t_wc_data *data);
 void	calc_perpendicular_distance(t_wc_data *data, t_info *info);
 int		initialize_info_structure(t_info *info, t_map_data *map_data);
 int		draw_floor(t_fc_data *data, t_info *info, int y);
+void	initialize_orientation(t_info *info, t_map_data *map_data);
 
 // Free //
 void	free_textures(char **str);
 void	free_int(int **tab);
 void	free_all(t_map_data *map_data, t_info *info);
 void	ft_free(char **tab);
+void	free_int_tab(int **tab);
 void	ft_free_int_tab(int **tab);
 
 #endif

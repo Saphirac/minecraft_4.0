@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:18:06 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/27 20:35:41 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:20:18 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void	calc_texturing(t_wc_data *data, int **map)
 void	calc_wallx_value(t_wc_data *data, t_info *info)
 {
 	if (data->side == 0)
-		data->wall_x = info->vec_pos[Y] + data->perp_wall_dist * data->ray_dir[Y];
+		data->wall_x = info->vec_pos[Y] + data->perp_wall_dist * \
+						data->ray_dir[Y];
 	else
-		data->wall_x = info->vec_pos[X] + data->perp_wall_dist * data->ray_dir[X];
+		data->wall_x = info->vec_pos[X] + data->perp_wall_dist * \
+						data->ray_dir[X];
 	data->wall_x -= floor(data->wall_x);
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+         #
+#    By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 01:48:02 by mcourtoi          #+#    #+#              #
-#    Updated: 2023/08/06 22:33:43 by mcourtoi         ###   ########.fr        #
+#    Updated: 2023/08/09 16:29:44 by gle-mini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ SRC					=									\
 						wall_casting_2.c 				\
 						wall_casting_3.c 				\
 						free_all.c						\
+						initialize_orientation.c		\
 				}										\
 						keys.c							\
 						keys_2.c						\

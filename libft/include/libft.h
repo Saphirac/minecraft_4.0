@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 15:42:20 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/17 17:08:29 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:12:16 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_list
 	char			*str;
 	struct s_list	*next;
 	struct s_list	*prev;
-	
 }	t_list;
 
 int				ft_atoi(const char *nptr);

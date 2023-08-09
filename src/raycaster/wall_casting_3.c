@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:19:43 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/27 20:37:00 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:21:02 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 	if (data->ray_dir[X] < 0)
 	{
 		data->vec_step[X] = -1;
-		data->side_dist[X] = (info->vec_pos[X] - data->vec_map[X]) * data->delta_dist[X];
+		data->side_dist[X] = (info->vec_pos[X] - data->vec_map[X]) * \
+							data->delta_dist[X];
 	}
 	else
 	{
@@ -41,7 +42,8 @@ void	calc_step_and_init_sidedist(t_wc_data *data, t_info *info)
 	if (data->ray_dir[Y] < 0)
 	{
 		data->vec_step[Y] = -1;
-		data->side_dist[Y] = (info->vec_pos[Y] - data->vec_map[Y]) * data->delta_dist[Y];
+		data->side_dist[Y] = (info->vec_pos[Y] - data->vec_map[Y]) * \
+							data->delta_dist[Y];
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:05:01 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/07/27 20:33:10 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:41:24 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,34 +93,7 @@ int	sub_initialize_info(t_info *info, t_map_data *map_data)
 {
 	info->vec_pos[X] = map_data->player[X];
 	info->vec_pos[Y] = map_data->player[Y];
-	if (map_data->player_orientation == 'E')
-	{
-		info->vec_dir[X] = -1.0;
-		info->vec_dir[Y] = 0;
-		info->vec_plane[X] = 0.00;
-		info->vec_plane[Y] = 0.66;
-	}
-	else if (map_data->player_orientation == 'W')
-	{
-		info->vec_dir[X] = 1.0;
-		info->vec_dir[Y] = 0;
-		info->vec_plane[X] = 0.00;
-		info->vec_plane[Y] = -0.66;
-	}
-	else if (map_data->player_orientation == 'S')
-	{
-		info->vec_dir[X] = 0;
-		info->vec_dir[Y] = 1.0;
-		info->vec_plane[X] = 0.66;
-		info->vec_plane[Y] = 0.00;
-	}
-	else if (map_data->player_orientation == 'N')
-	{
-		info->vec_dir[X] = 0;
-		info->vec_dir[Y] = -1.0;
-		info->vec_plane[X] = -0.66;
-		info->vec_plane[Y] = 0.00;
-	}
+	initialize_orientation(info, map_data);
 	info->move_speed = 0.15;
 	info->rot_speed = 0.15;
 	info->map_data = map_data;

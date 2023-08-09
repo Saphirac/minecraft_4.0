@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:05 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/09 11:53:01 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:47:20 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,14 @@ int	get_all_data(t_map_data *const map, int const fd)
 		if (check_line(line) >= 0)
 		{
 			if (get_textures_colours(map, line, check_line(line)))
-				return (free(line), free_textures(map->textures_colours), EXIT_FAILURE);
+				return (free(line), \
+						free_textures(map->textures_colours), EXIT_FAILURE);
 		}
 		else if (check_line(line) == -1)
 			return (get_map(map, fd, line));
 		else if (check_line(line) == -2)
-			return (printf("Incorrect given data.\n"), free(line), free_textures(map->textures_colours), EXIT_FAILURE);
+			return (printf("Incorrect given data.\n"), free(line), \
+					free_textures(map->textures_colours), EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
 	}
