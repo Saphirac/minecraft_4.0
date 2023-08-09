@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:05:01 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/08/09 16:41:24 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:30:24 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,19 @@
  * @return
  * @throws
  */
-void	load_image(t_info *info, int *texture, char *path, t_img *img)
+int	load_image(t_info *info, int *texture, char *path, t_img *img)
 {
 	int	x;
 	int	y;
 
 	img->img = mlx_xpm_file_to_image(info->mlx, path,
 			&img->img_width, &img->img_height);
+	if (img->img == NULL)
+		return (MLX_ERR);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
 			&img->size_l, &img->endian);
+	if (img->data == NULL)
+		return (MLX_ERR);
 	y = 0;
 	while (y < img->img_height)
 	{
@@ -40,6 +44,7 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
 		y++;
 	}
 	mlx_destroy_image(info->mlx, img->img);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -49,18 +54,23 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
  * @return
  * @throws
  */
-void	load_texture(t_info *info)
+int	load_texture(t_info *info)
 {
 	t_img	img;
 
-	load_image(info, info->texture[0],
-		info->map_data->textures_colours[0], &img);
-	load_image(info, info->texture[1],
-		info->map_data->textures_colours[1], &img);
-	load_image(info, info->texture[2],
-		info->map_data->textures_colours[2], &img);
-	load_image(info, info->texture[3],
-		info->map_data->textures_colours[3], &img);
+	if (load_image(info, info->texture[0], \
+				info->map_data->textures_colours[0], &img) == MLX_ERR)
+		return (MLX_ERR);
+	if (load_image(info, info->texture[1], \
+				info->map_data->textures_colours[1], &img) == MLX_ERR)
+		return (MLX_ERR);
+	if (load_image(info, info->texture[2], \
+				info->map_data->textures_colours[2], &img) == MLX_ERR)
+		return (MLX_ERR);
+	if (load_image(info, info->texture[3], \
+				info->map_data->textures_colours[3], &img) == MLX_ERR)
+		return (MLX_ERR);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -85,7 +95,8 @@ int	initialize_textures(t_info *info)
 			return (MALLOC_ERR);
 		i++;
 	}
-	load_texture(info);
+	if (load_texture(info) == MLX_ERR)
+		return (-1);
 	return (EXIT_SUCCESS);
 }
 

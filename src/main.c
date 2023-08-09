@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/06 22:23:42 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:52:38 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	create_map(t_map_data *map, char *file)
 	if (fd < 0)
 		return (printf("Error : can't open map.\n"), EXIT_FAILURE);
 	if (get_all_data(map, fd) || check_border(map) == false)
-		return (EXIT_FAILURE);
+		return (close(fd), EXIT_FAILURE);
 	if (close(fd) == -1)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (close(fd), EXIT_SUCCESS);
 }
 
 // TODO : Open and check args
@@ -37,7 +37,8 @@ int	main(int ac, char **av)
 	if (create_map(&map, av[1]))
 		return (1);
 	if (get_color_ceiling_floor(&map) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free(map.map_char), free_textures(map.textures_colours),
+			EXIT_FAILURE);
 	raycaster(&map);
 	return (0);
 }
