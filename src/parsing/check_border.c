@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:57:37 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/08/06 22:33:14 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/11 13:05:42 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 */
 inline static int	__is_border(t_map_data *map, int x, int y)
 {
-	if (x == 0 || y == 0 || x == map->map_size[X] \
-			|| y == map->map_size[Y])
+	if (x == 0 || y == 0 || x == map->map_size[X] - 1 \
+			|| y == map->map_size[Y] - 1)
 		return (1);
 	return (0);
 }
@@ -116,6 +116,8 @@ bool	check_border(t_map_data *map)
 	{
 		printf("Error : map is not closed by wall\n");
 		ft_free(tmp);
+		ft_free(map->map_char);
+		free_textures(map->textures_colours);
 		return (false);
 	}
 	ft_free(tmp);

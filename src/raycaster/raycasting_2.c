@@ -6,7 +6,7 @@
 /*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:05:01 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/08/09 19:30:24 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:43:50 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ int	load_texture(t_info *info)
 
 	if (load_image(info, info->texture[0], \
 				info->map_data->textures_colours[0], &img) == MLX_ERR)
-		return (MLX_ERR);
+		return (printf("Error : couldn't load texture file.\n"), MLX_ERR);
 	if (load_image(info, info->texture[1], \
 				info->map_data->textures_colours[1], &img) == MLX_ERR)
-		return (MLX_ERR);
+		return (printf("Error : couldn't load texture file.\n"), MLX_ERR);
 	if (load_image(info, info->texture[2], \
 				info->map_data->textures_colours[2], &img) == MLX_ERR)
-		return (MLX_ERR);
+		return (printf("Error : couldn't load texture file.\n"), MLX_ERR);
 	if (load_image(info, info->texture[3], \
 				info->map_data->textures_colours[3], &img) == MLX_ERR)
-		return (MLX_ERR);
+		return (printf("Error : couldn't load texture file.\n"), MLX_ERR);
 	return (EXIT_SUCCESS);
 }
 
