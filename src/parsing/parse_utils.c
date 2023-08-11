@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:24:59 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/07/27 20:10:52 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:14:24 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	find_max_x(char **map)
 bool	is_correct_char(char c)
 {
 	if (!c)
-		return (false);
+		return (printf("Error : invalid char\n"), false);
 	if (c == '1' || c == '0' || c == 'N' || c == 'W' || c == 'E' || c == 'S')
 		return (true);
-	return (false);
+	return (printf("Error : invalid char\n"), false);
 }

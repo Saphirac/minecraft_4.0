@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 03:53:37 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/09 20:52:38 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:27:56 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 	if (create_map(&map, av[1]))
 		return (1);
 	if (get_color_ceiling_floor(&map) == EXIT_FAILURE)
-		return (free(map.map_char), free_textures(map.textures_colours),
+		return (ft_free(map.map_char), free_textures(map.textures_colours),
 			EXIT_FAILURE);
 	raycaster(&map);
 	return (0);

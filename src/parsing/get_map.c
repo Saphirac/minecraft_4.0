@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gle-mini <gle-mini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/09 16:46:44 by gle-mini         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:17:04 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ inline static bool	__is_map_line_correct(char const *const line)
 	size_t	i;
 
 	if (is_line_empty(line) == true)
-		return (false);
+		return (printf("Error : empty line in map.\n"), false);
 	i = 0;
 	while (line[i])
 	{
@@ -31,8 +31,10 @@ inline static bool	__is_map_line_correct(char const *const line)
 
 int	read_map(t_str_lst *map_list, char *line, int fd)
 {
-	while (line && __is_map_line_correct(line) == true)
+	while (line)
 	{
+		if (__is_map_line_correct(line) == false)
+			return (free(line), str_lst_clear(map_list), EXIT_FAILURE);
 		if (!str_lst_add_back(map_list, line))
 			return (printf("Error : str_lst creation.\n"), \
 					free(line), EXIT_FAILURE);
