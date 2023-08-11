@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:00:02 by gle-mini          #+#    #+#             */
-/*   Updated: 2023/08/11 11:38:40 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:38:20 by gle-mini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ bool	is_correct_char_colour(char *str)
 {
 	while (*str)
 	{
-		printf("*str : %c\n", *str);
 		if ((*str < '0' || *str > '9') && *str != ',')
 			return (printf("Error : incorrect colour for ceiling or floor.\n"),
 				false);
