@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:39:57 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/08/11 11:17:04 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:20:38 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ inline static bool	__is_map_line_correct(char const *const line)
 	{
 		if (line[i] != ' ' && line[i] != '\n'
 			&& is_correct_char(line[i]) == false)
-			return (false);
+			return (printf("Error : invalid char\n"), false);
 		i++;
 	}
 	return (true);
